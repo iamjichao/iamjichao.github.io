@@ -10,7 +10,7 @@ function getUrlParam (name) {
 ```
 ##### 获取元素的坐标
 
-```
+```js
 //获取元素的纵坐标（相对于窗口）
 function getTop (obj) {
     var offset = obj.offsetTop;
@@ -26,7 +26,7 @@ function getLeft (obj) {
 ```
 ##### 手机号校验和替换中间4位
 
-```
+```js
 phonenum.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
 <!--正则表达式中的括号即可用于分组，同时也用于定义子模式串，在replace()方法中，参数二中可以使用$n(n为数字)来依次引用模式串中用括号定义的字串-->
 phonenum.match(/^[1][34587]\d{9}$/)
@@ -35,7 +35,7 @@ phonenum.match(/^[1][34587]\d{9}$/)
 
 ##### 姓名显示最后一字
 
-```
+```js
 var str = '王大锤';
 // 方法一
 return new Array(str.length).join('*') + str.substr(-1);
@@ -50,7 +50,7 @@ return str.replace(/.(?=.)/g, '*');
 
 sort方法接收一个函数作为参数，这里嵌套一层函数用来接收对象属性名，其他部分代码与正常使用sort方法相同。
 
-```
+```js
 var arr = [
     {name: 'a', age: 10},
     {name: 'b', age: 20},
