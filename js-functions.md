@@ -1,6 +1,6 @@
 ##### 获取url传递参数的方法
 
-```javascript
+```js
 function getUrlParam (name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
@@ -11,13 +11,13 @@ function getUrlParam (name) {
 ##### 获取元素的坐标
 
 ```js
-//获取元素的纵坐标（相对于窗口）
+// 获取元素的纵坐标（相对于窗口）
 function getTop (obj) {
     var offset = obj.offsetTop;
     if (obj.offsetParent != null) offset += getTop(obj.offsetParent);
     return offset;
 }
-//获取元素的横坐标（相对于窗口）
+// 获取元素的横坐标（相对于窗口）
 function getLeft (obj) {
     var offset = obj.offsetLeft;
     if (obj.offsetParent != null) offset += getLeft(obj.offsetParent);
@@ -27,19 +27,17 @@ function getLeft (obj) {
 ##### 手机号校验和替换中间4位
 
 ```js
+// 正则表达式中的括号即可用于分组，同时也用于定义子模式串，在replace()方法中，参数二中可以使用$n(n为数字)来依次引用模式串中用括号定义的字串
 phonenum.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
-<!--正则表达式中的括号即可用于分组，同时也用于定义子模式串，在replace()方法中，参数二中可以使用$n(n为数字)来依次引用模式串中用括号定义的字串-->
+// 手机号校验
 phonenum.match(/^[1][34587]\d{9}$/)
-<!--手机号校验-->
 ```
 
 ##### 姓名显示最后一字
 
 ```js
 var str = '王大锤';
-// 方法一
 return new Array(str.length).join('*') + str.substr(-1);
-// 方法二
 return str.replace(/.(?=.)/g, '*');
 ```
 
