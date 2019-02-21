@@ -1,6 +1,6 @@
 ##### 获取url传递参数的方法
 
-```java
+```js
 function getUrlParam (name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
