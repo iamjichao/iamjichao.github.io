@@ -100,7 +100,7 @@ gitment:
     oauth:
         client_id: 5a841e8a87b06d346f3d
         client_secret: e0f22a1087ecec4dc50679f89f726b79e76bb628
-https://github.com/gitalk/gitalk#install
+# https://github.com/gitalk/gitalk#install
 gitalk:
     owner: iamjichao
     repo: blog-comments
