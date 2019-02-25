@@ -5,7 +5,7 @@ baseurl:
 url: https://iamjichao.net
 date_format: "ordinal"
 title: 菜鸟笔记
-subtitle: "一个菜鸟的笔记"
+subtitle: "stay hungry stay foolis"
 description: ""
 keywords: 菜鸟笔记
 timezone: Asia/Shanghai
@@ -15,7 +15,7 @@ side_bar_repo_limit: 5
 # ---------------- #
 #      Author      #
 # ---------------- #
-author: Ji Chao
+author: JiChao
 organization: 
 organization_url: 
 github_username: iamjichao
