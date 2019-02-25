@@ -4,7 +4,6 @@ title: 一些JS方法
 categories: [JS]
 description: 一些JS方法
 keywords: JS, 方法
-date: 2019-02-21
 ---
 
 ##### 获取url传递参数的方法

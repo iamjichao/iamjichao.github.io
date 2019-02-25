@@ -10,6 +10,8 @@ permalink: /about/
 
 一个菜鸟的笔记
 
+stay hungry stay foolish
+
 ## 联系
 
 {% for website in site.data.social %}

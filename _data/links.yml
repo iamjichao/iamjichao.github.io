@@ -1,5 +1,8 @@
 - name: 八度空间
-  url: http://iamjichao.com
+  url: https://iamjichao.com
 
 - name: 菜鸟笔记
-  url: http://iamjichao.net
+  url: https://iamjichao.net
+
+- name: 码志
+  url: https://mazhuang.org

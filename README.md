@@ -18,8 +18,6 @@
 
 **[在线预览 &rarr;](https://iamjichao.net)**
 
-![screenshot home](https://iamjichao.net/assets/images/screenshots/home.png)
-
 ## Fork 指南
 
 Fork 本项目之后，还需要做一些事情才能让你的页面「正确」跑起来。
