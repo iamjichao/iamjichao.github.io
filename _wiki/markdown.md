@@ -2,7 +2,7 @@
 layout: wiki
 title: Markdown
 categories: Markdown
-description: Markdown 常用语法示例。
+description: Markdown 常用语法示例
 keywords: Markdown
 mermaid: true
 sequence: true
@@ -18,14 +18,14 @@ mathjax: true
 ### 超链接
 
 ```
-[靠谱-ing](https://mazhuang.org)
+[我是链接](https://iamjichao.net)
 
-<https://mazhuang.org>
+<https://iamjichao.net>
 ```
 
-[靠谱-ing](https://mazhuang.org)  
+[我是链接](https://iamjichao.net)  
 
-<https://mazhuang.org>
+<https://iamjichao.net>
 
 ### 列表
 

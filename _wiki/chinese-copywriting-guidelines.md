@@ -1,9 +1,9 @@
 ---
 layout: wiki
-title: 中文文案排版指北（简体中文版）
+title: 中文文案排版指南
 categories: Copywriting
-description: 中文文案排版指北（简体中文版）。
-keywords: 中文文案排版指北
+description: 中文文案排版指南（简体中文版）
+keywords: 中文文案排版指南
 ---
 
 GitHub repository: [mzlogin/chinese-copywriting-guidelines](https://github.com/mzlogin/chinese-copywriting-guidelines)

@@ -1,9 +1,9 @@
 ---
 layout: wiki
-title: 73条日常Linux shell命令汇总
-categories: [linux-shell]
-description: 73条日常Linux shell命令汇总
-keywords: linux, shell
+title: 常用 Linux shell 命令
+categories: Linux
+description: 常用 Linux shell 命令
+keywords: Linux, shell
 ---
 
 ####  检查远程端口是否对bash开放：
