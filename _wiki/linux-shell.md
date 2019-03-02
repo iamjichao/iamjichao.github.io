@@ -1,8 +1,8 @@
 ---
 layout: wiki
-title: 常用 Linux shell 命令
+title: Linux shell 命令
 categories: Linux
-description: 常用 Linux shell 命令
+description: Linux shell 命令
 keywords: Linux, shell
 ---
 
