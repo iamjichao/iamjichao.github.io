@@ -6,8 +6,6 @@ description: webstorm 常用快捷键
 keywords: webstorm
 ---
 
-## webstorm 常用快捷键
-
 ### 查找/代替
 <!--more-->
 - `ctrl+shift+N`	通过文件名快速查找工程内的文件（必记）

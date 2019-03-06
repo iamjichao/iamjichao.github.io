@@ -6,8 +6,6 @@ description: Sublime Text3 常用快捷键
 keywords: Sublime
 ---
 
-## Sublime Text3 常用快捷键
-
 ### 选择类
 
  - `Ctrl+D` 选中光标所占的文本，继续操作则会选中下一个相同的文本
