@@ -1,8 +1,8 @@
 ---
 layout: post
-title: CSS块级元素和行内元素
-categories: [CSS]
-description: CSS块级元素和行内元素
+title: CSS 块级元素和行内元素
+categories: CSS
+description: CSS 块级元素和行内元素
 keywords: CSS, 块级元素, 行内元素
 ---
 

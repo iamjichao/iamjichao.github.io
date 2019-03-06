@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 一些JS方法
+title: 常用的 JS 方法
 categories: JS
-description: 一些JS方法
+description: 常用的 JS 方法
 keywords: JS, 方法
 ---
 
@@ -40,10 +40,10 @@ function getLeft (obj) {
 ---
 
 ```js
-// 正则表达式中的括号即可用于分组，同时也用于定义子模式串，在replace()方法中，参数二中可以使用$n(n为数字)来依次引用模式串中用括号定义的字串
-phonenum.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
 // 手机号校验
 phonenum.match(/^[1][34587]\d{9}$/);
+// 正则表达式中的括号即可用于分组，同时也用于定义子模式串，在replace()方法中，参数二中可以使用$n(n为数字)来依次引用模式串中用括号定义的字串
+phonenum.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
 ```
 
 ### 姓名显示最后一字
@@ -62,6 +62,34 @@ return str.replace(/.(?=.)/g, '*');
 
 ```js
 window.navigator.onLine
+```
+
+### 数组常用操作
+---
+
+```js
+// 移除数组中一个元素
+Array.prototype.remove = function (val) {
+  var index = this.indexOf(val);
+  if (index > -1) {
+    this.splice(index, 1);
+  }
+};
+// 判断两个数组相等（无视顺序）
+Array.prototype.equals = function(array) {
+  if (!array) return false;
+  if (this.length != array.length) return false;
+  for (var i = 0, l = this.length; i < l; i++) {
+    // Check if we have nested arrays
+    if (this[i] instanceof Array && array[i] instanceof Array) {
+      // recurse into the nested arrays
+      if (!this[i].equals(array[i])) return false;
+    } else if (array.indexOf(this[i]) === -1) {
+      return false;
+    }
+  }
+  return true;
+};
 ```
 
 ### js sort方法根据数组中对象的某一个属性值进行排序

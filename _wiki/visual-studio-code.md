@@ -1,8 +1,8 @@
 ---
 layout: wiki
-title: Visual Studio Code
+title: Visual Studio Code 常用快捷键
 categories: Tools
-description: Visual Studio Code 的快捷键与使用技巧
+description: Visual Studio Code 常用快捷键
 keywords: Visual Studio Code
 ---
 
