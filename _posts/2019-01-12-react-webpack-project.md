@@ -68,7 +68,7 @@ npm install html-webpack-plugin --save
 
 经过以上 3 个步骤，项目目录如下：
 
-![image](images/posts/react-webpack.png)
+![image](https://iamjichao.net/images/posts/react-webpack.png)
 
 ### 创建代码基本结构
 ---

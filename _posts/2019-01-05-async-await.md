@@ -8,6 +8,8 @@ keywords: JS, async, await
 
 使用 async / await，搭配 promise，可以通过编写形似同步的代码来处理异步流程，提高代码的简洁性和可读性。
 
+### async / await
+
 async 方法比较简单，只需要在普通的函数前加上 async 关键字即可。async function 通过 Promise.resolved() 将返回值封装成一个 Promise 对象返回。所以可以通过 then 方法获取返回值。
 
 ```js
@@ -21,6 +23,8 @@ await 后面可以是字符串，布尔值，数值以及普通函数。await针
 - 对于 Promise 对象，await 会阻塞主函数的执行，等待 Promise 对象 resolve，然后得到 resolve 的值，作为 await 表达式的运算结果，然后继续执行主函数接下来的代码。
 
 - 对于非 Promise 对象，await 等待函数或者直接量的返回，而不是等待其执行结果。
+
+### Promise 对象
 
 Promise 对象有两种状态，除了 resolved，还有 rejected。如果 promise 对象变为 rejected，await 会中断后面的执行。如果想不被中断继续执行，可以采用 try catch 在函数内部捕获异常。
 
@@ -44,6 +48,8 @@ helloAsync().then(() => {
   console.log(e);
 });
 ```
+
+### 应用
 
 以下是微信小程序云开发文档中关于分批次获取所有数据的一段代码，使用了 async / await 方法，没有各种回调，代码简洁易读。
 
