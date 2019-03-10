@@ -101,4 +101,4 @@ transition-delay: time;
 }
 ```
 
-max-height 相对 height 来说比较灵活。两者的区别就是计算高度的过程，一个是由人为计算，一个由盒子内容高度去计算然后自适应。这种写法必须给定足够存放内容的高度，所以尽量把 max-height 设置大一点。[效果展示](lab.iamjichao.com)
+max-height 相对 height 来说比较灵活。两者的区别就是计算高度的过程，一个是由人为计算，一个由盒子内容高度去计算然后自适应。这种写法必须给定足够存放内容的高度，所以尽量把 max-height 设置大一点。[效果展示](https://lab.iamjichao.com)
