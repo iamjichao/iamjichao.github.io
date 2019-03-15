@@ -1,9 +1,9 @@
 ---
 layout: post
-title: 闭包学习心得
-categories: JS
-description: 闭包学习心得
-keywords: JS, 闭包
+title: 闭包学习
+categories: JavaScript
+description: 闭包学习
+keywords: JavaScript, 闭包
 ---
 
 JavaScript 中的函数运行在它们被定义的作用域里，而不是它们被执行的作用域里。

@@ -1,9 +1,9 @@
 ---
 layout: post
-title: async/await 使用心得
-categories: JS
-description: async/await 使用心得
-keywords: JS, async, await
+title: async/await 学习
+categories: JavaScript
+description: async/await 学习
+keywords: JavaScript, async, await
 ---
 
 使用 async / await，搭配 promise，可以通过编写形似同步的代码来处理异步流程，提高代码的简洁性和可读性。

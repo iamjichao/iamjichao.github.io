@@ -1,9 +1,9 @@
 ---
 layout: post
-title: 常用的 JS 方法
-categories: JS
-description: 常用的 JS 方法
-keywords: JS, 方法
+title: 常用的 JavaScript 方法
+categories: JavaScript
+description: 常用的 JavaScript 方法
+keywords: JavaScript, 方法
 ---
 
 ### 获取url传递参数的方法

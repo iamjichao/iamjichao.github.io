@@ -1,9 +1,9 @@
 ---
 layout: post
 title: React 组件生命周期
-categories: [JS, React]
+categories: [JavaScript, React]
 description: React 组件生命周期
-keywords: JS, React
+keywords: JavaScript, React
 ---
 
 ### 实例化

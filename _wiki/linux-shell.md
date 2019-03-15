@@ -6,7 +6,7 @@ description: Linux shell 命令
 keywords: Linux, shell
 ---
 
-####  检查远程端口是否对bash开放：
+####  检查远程端口是否对 bash 开放：
 
 <!--more-->
 	echo >/dev/tcp/8.8.8.8/53 && echo "open"
@@ -19,15 +19,15 @@ keywords: Linux, shell
 
     fg
 
-####  产生随机的十六进制数，其中n是字符数：
+####  产生随机的十六进制数，其中 n 是字符数：
 
     openssl rand -hex n
 
-####  在当前shell里执行一个文件里的命令：
+####  在当前 shell 里执行一个文件里的命令：
 
     source /home/user/file.name
 
-####  截取前5个字符：
+####  截取前 5 个字符：
 
     ${variable:0:5}
 
@@ -39,7 +39,7 @@ keywords: Linux, shell
 
     ssh user@ip_address -i key.pem
 
-####  用wget抓取完整的网站目录结构，存放到本地目录中：
+####  用 wget 抓取完整的网站目录结构，存放到本地目录中：
 
     wget -r --no-parent --reject "index.html*" http://hostname/ -P /home/user/dirs
 
@@ -63,19 +63,19 @@ keywords: Linux, shell
 
     hdparm -Tt /dev/sda
 
-####  获取文本的md5 hash：
+####  获取文本的 md5 hash：
 
     echo -n "text" | md5sum
 
-####  检查xml格式：
+####  检查 xml 格式：
 
     xmllint --noout file.xml
 
-####  将tar.gz提取到新目录里：
+####  将 tar.gz 提取到新目录里：
 
     tar zxvf package.tar.gz -C new_dir
 
-####  使用curl获取HTTP头信息：
+####  使用 curl 获取 HTTP 头信息：
 
     curl -I http://www.example.com
 
@@ -83,11 +83,11 @@ keywords: Linux, shell
 
     touch -t 0712250000 file
 
-####  用wget命令执行ftp下载：
+####  用 wget 命令执行 ftp 下载：
 
     wget -m ftp://username:password@hostname
 
-####  生成随机密码(例子里是16个字符长):
+####  生成随机密码(例子里是 16 个字符长):
 
     LANG=c < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-16};echo;
 
@@ -95,11 +95,11 @@ keywords: Linux, shell
 
     cp some_file_name{,.bkp}
 
-####  访问Windows共享目录：
+####  访问 Windows 共享目录：
 
     smbclient -U "DOMAIN\user" //dc.domain.com/share/test/dir
 
-####  执行历史记录里的命令(这里是第100行):
+####  执行历史记录里的命令(这里是第 100 行):
 
     !100
 
@@ -115,19 +115,19 @@ keywords: Linux, shell
 
     \> test.txt
 
-####  与Ubuntu NTP server同步时间：
+####  与 Ubuntu NTP server 同步时间：
 
     ntpdate ntp.ubuntu.com
 
-####  用netstat显示所有tcp4监听端口：
+####  用 netstat 显示所有 tcp4 监听端口：
 
     netstat -lnt4 | awk '{print $4}' | cut -f2 -d: | grep -o '[0-9]*'
 
-####  qcow2镜像文件转换：
+####  qcow2 镜像文件转换：
 
     qemu-img convert -f qcow2 -O raw precise-server-cloudimg-amd64-disk1.img \precise-server-cloudimg-amd64-disk1.raw
 
-####  重复运行文件，显示其输出（缺省是2秒一次）：
+####  重复运行文件，显示其输出（缺省是 2 秒一次）：
 
     watch ps -ef
 
@@ -143,18 +143,18 @@ keywords: Linux, shell
 
     mount --bind /source /destination
 
-####  动态更新DNS server:
+####  动态更新 DNS server:
 
     nsupdate < <EOF
     update add $HOST 86400 A $IP
     send
     EOF
 
-####  递归grep所有目录：
+####  递归 grep 所有目录：
 
     grep -r "some_text" /path/to/dir
 
-####  列出前10个最大的文件：
+####  列出前 10 个最大的文件：
 
     lsof / | awk '{ if($7 > 1048576) print $7/1048576 "MB "$9 }' | sort -n -u | tail
 
@@ -162,7 +162,7 @@ keywords: Linux, shell
 
     free -m | grep cache | awk '/[0-9]/{ print $4" MB" }'
 
-####  打开Vim并跳到文件末：
+####  打开 Vim 并跳到文件末：
 
     vim + some_file_name
 
@@ -186,27 +186,27 @@ keywords: Linux, shell
 
     git push -u origin mynewfeature
 
-####  打印历史记录中最后一次cat命令：
+####  打印历史记录中最后一次 cat 命令：
 
     !cat:p
 
-####  运行历史记录里最后一次cat命令：
+####  运行历史记录里最后一次 cat 命令：
 
     !cat
 
-####  找出/home/user下所有空子目录:
+####  找出 /home/user 下所有空子目录:
 
     find /home/user -maxdepth 1 -type d -empty
 
-####  获取test.txt文件中第50-60行内容：
+####  获取 test.txt 文件中第 50 - 60 行内容：
 
     < test.txt sed -n '50,60p'
 
-####  运行最后一个命令(如果最后一个命令是mkdir /root/test, 下面将会运行: `sudo mkdir /root/test)：`
+####  运行最后一个命令(如果最后一个命令是 mkdir /root/test, 下面将会运行: `sudo mkdir /root/test)：`
 
     sudo !!
 
-####  创建临时RAM文件系统 – ramdisk (先创建/tmpram目录):
+####  创建临时 RAM 文件系统 – ramdisk (先创建 /tmpram 目录):
 
     mount -t tmpfs tmpfs /tmpram -o size=512m
 
@@ -218,11 +218,11 @@ keywords: Linux, shell
 
     echo "some text" | sudo tee -a /path/file
 
-####  列出所有kill signal参数:
+####  列出所有 kill signal 参数:
 
     kill -l
 
-####  在bash历史记录里禁止记录最后一次会话：
+####  在 bash 历史记录里禁止记录最后一次会话：
 
     kill -9 $$
 
@@ -230,7 +230,7 @@ keywords: Linux, shell
 
     nmap -p 8081 172.20.0.0/16
 
-####  设置git email:
+####  设置 git email:
 
     git config --global user.email "me@example.com"
 
@@ -238,7 +238,7 @@ keywords: Linux, shell
 
     git pull --rebase origin master
 
-####  将所有文件名中含有”txt”的文件移入/home/user目录:
+####  将所有文件名中含有 txt 的文件移入 /home/user 目录:
 
     find -iname "*txt*" -exec mv -v {} /home/user \;
 
@@ -246,15 +246,15 @@ keywords: Linux, shell
 
     paste test.txt test1.txt
 
-####  shell里的进度条:
+####  shell 里的进度条:
 
     pv data.log
 
-####  使用netcat将数据发送到Graphite server:
+####  使用 netcat 将数据发送到 Graphite server:
 
     echo "hosts.sampleHost 10 `date +%s`" | nc 192.168.200.2 3000
 
-####  将tabs转换成空格：
+####  将 tabs 转换成空格：
 
     expand test.txt > test1.txt
 
@@ -266,28 +266,28 @@ keywords: Linux, shell
 
     cd -
 
-####  拆分大体积的tar.gz文件(每个100MB)，然后合并回去：
+####  拆分大体积的 tar.gz 文件(每个100MB)，然后合并回去：
 
     split –b 100m /path/to/large/archive /path/to/output/files
     cat files* > archive
 
-####  使用curl获取HTTP status code:
+####  使用 curl 获取 HTTP status code:
 
     curl -sL -w "%{http_code}\\n" www.example.com -o /dev/null
 
-####  设置root密码，强化MySQL安全安装:
+####  设置 root 密码，强化 MySQL 安全安装:
 
     /usr/bin/mysql_secure_installation
 
-####  当Ctrl + c不好使时:
+####  当 Ctrl + c 不好使时:
 
     Ctrl + \
 
-####  获取文件owner:
+####  获取文件 owner:
 
     stat -c %U file.txt
 
-####  block设备列表：
+####  block 设备列表：
 
     lsblk -f
 
@@ -295,12 +295,10 @@ keywords: Linux, shell
 
     find . -type f -exec egrep -l " +$" {} \;
 
-####  找出文件名有tab缩进符的文件
+####  找出文件名有 tab 缩进符的文件
 
     find . -type f -exec egrep -l $'\t' {} \;
 
-####  用”=”打印出横线:全选复制放进笔记
+####  用 = 打印出横线：全选复制放进笔记
 
     printf '%100s\n' | tr ' ' =
-
-

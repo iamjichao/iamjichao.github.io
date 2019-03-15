@@ -6,6 +6,34 @@ description: Git 常用操作
 keywords: Git, 版本控制
 ---
 
+## 安装及初始化
+
+安装 Git，一路下一步，安装完毕。
+
+设置身份：
+
+```
+git config --global user.email "wangdachui@iamjichao.com"
+git config --global user.name "wangdachui"
+```
+
+设置完毕后查看：
+
+```
+git config user.email
+git config user.name
+```
+
+生成 ssh key：
+
+```
+ssh-keygen -t rsa -C "wangdachui@iamjichao.com"
+```
+
+一路回车，成功生成 key。
+
+在 `C:\Users\用户名\.ssh` 目录下找到 `id_rsa.pub` 文件，添加到 SSH Keys 列表中。
+
 ## 常用命令
 
 | 功能                      | 命令                                  |
@@ -34,9 +62,9 @@ keywords: Git, 版本控制
 
 ## Q&A
 
-### 如何解决gitk中文乱码，git ls-files 中文文件名乱码问题？
+### 如何解决 gitk 中文乱码，git ls-files 中文文件名乱码问题？
 
-在~/.gitconfig中添加如下内容
+在 ~/.gitconfig 中添加如下内容
 
 ```
 [core]

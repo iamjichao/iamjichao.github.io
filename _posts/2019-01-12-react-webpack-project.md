@@ -1,9 +1,9 @@
 ---
 layout: post
 title: 从零开始创建 react+webpack 项目
-categories: [JS, React, webpack]
+categories: [JavaScript, React, webpack]
 description: 从零开始创建 react+webpack 项目
-keywords: JS, React, webpack
+keywords: JavaScript, React, webpack
 ---
 
 React 是 Facebook 开发的一款用于构建用户界面的 JavaScript 库。

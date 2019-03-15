@@ -1,8 +1,8 @@
 ---
 layout: post
-title: transition 使用心得
+title: transition 学习
 categories: CSS
-description: transition 使用心得
+description: transition 学习
 keywords: transition
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 常用的正则表达式
-categories: JS
+categories: JavaScript
 description: 常用的正则表达式
 keywords: 正则
 ---
