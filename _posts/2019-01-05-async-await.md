@@ -6,32 +6,75 @@ description: async/await 学习
 keywords: JavaScript, async, await
 ---
 
-使用 async / await，搭配 promise，可以通过编写形似同步的代码来处理异步流程，提高代码的简洁性和可读性。
+使用 async / await，搭配 Promise，可以通过编写形似同步的代码来处理异步流程，提高代码的简洁性和可读性。
 
-### async / await
+### async
 
-async 方法比较简单，只需要在普通的函数前加上 async 关键字即可。async function 通过 Promise.resolved() 将返回值封装成一个 Promise 对象返回。所以可以通过 then 方法获取返回值。
+async 方法比较简单，只需要在普通的函数前加上 async 关键字即可。async function 通过 `Promise.resolved()` 将返回值封装成一个 Promise 对象返回。所以可以通过 then 方法获取返回值。
 
 ```js
 async function name([param[, param[, ... param]]]) { statements }
 ```
 
+async function 总是返回一个 Promise 对象，即使代码中有 return <非 Promise> 的语句，也会自动把返回的这个 value 值包装成 Promise 对象 的 resolved 值。
+
+以下两种方法可以输出相同的结果：
+
+```js
+async function f() {
+  return 1;
+}
+
+f().then(res => {
+  console.log(res);
+});
+```
+
+```js
+async function f() {
+  return Promise.resolve(1);
+}
+
+f().then(res => {
+  console.log(res);
+});
+```
+
+### await
+
 await 操作符用于等待一个 Promise 对象，它只能在异步函数 async function 内部使用。await 在等待 Promise 对象时会导致 async function 暂停执行，一直到 Promise 对象决议之后才会 async function 继续执行。
 
-await 后面可以是字符串，布尔值，数值以及普通函数。await针对所跟的表达式不同，有两种处理方式：
+await 后面可以是字符串，布尔值，数值以及普通函数。await 针对所跟的表达式不同，有两种处理方式：
 
 - 对于 Promise 对象，await 会阻塞主函数的执行，等待 Promise 对象 resolve，然后得到 resolve 的值，作为 await 表达式的运算结果，然后继续执行主函数接下来的代码。
 
 - 对于非 Promise 对象，await 等待函数或者直接量的返回，而不是等待其执行结果。
 
-### Promise 对象
+以下是一个 await Promise 的例子：
+
+```js
+async function f() {
+  let promise = new Promise((resolve, reject) => {
+    setTimeout(() => resolve('done!'), 1000);
+  });
+  let result = await promise; // 直到 promise 返回一个 resolve 值
+  console.log(result); // 1s 后打印 'done!'
+}
+
+f();
+```
+
+### 异常处理
 
 Promise 对象有两种状态，除了 resolved，还有 rejected。如果 promise 对象变为 rejected，await 会中断后面的执行。如果想不被中断继续执行，可以采用 try catch 在函数内部捕获异常。
+
+以下是一个异常处理的例子：
 
 ```js
 function testAwait() {
   return Promise.reject('error');
 }
+
 async function helloAsync(){
   try{
     await testAwait();
@@ -40,6 +83,7 @@ async function helloAsync(){
     console.log(e);
   }
 }
+
 helloAsync().then(() => {
   // 打印then，说明helloAsync方法没有被中断
   console.log('success');
@@ -47,6 +91,15 @@ helloAsync().then(() => {
   // 没有打印
   console.log(e);
 });
+```
+
+如果我们不使用 try catch，然后 async 函数 f() 的调用产生的 Promise 变成 reject 状态的话，我们可以添加 .catch 去处理它。
+
+```js
+async function f() {
+  let res = await Promise.reject('error');
+}
+f().catch(err => console.log(e)); // TypeError: failed to fetch
 ```
 
 ### 应用
