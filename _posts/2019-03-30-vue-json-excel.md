@@ -30,9 +30,9 @@ Vue.component('downloadExcel', JsonExcel)
 
 ```html
 <download-excel
-  :data = "json_data"
-  :fields = "json_fields"
-  name = "filename.xls">
+  :data="json_data"
+  :fields="json_fields"
+  name="filename.xls">
   <button>导出 Excel</button>
 </download-excel>
 ```

@@ -12,6 +12,7 @@ keywords: jQuery, JavaScript
 - 原生 JS 创建元素节点：`document.createElement("p");`
 - jQuery 创建元素节点：`$('<p></p>');`
 <!--more-->
+
 ### 2. 创建并添加文本节点:
 
 - 原生 JS 创建文本节点：`document.createTextNode("Text Content");`
