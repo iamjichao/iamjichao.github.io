@@ -7,14 +7,14 @@ keywords: jQuery, JavaScript
 ---
 
 
-### 1. 创建元素节点
+### 创建元素节点
 
 - 原生 JS 创建元素节点：`document.createElement("p");`
 
 - jQuery 创建元素节点：`$('<p></p>');`
 <!--more-->
 
-### 2. 创建并添加文本节点:
+### 创建并添加文本节点
 
 - 原生 JS 创建文本节点：`document.createTextNode("Text Content");`
 
@@ -28,7 +28,7 @@ pEl.appendChild(textEl);
 
 - jQuery 创建并添加文本节点：`var $p = $('<p>Hello World.</p>');`
 
-### 3. 复制节点
+### 复制节点
 
 - 原生 JS 复制节点：`var newEl = pEl.cloneNode(true);`
 
@@ -39,7 +39,7 @@ pEl.appendChild(textEl);
 
 **注意**：克隆节点要避免 `id` 重复
 
-### 4. 插入节点
+### 插入节点
 
 - 原生 JS 向子节点列表的末尾添加新的子节点：`El.appendChild(newNode);`
 
@@ -56,13 +56,13 @@ pEl.appendChild(textEl);
   - `$('#El').after('<p>Hello World.</p>');`  在匹配元素之后添加目标内容
   - `$('<p>Hello World.</p>').insertAfter('#El');`  把匹配元素添加到目标元素之后
 
-### 5. 删除节点
+### 删除节点
 
 - 原生 JS 删除节点：`El.parentNode.removeChild(El);`
 
 - jQuery 删除节点：` $('#El').remove();`
 
-### 6. 替换节点
+### 替换节点
 
 - 原生 JS 替换节点：`El.repalceChild(newNode, oldNode);`
 
@@ -70,7 +70,7 @@ pEl.appendChild(textEl);
 
 - jQuery 替换节点:` $('p').replaceWith('<p>Hello World.</p>');`
 
-### 7. 设置属性 / 获取属性
+### 设置属性 / 获取属性
 
 - 原生 JS 设置属性 / 获取属性:
 
