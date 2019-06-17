@@ -5,7 +5,7 @@ baseurl:
 url: https://iamjichao.net
 date_format: "ordinal"
 title: 菜鸟笔记
-subtitle: "stay hungry stay foolish"
+subtitle: "stay hungry"
 description: ""
 keywords: 菜鸟笔记
 timezone: Asia/Shanghai
@@ -19,7 +19,7 @@ author: JiChao
 organization: 
 organization_url: 
 github_username: iamjichao
-location: China
+location: Shanghai
 email: iamjichao@163.com
 
 # ---------------- #
