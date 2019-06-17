@@ -67,10 +67,10 @@ window.onload = function() {
 ### jQuery 中的事件委托
 ---
 
-- .bind( )
-- .live( )
-- .delegate( )
-- .on( )
+- `.bind()`
+- `.live()`
+- `.delegate()`
+- `.on()`
 
 前三种各有弊端，推荐使用第四种。
 
