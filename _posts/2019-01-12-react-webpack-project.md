@@ -37,19 +37,25 @@ npm install react react-dom --save
 npm install webpack --save-dev
 ```
 
+**注：这里的 `--save` 是指将模块安装到项目目录下，并在 `package.json` 文件的 `dependencies` 中写入依赖。`-dev` 是指开发或编译时会用到的工具模块，对应的会写入 `package.json` 文件的 `devDependencies` 中。最后项目编译部署后需要 `dependencies` 中的模块，不需要 `devDependencies`中的模块。下同。**
+
 - 因为接下来要使用 es6 的语法写组件，所以需要安装用于解析 es6 的依赖。在项目目录下执行：
 
 ```
-npm install babel-core babel-loader babel-preset-es2015 babel-preset-react --save
+npm install babel-core babel-loader babel-preset-es2015 babel-preset-react babel-preset-stage-0 --save-dev
 ```
 
 **babel-core** 一些代码需要调用 babel 的 API 进行转码
 
 **babel-loader** 转化 es6 代码
 
-**babel-preset-es2015** 解析 es6
+**babel-preset-es2015** 解析 es6 (es6 -> es5) 的 Babel 预设
+
+**babel-preset-stage-0** 同上
 
 **babel-preset-react** 解析 jsx
+
+**注：关于 Babel 配置项的问题，详细的说明可以看[这里](https://segmentfault.com/a/1190000010468759)。**
 
 - 安装 css 和 html 相关的依赖，在项目目录下执行：
 
@@ -63,6 +69,8 @@ npm install html-webpack-plugin --save
 **style-loader** 在 html 中通过 style 方式嵌入 css
 
 **less-loader/less** 如果需要在 js 中通过 require 引入 less 文件，则安装这两个包
+
+**sass-loader/node-sass** 如果需要在 js 中通过 require 引入 sass 文件，则安装这两个包
 
 **html-webpack-plugin** 生成 html 文件
 
