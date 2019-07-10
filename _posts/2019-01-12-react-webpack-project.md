@@ -37,7 +37,7 @@ npm install react react-dom --save
 npm install webpack --save-dev
 ```
 
-**注：这里的 `--save` 是指将模块安装到项目目录下，并在 `package.json` 文件的 `dependencies` 中写入依赖。`-dev` 是指开发或编译时会用到的工具模块，对应的会写入 `package.json` 文件的 `devDependencies` 中。最后项目编译部署后需要 `dependencies` 中的模块，不需要 `devDependencies`中的模块。下同。**
+**注：`--save` 是指将模块安装到项目目录下，并在 `package.json` 文件的 `dependencies` 中写入依赖。`-dev` 是指开发或编译时会用到的工具模块，对应的会写入 `package.json` 文件的 `devDependencies` 中。最后项目编译部署后需要 `dependencies` 中的模块，不需要 `devDependencies`中的模块。下同。**
 
 - 因为接下来要使用 es6 的语法写组件，所以需要安装用于解析 es6 的依赖。在项目目录下执行：
 
@@ -60,8 +60,8 @@ npm install babel-core babel-loader babel-preset-es2015 babel-preset-react babel
 - 安装 css 和 html 相关的依赖，在项目目录下执行：
 
 ```
-npm install css-loader style-loader --save
-npm install html-webpack-plugin --save
+npm install css-loader style-loader --save-dev
+npm install html-webpack-plugin --save-dev
 ```
 
 **css-loader** 在 webpack 中，通过 css-loader 可以实现在 js 文件中通过 require 方式引入 css
@@ -118,7 +118,7 @@ ReactDOM.render(<App />, document.getElementById('app'));
 - 安装 webpack-dev-server，在项目目录下执行：
 
 ```
-npm install webpack-dev-server --save
+npm install webpack-dev-server --save-dev
 ```
 
 - 然后在 package.json 的 scripts 中设置启动本地服务的脚本，如：
