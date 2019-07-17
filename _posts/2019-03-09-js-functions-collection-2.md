@@ -240,7 +240,7 @@ function getViewSize(){
 }
 ```
 
-### 解决offsetX兼容性问题
+### 解决 offsetX 兼容性问题
 
 ```js
 // 针对火狐不支持offsetX/Y
