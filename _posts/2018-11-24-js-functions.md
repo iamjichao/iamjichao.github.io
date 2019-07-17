@@ -41,7 +41,9 @@ function getLeft (obj) {
 
 ```js
 // 手机号校验
-phonenum.match(/^[1][34587]\d{9}$/);
+var reg = /^[1][34587]\d{9}$/;
+phonenum.match(reg);
+reg.test(phonenum);
 // 正则表达式中的括号即可用于分组，同时也用于定义子模式串，在replace()方法中，参数二中可以使用$n(n为数字)来依次引用模式串中用括号定义的字串
 phonenum.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
 ```
