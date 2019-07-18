@@ -1,8 +1,8 @@
 ---
 layout: post
-title: JavaScript 可能会用到的工具函数（三）
+title: 可能会用到的 JS 工具函数（三）
 categories: JavaScript
-description: JavaScript 可能会用到的工具函数
+description: 可能会用到的 JS 工具函数
 keywords: JavaScript
 ---
 
