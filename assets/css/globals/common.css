@@ -238,6 +238,12 @@
     margin: 20px 0
 }
 
+.share .share-component .iconfont-tencent,
+.share .share-component .iconfont-qzone,
+.share .share-component .iconfont-diandian {
+    display: none;
+}
+
 .markdown-body {
     overflow: hidden
 }
