@@ -238,9 +238,9 @@
     margin: 20px 0
 }
 
-.share .share-component .iconfont-tencent,
-.share .share-component .iconfont-qzone,
-.share .share-component .iconfont-diandian {
+.share .share-component a.iconfont.icon-tencent,
+.share .share-component a.iconfont.icon-qzone,
+.share .share-component a.iconfont.icon-diandian {
     display: none;
 }
 
