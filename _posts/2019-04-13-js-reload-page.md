@@ -6,8 +6,6 @@ description: JS 脚本实现页面自动刷新
 keywords: JavaScript, 页面刷新
 ---
 
-### JS 脚本实现页面自动刷新
-
 如果只知道页面的 url，怎样刷新当前页面呢？
 
 JS 有几种刷新页面的方法：
