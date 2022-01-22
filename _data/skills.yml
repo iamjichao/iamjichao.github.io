@@ -1,19 +1,13 @@
-- name: Software Engineer Keywords
+- name: Front End Keywords
   keywords:
-      - Java
-      - C++
-      - Python
-      - Design Patterns
+      - JavaScript
+      - CSS
+      - HTML
+      - React
+      - Vue
+      - 微信小程序
+      - node.js
+      - React Native
+      - Flutter
+      - Webpack
 
-- name: Mobile Developer Keywords
-  keywords:
-      - Android
-      - Reverse Engineering
-
-- name: Windows Developer Keywords
-  keywords:
-      - Win32 SDK
-      - DuiLib
-      - WTL
-      - COM
-      - WinDbg
