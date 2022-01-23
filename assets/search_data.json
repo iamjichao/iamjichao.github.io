@@ -1,27 +1,116 @@
----
----
-{% capture json %}
+
+
 [
-  {% for pg in site.pages %}
-  {% if pg.title != nil %}
+  
+  
     {
-      "title"    : "{{ pg.title | escape }}",
-      "url"      : "{{ site.url }}{{ pg.url }}",
-      "keywords" : "{{ pg.keywords | escape }}"
+      "title"    : "页面没有找到",
+      "url"      : "https://fehub.net/404.html",
+      "keywords" : "404"
     } ,
-  {% endif %}
-  {% endfor %}
-
-  {% for doc in site.documents %}
+  
+  
+  
     {
-      "title"    : "{{ doc.title | escape }}",
-      "category" : "{{ doc.categories[0] | xml_escape }}",
-      {% if site.simple_jekyll_search.fulltext %}"content": {{ doc.content | markdownify | strip_html | replace:'"','' | jsonify | replace:'\n',' ' | replace:'   ',' ' | replace:'  ',' ' | replace:'\',' ' }},{% endif %}
-      "url"      : "{{ site.url }}{{ doc.url }}",
-      "keywords" : "{{ doc.keywords | escape }}"
-    } {% unless forloop.last %},{% endunless %}
-  {% endfor %}
-]
-{% endcapture %}
+      "title"    : "About",
+      "url"      : "https://fehub.net/about/",
+      "keywords" : "FEHub"
+    } ,
+  
+  
+  
+    {
+      "title"    : "归档",
+      "url"      : "https://fehub.net/archives/",
+      "keywords" : "归档"
+    } ,
+  
+  
+  
+    {
+      "title"    : "Categories",
+      "url"      : "https://fehub.net/categories/",
+      "keywords" : "分类"
+    } ,
+  
+  
+  
+  
+  
+    {
+      "title"    : "Links",
+      "url"      : "https://fehub.net/links/",
+      "keywords" : "友情链接"
+    } ,
+  
+  
+  
+    {
+      "title"    : "mindmap",
+      "url"      : "https://fehub.net/mindmap-viewer/",
+      "keywords" : "mindmap"
+    } ,
+  
+  
+  
+    {
+      "title"    : "Open Source Projects",
+      "url"      : "https://fehub.net/open-source/",
+      "keywords" : "开源,open-source,GitHub,开源项目"
+    } ,
+  
+  
+  
+  
+  
+    {
+      "title"    : "Wiki",
+      "url"      : "https://fehub.net/wiki/",
+      "keywords" : "维基, Wiki"
+    } ,
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-{{ json | lstrip }}
+  
+    {
+      "title"    : "使用 we-cropper 实现微信小程序头像裁剪并上传",
+      "category" : "微信小程序",
+      
+      "url"      : "https://fehub.net/2019/11/23/we-cropper/",
+      "keywords" : "微信小程序"
+    } ,
+  
+    {
+      "title"    : "使用 canvas 实现图片的合成",
+      "category" : "HTML5",
+      
+      "url"      : "https://fehub.net/2020/05/16/canvas-for-image-composition/",
+      "keywords" : "canvas"
+    } ,
+  
+    {
+      "title"    : "Rem",
+      "category" : "",
+      
+      "url"      : "https://fehub.net/2021/01/02/rem/",
+      "keywords" : ""
+    } ,
+  
+    {
+      "title"    : "Wiki Template",
+      "category" : "",
+      
+      "url"      : "https://fehub.net/wiki/template/",
+      "keywords" : "keyword1, keyword2"
+    } 
+  
+]
+
