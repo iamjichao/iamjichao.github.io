@@ -1,11 +1,12 @@
 - name: Front End Keywords
   keywords:
       - JavaScript
+      - TypeScript
       - CSS
       - HTML
       - React
       - Vue
-      - 微信小程序
+      - mini program
       - node.js
       - React Native
       - Flutter

@@ -3,10 +3,8 @@ layout: post
 title: 使用 canvas 实现图片的合成
 categories: [HTML5, JavaScript]
 description: 使用 canvas 实现图片的合成
-keywords: canvas
+keywords: [canvas]
 ---
-
-## 使用 canvas 实现图片的合成
 
 ### 需求
 

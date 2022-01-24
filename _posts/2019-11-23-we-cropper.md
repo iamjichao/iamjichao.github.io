@@ -1,14 +1,14 @@
 ---
 layout: post
 title: 使用 we-cropper 实现微信小程序头像裁剪并上传
-categories: 微信小程序
+categories: [mini program, JavaScript]
 description: 使用 we-cropper 实现微信小程序头像裁剪并上传
-keywords: 微信小程序
+keywords: [mini program, JavaScript]
 ---
 
-工作中需要在微信小程序中实现头像裁剪并上传的功能，图片上传配合后端可以实现，图片裁剪则需要在小程序中实现。在 Github 上找到一个微信小程序图片裁剪工具，在这里记录一下使用步骤。
+### 需求
 
-Github: [we-cropper](https://github.com/we-plugin/we-cropper)
+工作中需要在微信小程序中实现头像裁剪并上传的功能，图片上传配合后端可以实现，图片裁剪则需要在小程序中实现。在 Github 上找到一个微信小程序图片裁剪工具 [we-cropper](https://github.com/we-plugin/we-cropper)，在这里记录一下使用步骤。
 
 ### 引用插件资源
 
