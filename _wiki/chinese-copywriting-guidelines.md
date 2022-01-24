@@ -1,7 +1,8 @@
 ---
 layout: wiki
 title: 中文文案排版指南（简体中文版）
-categories: Copywriting
+cate1: Copywriting
+cate2:
 description: 中文文案排版指南（简体中文版）
 keywords: Copywriting
 topmost: true
