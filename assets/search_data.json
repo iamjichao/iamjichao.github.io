@@ -106,7 +106,7 @@
   
     {
       "title"    : "中文文案排版指南（简体中文版）",
-      "category" : "Copywriting",
+      "category" : "",
       
       "url"      : "https://fehub.net/wiki/chinese-copywriting-guidelines/",
       "keywords" : "Copywriting"
@@ -114,7 +114,7 @@
   
     {
       "title"    : "前端工程师规范",
-      "category" : "Front-End",
+      "category" : "",
       
       "url"      : "https://fehub.net/wiki/front-end-engineer-specification/",
       "keywords" : "Front-End"
