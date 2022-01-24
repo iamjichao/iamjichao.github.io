@@ -82,10 +82,10 @@
   
     {
       "title"    : "使用 we-cropper 实现微信小程序头像裁剪并上传",
-      "category" : "微信小程序",
+      "category" : "mini program",
       
       "url"      : "https://fehub.net/2019/11/23/we-cropper/",
-      "keywords" : "微信小程序"
+      "keywords" : "[&quot;mini program&quot;, &quot;JavaScript&quot;]"
     } ,
   
     {
@@ -93,15 +93,31 @@
       "category" : "HTML5",
       
       "url"      : "https://fehub.net/2020/05/16/canvas-for-image-composition/",
-      "keywords" : "canvas"
+      "keywords" : "[&quot;canvas&quot;]"
     } ,
   
     {
-      "title"    : "Rem",
-      "category" : "",
+      "title"    : "一次搞懂 rem 布局",
+      "category" : "CSS",
       
       "url"      : "https://fehub.net/2021/01/02/rem/",
-      "keywords" : ""
+      "keywords" : "[&quot;CSS&quot;, &quot;rem&quot;]"
+    } ,
+  
+    {
+      "title"    : "中文文案排版指南（简体中文版）",
+      "category" : "Copywriting",
+      
+      "url"      : "https://fehub.net/wiki/chinese-copywriting-guidelines/",
+      "keywords" : "Copywriting"
+    } ,
+  
+    {
+      "title"    : "前端工程师规范",
+      "category" : "Front-End",
+      
+      "url"      : "https://fehub.net/wiki/front-end-engineer-specification/",
+      "keywords" : "Front-End"
     } ,
   
     {

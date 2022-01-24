@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://fehub.net/feed.xml" rel="self" type="application/atom+xml" /><link href="https://fehub.net/" rel="alternate" type="text/html" /><updated>2022-01-23T22:03:10+08:00</updated><id>https://fehub.net/feed.xml</id><title type="html">FEHub</title><subtitle></subtitle><author><name>FEHub</name></author><entry><title type="html">Rem</title><link href="https://fehub.net/2021/01/02/rem/" rel="alternate" type="text/html" title="Rem" /><published>2021-01-02T00:00:00+08:00</published><updated>2021-01-02T00:00:00+08:00</updated><id>https://fehub.net/2021/01/02/rem</id><content type="html" xml:base="https://fehub.net/2021/01/02/rem/">&lt;h1 id=&quot;一次搞懂-rem-布局&quot;&gt;一次搞懂 rem 布局&lt;/h1&gt;
-
-&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://fehub.net/feed.xml" rel="self" type="application/atom+xml" /><link href="https://fehub.net/" rel="alternate" type="text/html" /><updated>2022-01-24T21:52:55+08:00</updated><id>https://fehub.net/feed.xml</id><title type="html">FEHub</title><subtitle></subtitle><author><name>FEHub</name></author><entry><title type="html">一次搞懂 rem 布局</title><link href="https://fehub.net/2021/01/02/rem/" rel="alternate" type="text/html" title="一次搞懂 rem 布局" /><published>2021-01-02T00:00:00+08:00</published><updated>2021-01-02T00:00:00+08:00</updated><id>https://fehub.net/2021/01/02/rem</id><content type="html" xml:base="https://fehub.net/2021/01/02/rem/">&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
 
 &lt;p&gt;在进入正题之前，首先认识几个名词，便于后续理解。&lt;/p&gt;
 
@@ -173,17 +171,13 @@
 
 &lt;h2 id=&quot;参考资料&quot;&gt;参考资料&lt;/h2&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/xwqqq/article/details/54862279&quot;&gt;https://blog.csdn.net/xwqqq/article/details/54862279&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.jianshu.com/p/af6dad66e49a&quot;&gt;https://www.jianshu.com/p/af6dad66e49a&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/jiangzilong/p/6700023.html&quot;&gt;https://www.cnblogs.com/jiangzilong/p/6700023.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.quirksmode.org/blog/archives/2010/04/a_pixel_is_not.html&quot;&gt;https://www.quirksmode.org/blog/archives/2010/04/a_pixel_is_not.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.zhangxinxu.com/wordpress/2012/08/window-devicepixelratio/&quot;&gt;https://www.zhangxinxu.com/wordpress/2012/08/window-devicepixelratio/&lt;/a&gt;&lt;/p&gt;</content><author><name>FEHub</name></author><summary type="html">一次搞懂 rem 布局</summary></entry><entry><title type="html">使用 canvas 实现图片的合成</title><link href="https://fehub.net/2020/05/16/canvas-for-image-composition/" rel="alternate" type="text/html" title="使用 canvas 实现图片的合成" /><published>2020-05-16T00:00:00+08:00</published><updated>2020-05-16T00:00:00+08:00</updated><id>https://fehub.net/2020/05/16/canvas-for-image-composition</id><content type="html" xml:base="https://fehub.net/2020/05/16/canvas-for-image-composition/">&lt;h2 id=&quot;使用-canvas-实现图片的合成&quot;&gt;使用 canvas 实现图片的合成&lt;/h2&gt;
-
-&lt;h3 id=&quot;需求&quot;&gt;需求&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.csdn.net/xwqqq/article/details/54862279&quot;&gt;手机端 rem 布局详解&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.jianshu.com/p/af6dad66e49a&quot;&gt;前端工程师需要明白的「像素」&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.cnblogs.com/jiangzilong/p/6700023.html&quot;&gt;CSS 像素、设备独立像素、设备像素之间关系&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.quirksmode.org/blog/archives/2010/04/a_pixel_is_not.html&quot;&gt;A pixel is not a pixel is not a pixel&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.zhangxinxu.com/wordpress/2012/08/window-devicepixelratio/&quot;&gt;设备像素比 devicePixelRatio 简单介绍&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>FEHub</name></author><category term="CSS" /><summary type="html">前言</summary></entry><entry><title type="html">使用 canvas 实现图片的合成</title><link href="https://fehub.net/2020/05/16/canvas-for-image-composition/" rel="alternate" type="text/html" title="使用 canvas 实现图片的合成" /><published>2020-05-16T00:00:00+08:00</published><updated>2020-05-16T00:00:00+08:00</updated><id>https://fehub.net/2020/05/16/canvas-for-image-composition</id><content type="html" xml:base="https://fehub.net/2020/05/16/canvas-for-image-composition/">&lt;h3 id=&quot;需求&quot;&gt;需求&lt;/h3&gt;
 
 &lt;p&gt;根据不同的推荐链接生成不同的二维码，将二维码和一张静态的图片合成一张完整的海报，用于不同推荐人的推广。&lt;/p&gt;
 
@@ -294,9 +288,9 @@
 &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;以上。&lt;/p&gt;</content><author><name>FEHub</name></author><category term="HTML5" /><category term="JavaScript" /><summary type="html">使用 canvas 实现图片的合成</summary></entry><entry><title type="html">使用 we-cropper 实现微信小程序头像裁剪并上传</title><link href="https://fehub.net/2019/11/23/we-cropper/" rel="alternate" type="text/html" title="使用 we-cropper 实现微信小程序头像裁剪并上传" /><published>2019-11-23T00:00:00+08:00</published><updated>2019-11-23T00:00:00+08:00</updated><id>https://fehub.net/2019/11/23/we-cropper</id><content type="html" xml:base="https://fehub.net/2019/11/23/we-cropper/">&lt;p&gt;工作中需要在微信小程序中实现头像裁剪并上传的功能，图片上传配合后端可以实现，图片裁剪则需要在小程序中实现。在 Github 上找到一个微信小程序图片裁剪工具，在这里记录一下使用步骤。&lt;/p&gt;
+&lt;p&gt;以上。&lt;/p&gt;</content><author><name>FEHub</name></author><category term="HTML5" /><category term="JavaScript" /><summary type="html">需求</summary></entry><entry><title type="html">使用 we-cropper 实现微信小程序头像裁剪并上传</title><link href="https://fehub.net/2019/11/23/we-cropper/" rel="alternate" type="text/html" title="使用 we-cropper 实现微信小程序头像裁剪并上传" /><published>2019-11-23T00:00:00+08:00</published><updated>2019-11-23T00:00:00+08:00</updated><id>https://fehub.net/2019/11/23/we-cropper</id><content type="html" xml:base="https://fehub.net/2019/11/23/we-cropper/">&lt;h3 id=&quot;需求&quot;&gt;需求&lt;/h3&gt;
 
-&lt;p&gt;Github: &lt;a href=&quot;https://github.com/we-plugin/we-cropper&quot;&gt;we-cropper&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;工作中需要在微信小程序中实现头像裁剪并上传的功能，图片上传配合后端可以实现，图片裁剪则需要在小程序中实现。在 Github 上找到一个微信小程序图片裁剪工具 &lt;a href=&quot;https://github.com/we-plugin/we-cropper&quot;&gt;we-cropper&lt;/a&gt;，在这里记录一下使用步骤。&lt;/p&gt;
 
 &lt;h3 id=&quot;引用插件资源&quot;&gt;引用插件资源&lt;/h3&gt;
 
@@ -450,4 +444,4 @@ we-cropper.wxml
 
 &lt;p&gt;关于微信小程序上传文件的 API &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wx.uploadFile&lt;/code&gt;，详见&lt;a href=&quot;https://developers.weixin.qq.com/miniprogram/dev/api/network/upload/wx.uploadFile.html&quot;&gt;微信官方文档&lt;/a&gt;。&lt;/p&gt;
 
-&lt;p&gt;以上。&lt;/p&gt;</content><author><name>FEHub</name></author><category term="微信小程序" /><summary type="html">工作中需要在微信小程序中实现头像裁剪并上传的功能，图片上传配合后端可以实现，图片裁剪则需要在小程序中实现。在 Github 上找到一个微信小程序图片裁剪工具，在这里记录一下使用步骤。</summary></entry></feed>
+&lt;p&gt;以上。&lt;/p&gt;</content><author><name>FEHub</name></author><category term="mini program" /><category term="JavaScript" /><summary type="html">需求</summary></entry></feed>
