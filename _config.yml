@@ -22,7 +22,7 @@ components:
     share:
         enabled: true
         hide-platforms: qq,qzone
-    # 不蒜子访问统计
+    # 不蒜子访问统计 http://busuanzi.ibruce.info/
     busuanzi:
         enabled: true
         start_date: 2020-01-01
@@ -51,7 +51,7 @@ highlight_theme: github
 # ---------------- #
 #      Author      #
 # ---------------- #
-author: FEHub
+author: Ji Chao
 organization: 
 organization_url: 
 github_username: iamjichao
