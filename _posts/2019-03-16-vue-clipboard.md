@@ -90,4 +90,3 @@ clipboard.destroy();
 可以通过 `ClipboardJS.isSupported()` 来检查是否支持 clipboard.js。
 
 以上。
-

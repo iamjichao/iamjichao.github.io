@@ -8,7 +8,6 @@ keywords: [JavaScript, Vue]
 
 工作中需要将 Vue 项目中的表格导出为 Excel，使用了 [vue-json-excel](https://github.com/jecovier/vue-json-excel) 插件，在这里详细记录一下使用方法和注意事项。
 
-
 ### 使用步骤
 
 - 安装依赖。在项目根目录下执行：
@@ -38,7 +37,6 @@ Vue.component('downloadExcel', JsonExcel)
 ```
 这里 data 属性是必需的。
 
-
 ### 组件属性
 
 属性 | 类型 | 描述
@@ -55,7 +53,6 @@ worksheet | String | 工作表选项卡的名称，默认是 Sheet1
 fetch | Function | 下载表格之前获取数据的回调函数。它会在鼠标点击后立即运行，并在下载表格之前运行。**重要提示**：只有在没有定义 data 属性时才有效
 before-generate | Function | 在生成 / 获取数据之前调用的方法，例如显示加载进度
 before-finish | Function | 在下载框弹出之前调用的方法，例如隐藏加载进度
-
 
 ### 注意事项
 
@@ -119,4 +116,3 @@ let json_fields = {
 ```
 
 以上。
-

@@ -155,3 +155,4 @@ window.addEventListener('resize', function() {
 webView.setLayerType(View.LAYER_TYPE_HARDWARE,null);
 ```
 
+不定时更新。

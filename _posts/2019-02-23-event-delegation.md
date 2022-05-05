@@ -68,3 +68,5 @@ window.onload = function() {
 - `.on()`
 
 前三种各有弊端，推荐使用第四种。
+
+以上。
