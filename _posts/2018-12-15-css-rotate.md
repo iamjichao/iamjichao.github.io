@@ -6,6 +6,7 @@ description: CSS3 实现卡片翻转效果
 keywords: [CSS3, rotate]
 ---
 
+
 做微信小程序时有一个翻卡片的需求，所以研究了一下用 CSS3 实现翻转的动画渐变效果。主要使用了 transition 和 transform 结合实现。
 
 ### 了解 transition 和 transform
@@ -136,6 +137,6 @@ transform: rotateY(180deg);
 }
 ```
 
-正面和反面都旋转了180度（从卡片上方看顺时针），此时正面背向屏幕不显示，反面面向屏幕显示，这样就实现了卡片翻转的动画效果。
+正面和反面都旋转了180度（从卡片上方看顺时针），此时正面背向屏幕不显示，反面面向屏幕显示，这样就实现了卡片翻转的动画效果。[效果展示](https://lab.iamjichao.com)
 
-[效果展示](https://lab.iamjichao.com)
+以上。

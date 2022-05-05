@@ -6,6 +6,8 @@ description: transition 学习
 keywords: [transition]
 ---
 
+### transition
+
 transition 属性是一个简写属性，用于设置四个过渡属性：
 
 ```css
@@ -84,16 +86,18 @@ transition-delay: time;
 
 ```css
 .box {
-  max-height: 0;
-  overflow: hidden;
-  -webkit-transition: max-height 600ms;
-  -moz-transition: max-height 600ms;
-  -o-transition: max-height 600ms;
-  transition: max-height 600ms;
+  max-height: 0;
+  overflow: hidden;
+  -webkit-transition: max-height 600ms;
+  -moz-transition: max-height 600ms;
+  -o-transition: max-height 600ms;
+  transition: max-height 600ms;
 }
 .box-unfolded {
-  max-height: 2000px;
+  max-height: 2000px;
 }
 ```
 
 max-height 相对 height 来说比较灵活。两者的区别就是计算高度的过程，一个是由人为计算，一个由盒子内容高度去计算然后自适应。这种写法必须给定足够存放内容的高度，所以尽量把 max-height 设置大一点。[效果展示](https://lab.iamjichao.com)
+
+以上。
