@@ -23,7 +23,7 @@ keywords: [canvas]
 ```
 
 ```js
-const qrcode = new QRCode(document.getElementById('qrcode'), 'https://iamjichao.net/');
+const qrcode = new QRCode(document.getElementById('qrcode'), 'https://fehub.net/');
 ```
 
 - 创建一个画布，将静态图片画上去，代码如下。
