@@ -6,8 +6,6 @@ description: transition 学习
 keywords: [transition]
 ---
 
-### transition
-
 transition 属性是一个简写属性，用于设置四个过渡属性：
 
 ```css

@@ -6,7 +6,7 @@ description: Vue 中导出 Excel 表格
 keywords: [JavaScript, Vue]
 ---
 
-工作中需要将 Vue 项目中的表格导出为 Excel，使用了 [vue-json-excel](https://github.com/jecovier/vue-json-excel) 插件，在这里详细记录一下使用方法和注意事项。
+工作中需要将 Vue 项目中的表格导出为 Excel，使用了 [vue-json-excel](https://github.com/jecovier/vue-json-excel) 插件，在这里记录一下使用方法和注意事项。
 
 ### 使用步骤
 

@@ -6,7 +6,7 @@ description: Vue 中使用 clipboard.js 实现复制文本
 keywords: [JavaScript, Vue, clipboard.js]
 ---
 
-工作中需要实现这样一个需求：在订单号后边提供一个复制订单号的按钮，使用了 [clipboard.js](https://github.com/zenorocha/clipboard.js.git)，在这里详细记录一下使用方法和注意事项。
+工作中需要实现这样一个需求：在订单号后边提供一个复制订单号的按钮，使用了 [clipboard.js](https://github.com/zenorocha/clipboard.js.git)，在这里记录一下使用方法和注意事项。
 
 ### 使用步骤
 
