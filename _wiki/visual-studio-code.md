@@ -3,7 +3,7 @@ layout: wiki
 title: Visual Studio Code
 cate1: Tools
 cate2:
-description: Visual Studio Code 的快捷键与使用技巧
+description: Visual Studio Code 常用快捷键与使用技巧
 keywords: Visual Studio Code
 ---
 
