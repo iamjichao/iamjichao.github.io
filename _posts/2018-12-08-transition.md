@@ -1,8 +1,8 @@
 ---
 layout: post
-title: transition 学习
+title: CSS3 transition 属性
 categories: [CSS]
-description: transition 学习
+description: CSS3 transition 属性
 keywords: [transition]
 ---
 

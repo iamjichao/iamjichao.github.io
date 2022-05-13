@@ -10,7 +10,7 @@ keywords: [CSS3, rotate]
 
 ### 了解 transition 和 transform
 
-transition 属性在 [transition 使用心得](https://iamjichao.net/2018/12/08/transition/) 中有详细介绍。
+transition 属性在 [CSS3 transition 属性](https://fehub.net/2018/12/08/transition/) 中有详细介绍。
 
 transform 属性向元素应用 2D 或 3D 转换。该属性允许我们对元素进行旋转、缩放、移动或倾斜。
 
