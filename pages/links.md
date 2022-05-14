@@ -18,6 +18,16 @@ permalink: /links/
 {% endfor %}
 </ul>
 
+> 前端工具库
+
+<ul>
+{% for link in site.data.links %}
+  {% if link.src == 'tool' %}
+  <li><a href="{{ link.url }}" target="_blank">{{ link.name}}</a></li>
+  {% endif %}
+{% endfor %}
+</ul>
+
 > 友情链接
 
 <ul>
@@ -27,5 +37,3 @@ permalink: /links/
   {% endif %}
 {% endfor %}
 </ul>
-
-

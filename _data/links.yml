@@ -1,40 +1,120 @@
-- name: MDN Web Docs
+# 前端学习网站
+
+- name: MDN Web Docs | Documenting web technologies
   url: https://developer.mozilla.org/zh-CN/
   src: www
 
-- name: React 官网
-  url: https://reactjs.org/
+- name: W3School | 领先的 Web 技术教程
+  url: https://www.w3school.com.cn
   src: www
 
-- name: React 官方中文文档
-  url: https://react.docschina.org/
-  src: www
-
-- name: TypeScript 官网
-  url: https://www.typescriptlang.org/
-  src: www
-
-- name: TypeScript 中文网
-  url: https://www.tslang.cn/
-  src: www
-
-- name: Ant Design of React
-  url: https://ant.design/docs/react/introduce-cn
-  src: www
-
-- name: Ant Design of Vue
-  url: https://www.antdv.com/docs/vue/introduce-cn/
-  src: www
-
-- name: 菜鸟教程
+- name: 菜鸟教程 | 小白零基础入门教程
   url: https://runoob.com/
   src: www
 
-- name: CSS-Tricks
-  url: https://css-tricks.com/
+- name: ECMAScript 6 入门 | 通俗易懂的 ES6 入门教程
+  url: https://es6.ruanyifeng.com/
   src: www
 
+- name: JavaScript 教程 | 通俗易懂的 JavaScript 教程
+  url: https://wangdoc.com/javascript/
+  src: www
 
+- name: 现代 JavaScript 教程 | 从基础到高阶的 JavaScript 相关知识
+  url: https://zh.javascript.info/
+  src: www
+
+- name: JavaScript 代码规范 | 适用于 JavaScript 的干净代码概念
+  url: https://github.com/ryanmcdermott/clean-code-javascript
+  src: www
+
+# - name: Node.js 官网
+#   url: https://nodejs.org/
+#   src: www
+
+- name: Node.js 中文文档 | 基于 Chrome V8 引擎的 JavaScript 运行环境
+  url: https://nodejs.org/zh-cn/docs/
+  src: www
+
+- name: Node.js 学习指南 | 系统的 Node.js 学习教程和笔记系统整理
+  url: https://blog.poetries.top/node-learning-notes/
+  src: www
+
+# - name: TypeScript 官网
+#   url: https://www.typescriptlang.org/
+#   src: www
+
+- name: TypeScript 中文网 | JavaScript 的超集
+  url: https://www.tslang.cn/
+  src: www
+
+- name: TypeScript 入门教程 | 循序渐进地理解 TypeScript
+  url: https://github.com/xcatliu/typescript-tutorial
+  src: www
+
+# - name: React 官网
+#   url: https://reactjs.org/
+#   src: www
+
+- name: React 官方中文文档 | 用于构建用户界面的 JavaScript 库
+  url: https://react.docschina.org/
+  src: www
+
+- name: Ant Design of React | 基于 Ant Design 设计体系的 React UI 组件库
+  url: https://ant.design/docs/react/introduce-cn
+  src: www
+
+# - name: Vue.js
+#   url: https://vuejs.org
+#   src: www
+
+- name: Vue.js 官网 | 渐进式 JavaScript 框架
+  url: https://cn.vuejs.org
+  src: www
+
+- name: Ant Design of Vue | Ant Design 的 Vue 实现
+  url: https://www.antdv.com/docs/vue/introduce-cn/
+  src: www
+
+- name: Sass 中文网 | 一种 CSS 的预编译语言
+  url: https://sass.bootcss.com/documentation
+  src: www
+
+- name: Less 中文网 | 一门向后兼容的 CSS 扩展语言
+  url: https://less.bootcss.com/
+  src: www
+
+- name: stylus | 富有表现力、动态、健壮的 CSS
+  url: https://stylus-lang.com/
+  src: www
+
+# 前端工具库
+
+- name: CSS Tricks | Web 开发者应该掌握的 CSS tricks
+  url: https://lhammer.cn/You-need-to-know-css/#/zh-cn/
+  src: tool
+
+- name: CSS Inspiration | CSS 灵感的诞生地
+  url: https://github.com/chokcoco/CSS-Inspiration
+  src: tool
+
+- name: CSS 常用样式 | 一些 CSS 常用样式
+  url: https://github.com/QiShaoXuan/css_tricks
+  src: tool
+
+- name: Animista | 按需定制的 CSS 动画库
+  url: https://animista.net/
+  src: tool
+
+- name: CSS Minifier | 在线 CSS 代码简化压缩工具
+  url: https://cssminifier.com/
+  src: tool
+
+# - name: CSS-Tricks
+#   url: https://css-tricks.com/
+#   src: tool
+
+# 友情链接
 
 - name: 码志
   url: http://mazhuang.org
