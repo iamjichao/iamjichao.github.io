@@ -8,7 +8,17 @@ menu: 链接
 permalink: /links/
 ---
 
-> 前端学习网站
+> 官方文档
+
+<ul>
+{% for link in site.data.links %}
+  {% if link.src == 'doc' %}
+  <li><a href="{{ link.url }}" target="_blank">{{ link.name}}</a></li>
+  {% endif %}
+{% endfor %}
+</ul>
+
+> 学习网站
 
 <ul>
 {% for link in site.data.links %}

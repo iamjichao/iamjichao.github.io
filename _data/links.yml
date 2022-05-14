@@ -1,4 +1,58 @@
-# 前端学习网站
+# 官方文档
+
+# - name: TypeScript 官网
+#   url: https://www.typescriptlang.org/
+#   src: doc
+
+- name: TypeScript 中文网 | JavaScript 的超集
+  url: https://www.tslang.cn/
+  src: doc
+
+# - name: Node.js 官网
+#   url: https://nodejs.org/
+#   src: doc
+
+- name: Node.js 中文文档 | 基于 Chrome V8 引擎的 JavaScript 运行环境
+  url: https://nodejs.org/zh-cn/docs/
+  src: doc
+
+# - name: React 官网
+#   url: https://reactjs.org/
+#   src: doc
+
+- name: React 官方中文文档 | 用于构建用户界面的 JavaScript 库
+  url: https://react.docschina.org/
+  src: doc
+
+# - name: Vue.js
+#   url: https://vuejs.org
+#   src: doc
+
+- name: Vue.js 官网 | 渐进式 JavaScript 框架
+  url: https://cn.vuejs.org
+  src: doc
+
+- name: Ant Design of React | 基于 Ant Design 设计体系的 React UI 组件库
+  url: https://ant.design/docs/react/introduce-cn
+  src: doc
+
+- name: Ant Design of Vue | Ant Design 的 Vue 实现
+  url: https://www.antdv.com/docs/vue/introduce-cn/
+  src: doc
+
+- name: Sass 中文网 | 一种 CSS 的预编译语言
+  url: https://sass.bootcss.com/documentation
+  src: doc
+
+- name: Less 中文网 | 一种向后兼容的 CSS 扩展语言
+  url: https://less.bootcss.com/
+  src: doc
+
+- name: stylus | 富有表现力、动态、健壮的 CSS
+  url: https://stylus-lang.com/
+  src: doc
+
+# 学习网站
 
 - name: MDN Web Docs | Documenting web technologies
   url: https://developer.mozilla.org/zh-CN/
@@ -28,64 +82,12 @@
   url: https://github.com/ryanmcdermott/clean-code-javascript
   src: www
 
-# - name: Node.js 官网
-#   url: https://nodejs.org/
-#   src: www
-
-- name: Node.js 中文文档 | 基于 Chrome V8 引擎的 JavaScript 运行环境
-  url: https://nodejs.org/zh-cn/docs/
-  src: www
-
 - name: Node.js 学习指南 | 系统的 Node.js 学习教程和笔记系统整理
   url: https://blog.poetries.top/node-learning-notes/
   src: www
 
-# - name: TypeScript 官网
-#   url: https://www.typescriptlang.org/
-#   src: www
-
-- name: TypeScript 中文网 | JavaScript 的超集
-  url: https://www.tslang.cn/
-  src: www
-
 - name: TypeScript 入门教程 | 循序渐进地理解 TypeScript
   url: https://github.com/xcatliu/typescript-tutorial
-  src: www
-
-# - name: React 官网
-#   url: https://reactjs.org/
-#   src: www
-
-- name: React 官方中文文档 | 用于构建用户界面的 JavaScript 库
-  url: https://react.docschina.org/
-  src: www
-
-- name: Ant Design of React | 基于 Ant Design 设计体系的 React UI 组件库
-  url: https://ant.design/docs/react/introduce-cn
-  src: www
-
-# - name: Vue.js
-#   url: https://vuejs.org
-#   src: www
-
-- name: Vue.js 官网 | 渐进式 JavaScript 框架
-  url: https://cn.vuejs.org
-  src: www
-
-- name: Ant Design of Vue | Ant Design 的 Vue 实现
-  url: https://www.antdv.com/docs/vue/introduce-cn/
-  src: www
-
-- name: Sass 中文网 | 一种 CSS 的预编译语言
-  url: https://sass.bootcss.com/documentation
-  src: www
-
-- name: Less 中文网 | 一门向后兼容的 CSS 扩展语言
-  url: https://less.bootcss.com/
-  src: www
-
-- name: stylus | 富有表现力、动态、健壮的 CSS
-  url: https://stylus-lang.com/
   src: www
 
 # 前端工具库
