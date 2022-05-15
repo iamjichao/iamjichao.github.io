@@ -1,7 +1,7 @@
 ---
 layout: wiki
 title: macOS
-cate1: Mac
+cate1: OS
 cate2:
 description: 使用 macOS 的一些快捷键和遇到的问题
 keywords: Mac
