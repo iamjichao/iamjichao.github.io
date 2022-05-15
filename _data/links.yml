@@ -90,6 +90,10 @@
   url: https://github.com/xcatliu/typescript-tutorial
   src: www
 
+- name: awesome GitHub | 更好地使用 GitHub
+  url: https://github.com/AntBranch/awesome-github
+  src: www
+
 # 前端工具库
 
 - name: CSS Tricks | Web 开发者应该掌握的 CSS tricks
