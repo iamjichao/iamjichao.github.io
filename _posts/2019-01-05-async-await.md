@@ -1,8 +1,8 @@
 ---
 layout: post
-title: async/await 学习
+title: 优雅的 async/await
 categories: [JavaScript]
-description: async/await 学习
+description: 优雅的 async/await
 keywords: [JavaScript, async, await]
 ---
 
