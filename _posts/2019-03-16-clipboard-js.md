@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 使用 clipboard.js 实现文本复制剪切
-categories: [HTML, JavaScript]
+categories: [JavaScript, HTML]
 description: 使用 clipboard.js 实现文本复制剪切
 keywords: [JavaScript, clipboard.js]
 ---

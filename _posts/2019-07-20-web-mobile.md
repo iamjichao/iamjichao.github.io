@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 移动端 web 开发常见问题及解决方案
-categories: [JavaScript, CSS, HTML]
+categories: [HTML, CSS, JavaScript]
 description: 移动端 web 开发常见问题及解决方案
 keywords: [移动端, web]
 ---

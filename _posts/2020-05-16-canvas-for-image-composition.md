@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 使用 canvas 实现图片的合成
-categories: [HTML, JavaScript]
+categories: [JavaScript, HTML]
 description: 使用 canvas 实现图片的合成
 keywords: [canvas]
 ---
