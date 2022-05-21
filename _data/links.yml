@@ -4,7 +4,7 @@
 #   url: https://www.typescriptlang.org/
 #   src: doc
 
-- name: TypeScript 中文网 | JavaScript 的超集
+- name: TypeScript | JavaScript 的超集
   url: https://www.tslang.cn/
   src: doc
 
@@ -12,7 +12,7 @@
 #   url: https://nodejs.org/
 #   src: doc
 
-- name: Node.js 中文文档 | 基于 Chrome V8 引擎的 JavaScript 运行环境
+- name: Node.js | 基于 Chrome V8 引擎的 JavaScript 运行环境
   url: https://nodejs.org/zh-cn/docs/
   src: doc
 
@@ -20,7 +20,7 @@
 #   url: https://reactjs.org/
 #   src: doc
 
-- name: React 官方中文文档 | 用于构建用户界面的 JavaScript 库
+- name: React | 用于构建用户界面的 JavaScript 库
   url: https://react.docschina.org/
   src: doc
 
@@ -28,7 +28,7 @@
 #   url: https://vuejs.org
 #   src: doc
 
-- name: Vue.js 官网 | 渐进式 JavaScript 框架
+- name: Vue.js | 渐进式 JavaScript 框架
   url: https://cn.vuejs.org
   src: doc
 
@@ -40,11 +40,11 @@
   url: https://www.antdv.com/docs/vue/introduce-cn/
   src: doc
 
-- name: Sass 中文网 | 一种 CSS 的预编译语言
+- name: Sass | 一种 CSS 的预编译语言
   url: https://sass.bootcss.com/documentation
   src: doc
 
-- name: Less 中文网 | 一种向后兼容的 CSS 扩展语言
+- name: Less | 一种向后兼容的 CSS 扩展语言
   url: https://less.bootcss.com/
   src: doc
 
@@ -90,13 +90,13 @@
   url: https://github.com/xcatliu/typescript-tutorial
   src: www
 
-- name: awesome GitHub | 更好地使用 GitHub
+- name: Awesome GitHub | 更好地使用 GitHub
   url: https://github.com/AntBranch/awesome-github
   src: www
 
-# 前端工具库
+# 前端工具
 
-- name: CSS Tricks | Web 开发者应该掌握的 CSS tricks
+- name: You-need-to-know-css | Web 开发者应该掌握的 CSS tricks
   url: https://lhammer.cn/You-need-to-know-css/#/zh-cn/
   src: tool
 
@@ -104,7 +104,7 @@
   url: https://github.com/chokcoco/CSS-Inspiration
   src: tool
 
-- name: CSS 常用样式 | 一些 CSS 常用样式
+- name: CSS Tricks | 一些 CSS 常用样式
   url: https://github.com/QiShaoXuan/css_tricks
   src: tool
 

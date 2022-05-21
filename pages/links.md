@@ -28,7 +28,7 @@ permalink: /links/
 {% endfor %}
 </ul>
 
-> 前端工具库
+> 前端工具
 
 <ul>
 {% for link in site.data.links %}
