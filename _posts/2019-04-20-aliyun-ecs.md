@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 阿里云云服务器 ECS 的使用
+title: 云服务器 ECS 的使用
 categories: [ECS]
-description: 阿里云云服务器 ECS 的使用
+description: 云服务器 ECS 的使用
 keywords: [ECS]
 ---
 
