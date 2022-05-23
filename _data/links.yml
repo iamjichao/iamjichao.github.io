@@ -78,7 +78,7 @@
   url: https://zh.javascript.info/
   src: www
 
-- name: JavaScript 代码规范 | 适用于 JavaScript 的干净代码概念
+- name: Clean Code JavaScript | 适用于 JavaScript 的干净代码概念
   url: https://github.com/ryanmcdermott/clean-code-javascript
   src: www
 
@@ -94,18 +94,22 @@
   url: https://github.com/AntBranch/awesome-github
   src: www
 
-# 前端工具
-
 - name: You-need-to-know-css | Web 开发者应该掌握的 CSS tricks
   url: https://lhammer.cn/You-need-to-know-css/#/zh-cn/
-  src: tool
+  src: www
 
 - name: CSS Inspiration | CSS 灵感的诞生地
   url: https://github.com/chokcoco/CSS-Inspiration
-  src: tool
+  src: www
 
 - name: CSS Tricks | 一些 CSS 常用样式
   url: https://github.com/QiShaoXuan/css_tricks
+  src: www
+
+# 前端工具
+
+- name: Can I Use | 浏览器兼容性检查工具
+  url: https://caniuse.com/
   src: tool
 
 - name: Animista | 按需定制的 CSS 动画库
@@ -118,6 +122,22 @@
 
 # - name: CSS-Tricks
 #   url: https://css-tricks.com/
+#   src: tool
+
+- name: CODELF | 变量命名神器
+  url: https://unbug.github.io/codelf/
+  src: tool
+
+- name: regex101 | 构建、测试和调试正则表达式
+  url: https://regex101.com/
+  src: tool
+
+- name: RegExp | 正则表达式在线测试工具
+  url: http://tool.rbtree.cn/
+  src: tool
+
+# - name: RegExp | 正则表达式解析器
+#   url: https://codegen.bqrdh.com/regexper
 #   src: tool
 
 # 友情链接
