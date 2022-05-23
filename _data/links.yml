@@ -82,7 +82,7 @@
   url: https://github.com/ryanmcdermott/clean-code-javascript
   src: www
 
-- name: Node.js 学习指南 | 系统的 Node.js 学习教程和笔记系统整理
+- name: Node.js 学习指南 | 系统的 Node.js 学习教程和笔记整理
   url: https://blog.poetries.top/node-learning-notes/
   src: www
 
@@ -94,7 +94,7 @@
   url: https://github.com/AntBranch/awesome-github
   src: www
 
-- name: You-need-to-know-css | Web 开发者应该掌握的 CSS tricks
+- name: You-need-to-know-css | Web 开发者应该掌握的 CSS 技巧
   url: https://lhammer.cn/You-need-to-know-css/#/zh-cn/
   src: www
 
