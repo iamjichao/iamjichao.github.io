@@ -45,13 +45,12 @@ JSON.stringify(value[, replacer [, space]])
 
 ## 九个特性
 
-先看第一个参数。如果只传一个参数，`JSON.stringify()` 将第一个参数的值转换为相应的 JSON 格式，有以下九个特性：
+如果只传一个参数，`JSON.stringify()` 将第一个参数的值转换为相应的 JSON 格式，有以下九个特性：
 
-1. 转换值如果有 `toJSON()` 方法，序列化的结果就是这个方法的返回值，忽略其他属性的值。
-2. `Date` 对象包含 `toJSON()` 方法（同 `Date.toISOString()`），因此会被当做字符串处理。
+- 转换值如果有 `toJSON()` 方法，序列化的结果就是这个方法的返回值，忽略其他属性的值。
+- `Date` 对象包含 `toJSON()` 方法（同 `Date.toISOString()`），因此会被当做字符串处理。
 
 ```jsx
-/** 1 **/
 JSON.stringify({
   name: "Li Lei",
   toJSON: function() {
@@ -60,26 +59,23 @@ JSON.stringify({
 })
 // '"Han Meimei"'
 
-/** 2 **/
 JSON.stringify(new Date());
 // '"2020-12-05T09:11:20.566Z"'
 JSON.stringify({ now: new Date() });
 // '{"now":"2020-12-05T09:11:20.566Z"}'
 ```
 
-3. **函数**、**undefined** 以及 **symbol** 单独序列化时会转换为 `undefined`，作为数组元素序列化时会转换为 `null`，作为对象的属性值序列化时会被忽略。
-4. 当 **symbol** 作为对象的**属性键**序列化时，该属性会被完全忽略掉，即使 `replacer` 参数中强制指定了包含它（`replacer` 参数我们稍后会说到），序列化时也会忽略。
-5. 因为非数组对象序列化时会忽略一些特殊的值，所以对象的属性不能保证以特定的顺序出现在序列化后的字符串中，数组除外。
+- **函数**、**undefined** 以及 **symbol** 单独序列化时会转换为 `undefined`，作为数组元素序列化时会转换为 `null`，作为对象的属性值序列化时会被忽略。
+- 当 **symbol** 作为对象的**属性键**序列化时，该属性会被完全忽略掉，即使 `replacer` 参数中强制指定了包含它（`replacer` 参数我们稍后会说到），序列化时也会忽略。
+- 因为非数组对象序列化时会忽略一些特殊的值，所以对象的属性不能保证以特定的顺序出现在序列化后的字符串中，数组除外。
 
 ```jsx
-/** 3 **/
 JSON.stringify(function(){});
 JSON.stringify(() => {});
 JSON.stringify(undefined);
 JSON.stringify(Symbol('stringify'));
 // undefined
 
-/** 3, 5 **/
 JSON.stringify({
   a: "stringify",
   b: undefined,
@@ -91,7 +87,6 @@ JSON.stringify({
 JSON.stringify(["stringify", undefined, Symbol("stringify"), function(){}]);
 // '["stringify",null,null,null]'
 
-/** 4 **/
 JSON.stringify({ [Symbol("json")]: "stringify" }, function(k, v) {
   if (typeof k === "symbol") {
     return v;
@@ -100,10 +95,9 @@ JSON.stringify({ [Symbol("json")]: "stringify" }, function(k, v) {
 // undefined
 ```
 
-6. **NaN**、**Infinity** 格式的数值以及 **null** 都会被当做 `null`，单独序列化时会转换为字符串 `"null"`，作为数组元素以及对象的属性值序列化时都会转换为 `null`。对 `BigInt` 类型（大于 2^53-1 的任意大的整数）的值序列化时会抛出 `Uncaught TypeError: Do not know how to serialize a BigInt` 。
+- **NaN**、**Infinity** 格式的数值以及 **null** 都会被当做 `null`，单独序列化时会转换为字符串 `"null"`，作为数组元素以及对象的属性值序列化时都会转换为 `null`。对 `BigInt` 类型（大于 2^53-1 的任意大的整数）的值序列化时会抛出 `Uncaught TypeError: Do not know how to serialize a BigInt` 。
 
 ```jsx
-/** 6 **/
 JSON.stringify(NaN);
 JSON.stringify(Infinity);
 JSON.stringify(null);
@@ -123,10 +117,9 @@ JSON.stringify(1n);
 // Uncaught TypeError: Do not know how to serialize a BigInt
 ```
 
-7. **布尔值**、**数字**、**字符串**的包装对象作为数组元素以及对象的属性值序列化时会自动转换成对应的原始值，单独序列化时会转化为对应的字符串。
+- **布尔值**、**数字**、**字符串**的包装对象作为数组元素以及对象的属性值序列化时会自动转换成对应的原始值，单独序列化时会转化为对应的字符串。
 
 ```jsx
-/** 7 **/
 JSON.stringify(new Number(1));
 // '1'
 JSON.stringify(new String("false"));
@@ -145,10 +138,9 @@ JSON.stringify([new Number(1), new String("false"), new Boolean(false)]);
 // '[1,"false",false]'
 ```
 
-8. 其他类型的对象，包括 **Map**/**Set**/**WeakMap**/**WeakSet**，仅会序列化可枚举的属性。
+- 其他类型的对象，包括 **Map**/**Set**/**WeakMap**/**WeakSet**，仅会序列化可枚举的属性。
 
 ```jsx
-/** 8 **/
 JSON.stringify(
   Object.create(null, {
     a: { value: 'json', enumerable: false },
@@ -158,10 +150,9 @@ JSON.stringify(
 // '{"b":"stringify"}'
 ```
 
-9. 对包含循环引用的对象（对象之间相互引用，形成无限循环）执行此方法，会抛出错误。当我们试图通过 `JSON.parse(JSON.stringify())` 方法实现深拷贝时，要注意对象不能包含循环引用，否则会报错。
+- 对包含循环引用的对象（对象之间相互引用，形成无限循环）执行此方法，会抛出错误。当我们试图通过 `JSON.parse(JSON.stringify())` 方法实现深拷贝时，要注意对象不能包含循环引用，否则会报错。
 
 ```jsx
-/** 9 **/
 // Uncaught TypeError: Converting circular structure to JSON
 ```
 
@@ -311,7 +302,7 @@ JSON.parse('{"foo" : 1, }');
 
 ## 参考资料
 
-- [JSON.stringify() - JavaScript | MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
-- [JSON - JavaScript | MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON)
-- [JSON.parse() - JavaScript | MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse)
+- [JSON.stringify() - MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
+- [JSON - MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON)
+- [JSON.parse() - MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse)
 - [你不知道的 JSON.stringify() 的威力](https://github.com/NieZhuZhu/Blog/issues/1)

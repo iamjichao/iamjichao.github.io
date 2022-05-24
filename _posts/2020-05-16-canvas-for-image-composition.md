@@ -53,7 +53,7 @@ img.onload = () => {
 这里有两点要注意：
 
 1. 由于 canvas 的绘制需要的是已经加载完成的图片，我们需要确保绘制的素材图片是已经加载完成的，因此我们需要使用 img 的 onload 事件，可以使用 html 中已存在的图片，或者用js创建一个图片对象；
-2. 图片加载并绘制涉及了图片的跨域问题，因此如果是一张在线的图片，需要在图片服务器上设置跨域头，并且在前端加载图片之前将 img 标签的 crossOrigin 属性设置为 anonymous，否则绘制到画布的时候会报跨域的错误。这里我用的本地资源，所以没有跨域问题，不需要设置 crossOrigin 属性。关于 crossOrigin 可以参考[这篇文章](http://ilucas.me/2017/04/19/crossorign-attribute-img-tag/)。
+2. 图片加载并绘制涉及了图片的跨域问题，因此如果是一张在线的图片，需要在图片服务器上设置跨域头，并且在前端加载图片之前将 img 标签的 crossOrigin 属性设置为 anonymous，否则绘制到画布的时候会报跨域的错误。这里我用的本地资源，所以没有跨域问题，不需要设置 crossOrigin 属性。关于 crossOrigin 可以参考这篇 [文章](http://ilucas.me/2017/04/19/crossorign-attribute-img-tag/)。
 
 - 将生成的二维码画到静态图片指定位置
 
