@@ -102,5 +102,5 @@ font-family: "Gill Sans Extrabold", sans-serif;
 ### 参考资料
 
 - [网页的默认全局字体该如何设置？- 哔哩哔哩](https://b23.tv/8zYhEob)
-- [font-family | MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/font-family)
-- [@font-face | MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/@font-face)
+- [font-family CSS - MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/font-family)
+- [@font-face CSS - MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/@font-face)

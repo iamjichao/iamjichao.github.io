@@ -8,7 +8,7 @@ menu: 链接
 permalink: /links/
 ---
 
-> 官方文档
+<!-- > 官方文档
 
 <ul>
 {% for link in site.data.links %}
@@ -16,7 +16,7 @@ permalink: /links/
   <li><a href="{{ link.url }}" target="_blank">{{ link.name}}</a></li>
   {% endif %}
 {% endfor %}
-</ul>
+</ul> -->
 
 > 学习网站
 
