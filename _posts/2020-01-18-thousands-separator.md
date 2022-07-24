@@ -6,13 +6,11 @@ description: web 开发中的千位分隔符
 keywords: [HTML, JavaScript]
 ---
 
-> 千位分隔符，其实就是数字中的逗号。依西方的习惯，在数字中，每隔三位数加进一个逗号，也就是千位分隔符，以便更加容易认出数值。
-
-在 web 开发中，经常需要实现大数值显示千位分隔符的需求。
+千位分隔符，其实就是数字中的逗号。依照国际通用规范，在数字中每隔三位数加一个逗号，也就是千位分隔符，以便更容易认出数值。在 web 开发中，经常需要实现大数值显示千位分隔符的需求。
 
 ### 为什么要使用千位分隔符
 
-- 更加符合国际通用规范
+- **更符合国际通用规范**
 
 英语中的大数值是千进制的：
 
@@ -30,9 +28,9 @@ keywords: [HTML, JavaScript]
 1 s = 1000 ms = 1,000,000 μs
 ```
 
-- 防止被浏览器识别为电话号码
+- **防止被浏览器识别为电话号码**
 
-```HTML
+```html
 <!-- 没有千位分隔符会被认为是电话号码 -->
 <span>123456789</span>
 
@@ -42,19 +40,19 @@ keywords: [HTML, JavaScript]
 
 如果不使用千位分隔符，为了避免将大数值识别为电话号码，通常会在 HTML 中指定 `meta` 标签：
 
-```HTML
+```html
 <meta name="format-detection" content="telephone=no">
 ```
 
 需要识别为电话号码的地方使用：
 
-```HTML
+```html
 <a href="tel:021-88881234">88881234</a>
 ```
 
-- 能让屏幕阅读器识别更准确
+- **能让屏幕阅读器识别更准确**
 
-```HTML
+```html
 <!-- 没有千位分隔符时阅读器读作：一二三四五六七八九 -->
 <span>123456789</span>
 
@@ -64,7 +62,7 @@ keywords: [HTML, JavaScript]
 
 ### 如何实现
 
-- `Number.toLocaleString()`
+- **`Number.toLocaleString()`**
 
 整数部分完美实现，小数部分最多会四舍五入保留三位小数：
 
@@ -76,7 +74,7 @@ keywords: [HTML, JavaScript]
 // '1,234.568'
 ```
 
-- `String(Number).replace(/(\d)(?=(\d{3})+$)/g, "$1,")`
+- **`String(Number).replace(/(\d)(?=(\d{3})+$)/g, "$1,")`**
 
 整数可以完美实现，小数就有问题了：
 
@@ -117,5 +115,4 @@ handleFloat(1234.56789);
 ### 参考资料
 
 - [千位分隔符](https://baike.baidu.com/item/%E5%8D%83%E4%BD%8D%E5%88%86%E9%9A%94%E7%AC%A6/10998823?fr=aladdin)
-
 - [Number.prototype.toLocaleString() - MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString)
