@@ -98,4 +98,39 @@ transition-delay: time;
 
 max-height 相对 height 来说比较灵活。两者的区别就是计算高度的过程，一个是由人为计算，一个由盒子内容高度去计算然后自适应。这种写法必须给定足够存放内容的高度，所以尽量把 max-height 设置大一点。[效果展示](https://lab.iamjichao.com)
 
+### 应用：模拟长悬停或长按效果
+
+```css
+div {
+  opacity: .9;
+}
+
+div.active {
+  opacity: .99;
+  transition: opacity 350ms;
+}
+```
+
+```js
+// 鼠标长时间悬停
+div.onmouseenter = function () {
+  this.classList.add('active');
+}
+div.onmouseleave = function () {
+  this.classList.remove('active');
+}
+
+// 移动端长按
+div.ontouchstart = function () {
+  this.classList.add('active');
+}
+div.ontouchend = function () {
+  this.classList.remove('active');
+}
+
+div.addEventListener('transitionend', function () {
+  // 触发长悬停/长按
+});
+```
+
 以上。
