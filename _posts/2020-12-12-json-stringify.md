@@ -6,6 +6,8 @@ description: 一次搞懂 JSON.stringify
 keywords: [JavaScript]
 ---
 
+在这里你可以找到 JSON.stringify 的所有常规和非常规的用法。
+
 ## 前言
 
 先看一个面试题：实现一个对象的 map 函数，类似 `Array.prototype.map`，先看答案，然后带着问题往下看。
