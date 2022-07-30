@@ -21,7 +21,7 @@ components:
     # weibo,qq,wechat,douban,qzone,linkedin,facebook,twitter
     share:
         enabled: true
-        hide-platforms: qq,qzone
+        hide-platforms: douban,qzone,linkedin
     # 不蒜子访问统计 http://busuanzi.ibruce.info/
     busuanzi:
         enabled: true

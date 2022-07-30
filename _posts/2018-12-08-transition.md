@@ -6,75 +6,66 @@ description: CSS3 transition 属性
 keywords: [transition]
 ---
 
-transition 属性是一个简写属性，用于设置四个过渡属性：
+CSS [transition](https://developer.mozilla.org/zh-CN/docs/Web/CSS/transition) 属性是 `transition-property`，`transition-duration`，`transition-timing-function` 和 `transition-delay` 的一个简写属性。
 
 ```css
+/* 默认值：all 0 ease 0 */
 transition: property duration timing-function delay;
 ```
 
-默认值：all 0 ease 0
+### transition 属性值
 
-### transition-property
+- **transition-property**
 
-transition-property 属性规定应用过渡效果的 CSS 属性的名称。当指定的 CSS 属性改变时，过渡效果将开始。过渡效果通常在用户将鼠标指针浮动到元素上时发生。
-
-```css
-transition-property: none|all|property;
-```
-
-默认值：all
-
-**none** 没有属性会获得过渡效果。
-
-**all** 所有属性都将获得过渡效果。
-
-**property** 定义应用过渡效果的 CSS 属性名称列表，列表以逗号分隔。
-
-### transition-duration
-
-transition-duration 属性规定完成过渡效果需要花费的时间（以秒或毫秒计）。请始终设置 transition-duration 属性，否则时长为 0，就不会产生过渡效果。
+transition-property 属性规定应用过渡效果的 CSS 属性的名称。当指定的 CSS 属性改变时，过渡效果将开始。
 
 ```css
-transition-duration: time;
+/* 默认值：all */
+transition-property: none | all | property;
 ```
 
-默认值：0
+| 属性值   | 含义     |
+|:--------|:---------|
+| **none** | 没有属性会应用过渡效果 |
+| **all** | 所有属性都应用过渡效果 |
+| **property** | 定义应用过渡效果的 CSS 属性名称列表，列表以逗号分隔 |
 
-**time** 规定完成过渡效果需要花费的时间（以秒或毫秒计）。默认值是 0，意味着不会有效果。
+- **transition-duration**
 
-### transition-timing-function
-
-transition-timing-function 属性规定过渡效果的速度曲线。该属性允许过渡效果随着时间来改变其速度。
+transition-duration 属性规定完成过渡效果需要花费的时间（以秒或毫秒计）。值是 0 时不会产生过渡效果。
 
 ```css
-transition-timing-function: linear|ease|ease-in|ease-out|ease-in-out|cubic-bezier(n,n,n,n);
+/* 默认值：0 */
+transition-duration: 2s;
+transition-duration: 2000ms;
 ```
 
-默认值：ease
+- **transition-timing-function**
 
-**linear** 规定以相同速度开始至结束的过渡效果（等于 cubic-bezier(0,0,1,1)）。
-
-**ease** 规定慢速开始，然后变快，然后慢速结束的过渡效果（等于 cubic-bezier(0.25,0.1,0.25,1)）。
-
-**ease-in** 规定以慢速开始的过渡效果（等于 cubic-bezier(0.42,0,1,1)）。
-
-**ease-out** 规定以慢速结束的过渡效果（等于 cubic-bezier(0,0,0.58,1)）。
-
-**ease-in-out** 规定以慢速开始和结束的过渡效果（等于 cubic-bezier(0.42,0,0.58,1)）。
-
-**cubic-bezier(n,n,n,n)** 在 cubic-bezier 函数中定义自己的值。可能的值是 0 至 1 之间的数值。
-
-### transition-delay
-
-transition-delay 属性规定过渡效果何时开始。值以秒或毫秒计。
+transition-timing-function 属性规定过渡效果的速度曲线。该属性允许过渡效果随着时间来改变其速度。默认值是 ease。
 
 ```css
-transition-delay: time;
+transition-timing-function: linear | ease | ease-in | ease-out | ease-in-out | cubic-bezier(n,n,n,n);
 ```
 
-默认值：0
+| 属性值   | 含义     |
+|:--------|:---------|
+| **linear** | 规定以相同速度开始至结束的过渡效果（等于 cubic-bezier(0, 0, 1, 1)）|
+| **ease** | 规定慢速开始，然后变快，然后慢速结束的过渡效果（等于 cubic-bezier(0.25, 0.1, 0.25, 1)）|
+| **ease-in** | 规定以慢速开始的过渡效果（等于 cubic-bezier(0.42, 0, 1, 1)）|
+| **ease-out** | 规定以慢速结束的过渡效果（等于 cubic-bezier(0, 0, 0.58, 1)）|
+| **ease-in-out** | 规定以慢速开始和结束的过渡效果（等于 cubic-bezier(0.42, 0, 0.58, 1)）|
+| **cubic-bezier(n,n,n,n)** | 在 cubic-bezier 函数中定义自己的值，可能的值是 0 至 1 之间的数值 |
 
-**time** 规定在过渡效果开始之前需要等待的时间，以秒或毫秒计。
+- **transition-delay**
+
+transition-delay 属性规定在过渡效果开始之前需要等待的时间，以秒或毫秒计。
+
+```css
+/* 默认值：0 */
+transition-delay: 1s;
+transition-delay: 1000ms;
+```
 
 ### 应用：实现不确定高度元素展开和收起的动画效果
 
