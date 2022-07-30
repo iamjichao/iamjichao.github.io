@@ -41,7 +41,7 @@ document.querySelector('#skin').href = 'dark.css';
 
 ### 使用原生 HTML 特性实现流畅的换肤效果
 
-首先了解一下 `link` 标签的 `rel` `title` `disabled` 属性，详细内容参考 [link：外部资源链接元素](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/link)。
+首先了解一下 `link` 标签的 `rel` `title` `disabled` 属性，详细内容参考 [\<link\>：外部资源链接元素](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/link)。
 
 - rel 属性用于声明链接文档与当前文档的关系，属性值参考 [链接类型值](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Link_types)，多个用空格分隔。
 
@@ -91,6 +91,6 @@ document.querySelector('link[href="light.css"]').disabled = true;
 ### 参考资料
 
 - [网站换肤的最佳实现 - 哔哩哔哩](https://b23.tv/PLImiGs)
-- [link：外部资源链接元素 - MDN](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/link)
+- [\<link\>：外部资源链接元素 - MDN](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/link)
 - [链接类型 - MDN](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Link_types)
 - [Alternative style sheets - MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Alternative_style_sheets)
