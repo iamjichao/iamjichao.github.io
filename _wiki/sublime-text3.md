@@ -38,14 +38,14 @@ keywords: Sublime Text 3
 
 Sublime Text 2为我们做了很多大好事，最大的好事就是多重选择功能。攻城师们用的静态语言（如Java）给文本编辑者带来方便，特别是保留变量。多重选择功能甚至在编辑领域发扬闪亮之处，掌握复选功能会使攻城师从文本编辑中得到无以伦比的满足感和成就感。
 
-### 六种方法来初始化多重选择功能：
+### 六种方法来初始化多重选择功能
 
-- `Add next/previous line` 增加下一行／向后命令(在OS X下用`Cmd+Ctrl+up/down`、Linux/Windows下用`Ctrl+Alt+up/down)`
-- `Cmd/Ctrl ＋ 点击`加入鼠标光标
-- Split into lines | 将选区转换成多个单行选区`(Cmd/Ctrl+Shift+L)`
-- Alt + 拖拽(OS X下)或者Shift＋右键拖拽(Linux/Windows下)
-- Quick Add Next | 快速添加下一个`(Cmd/Ctrl+D)`
-- Quick Find All | 快速寻找所有(OS X下`Cmd+Ctrl+G`，Linux/Windows下`Alt+F3`)
+- `Cmd+Ctrl+up/down`(macOS) `Ctrl+Alt+up/down)`(Linux/Windows) 增加下一行/向后命令
+- `Cmd/Ctrl ＋ 点击` 加入鼠标光标
+- `Cmd/Ctrl+Shift+L` 将选区转换成多个单行选区
+- `Alt + 拖拽`(macOS) `Shift＋右键拖拽`(Linux/Windows)
+- `Cmd/Ctrl+D` 快速添加下一个
+- `Cmd+Ctrl+G`(macOS) `Alt+F3`(Linux/Windows) 快速寻找所有
 
 最后的那个用得最多，因为即使不用鼠标也可以快速并容易控制所选内容。用这个功能，你还可以下次继续调用当前所选内容。这让变量更名变得易如反掌。
 
