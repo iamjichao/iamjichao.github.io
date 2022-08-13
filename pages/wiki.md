@@ -9,7 +9,7 @@ menu: 维基
 permalink: /wiki/
 ---
 
-> 世界太辽阔，将你的消息淹没。
+> Stay hungry, stay foolish.
 
 {% case site.components.wiki.view %}
 

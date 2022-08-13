@@ -8,7 +8,7 @@ menu: 关于
 permalink: /about/
 ---
 
-> Stay hungry, stay foolish.
+> 世界太辽阔，将你的消息淹没。
 
 ## 联系
 

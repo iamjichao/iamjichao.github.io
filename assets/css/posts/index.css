@@ -6,7 +6,7 @@
   font-size: 14px;
   background: #fff;
   overflow: hidden;
-  width: 300px;
+  width: 230px;
   padding-bottom: 1em;
   border: 1px solid #efefef;
   color: #999;
@@ -15,6 +15,7 @@
 .post-directory ul,
 .post-directory ol {
   padding-left: 1.5em;
+  padding-right: 1.5em;
   list-style: none;
 }
 
