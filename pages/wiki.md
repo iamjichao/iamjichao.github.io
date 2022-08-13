@@ -9,7 +9,7 @@ menu: 维基
 permalink: /wiki/
 ---
 
-> 记多少命令和快捷键会让脑袋爆炸呢？
+> 世界太辽阔，将你的消息淹没。
 
 {% case site.components.wiki.view %}
 
