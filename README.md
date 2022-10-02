@@ -17,7 +17,7 @@
 
 **[在线预览 &rarr;](https://fehub.net)**
 
-![screenshot home](https://mazhuang.org/assets/images/screenshots/home.png)
+![screenshot home](https://fehub.net/assets/images/screenshots/home.png)
 
 ## Fork 指南
 
