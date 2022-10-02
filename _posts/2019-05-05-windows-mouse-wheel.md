@@ -10,11 +10,11 @@ keywords: [Windows, 鼠标]
 
 - 首先按以下顺序获取到需要设置的鼠标的设备实力路径：计算机→右键→管理→系统工具→设备管理器→鼠标和其他指针设备→打开鼠标的属性→详细信息→属性→设备实例路径。
 
-![image](https://fehub.net/images/posts/windows-mouse-1.png)
+![image](https://fehub.net/images/posts/2019/windows-mouse-wheel-1.png)
 
 - Win+R 输入 `regedit` 打开注册表，在 `计算机\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\xxx\xxx\xxx\Device Parameters` 路径下找到 `FlipFlopWheel` 字段，默认为 0，修改为 1。`xxx\xxx\xxx` 对应第一步中获取到的设备实例路径。
 
-![image](https://fehub.net/images/posts/windows-mouse-2.png)
+![image](https://fehub.net/images/posts/2019/windows-mouse-wheel-2.png)
 
 - 最后重新连接鼠标即可，不用重启 Windows。
 

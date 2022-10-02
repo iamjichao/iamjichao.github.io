@@ -33,7 +33,7 @@ body {
 
 这个属性的兼容性还不错，可以放心使用。
 
-![image](https://fehub.net/images/posts/user-behavior-css-1.png)
+![image](https://fehub.net/images/posts/2022/user-behavior-css-1.png)
 
 ### user-drag
 
@@ -55,7 +55,7 @@ img.no-drag {
 
 这个属性兼容性不好，要谨慎使用。
 
-![image](https://fehub.net/images/posts/user-behavior-css-2.png)
+![image](https://fehub.net/images/posts/2022/user-behavior-css-2.png)
 
 如果有相关需求可以使用 HTML 元素的 [`draggable`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/draggable) 属性实现：
 
@@ -80,7 +80,7 @@ user-modify: write-only; /* 用户可以编辑内容，但不能阅读 */
 
 这个属性的兼容性还不错，但它不是标准语法，可能会从相关的 Web 标准中删除，不再推荐使用此功能。
 
-![image](https://fehub.net/images/posts/user-behavior-css-3.png)
+![image](https://fehub.net/images/posts/2022/user-behavior-css-3.png)
 
 如果有相关需求可以使用 HTML 元素的 [`contenteditable`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/contenteditable) 属性实现：
 
