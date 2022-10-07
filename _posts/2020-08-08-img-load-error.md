@@ -14,7 +14,7 @@ keywords: [图片加载出错]
 <img src="https://fehub.net/images/xxx.png" alt="我是一张图片">
 ```
 
-在浏览器中的显示效果：
+在浏览器中的显示效果如图：
 
 ![image](https://fehub.net/images/posts/2020/img-load-error-1.png)
 
@@ -38,7 +38,7 @@ img[src$="error.svg"] {
 
 这里要注意 `error.svg` 必须可以访问到，否则会一直触发 `onerror` 进入死循环。
 
-在浏览器中的显示效果：
+在浏览器中的显示效果如图：
 
 ![image](https://fehub.net/images/posts/2020/img-load-error-2.png)
 
@@ -94,9 +94,9 @@ img::after {
 
 实现思路如下：
 
-- 如果 `img` 加载正常，`::before` 不会生效，可以利用这一点在 `::before` 中实现没有头像时的显示效果。
+- 如果 `img` 加载正常，`::before` 不会生效，利用这个特性在 `::before` 中实现没有头像时的显示效果。
 
-- 利用大字体和大行高，以及文字换行，实现在 `::before` 中只显示昵称的第一个字。
+- 利用大字体大行高以及文字换行，在 `::before` 中实现只显示昵称的第一个字。
 
 实现方法如下：
 
@@ -132,7 +132,7 @@ img.avatar::before {
 }
 ```
 
-在浏览器中的显示效果：
+在浏览器中的显示效果如图：
 
 ![image](https://fehub.net/images/posts/2020/img-load-error-4.png)
 
