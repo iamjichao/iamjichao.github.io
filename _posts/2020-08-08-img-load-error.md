@@ -16,7 +16,7 @@ keywords: [图片加载出错]
 
 在浏览器中的显示效果：
 
-![image](https://fehub.net/images/posts/2020/img-load-error-1.jpg)
+![image](https://fehub.net/images/posts/2020/img-load-error-1.png)
 
 这种默认效果显得非常粗糙，对于用户也不太友好。
 
@@ -40,7 +40,7 @@ img[src$="error.svg"] {
 
 在浏览器中的显示效果：
 
-![image](https://fehub.net/images/posts/2020/img-load-error-2.jpg)
+![image](https://fehub.net/images/posts/2020/img-load-error-2.png)
 
 ### 增加内容识别
 
@@ -88,7 +88,7 @@ img::after {
 
 在浏览器中的显示效果：
 
-![image](https://fehub.net/images/posts/2020/img-load-error-3.jpg)
+![image](https://fehub.net/images/posts/2020/img-load-error-3.png)
 
 ### 实现用户没有头像时显示昵称的第一个汉字或字母
 
@@ -134,7 +134,7 @@ img.avatar::before {
 
 在浏览器中的显示效果：
 
-![image](https://fehub.net/images/posts/2020/img-load-error-4.jpg)
+![image](https://fehub.net/images/posts/2020/img-load-error-4.png)
 
 [查看完整 demo](https://fehub.net/demos/posts/2020/img-load-error.html)
 
