@@ -16,7 +16,8 @@ jobs:
       - name: Set Ruby
         uses: actions/setup-ruby@v1
         with:
-          ruby-version: 3.3
+          ruby-version: '3.3'
+          bundler-cache: true
 
       - name: Install and Build
         run: |
