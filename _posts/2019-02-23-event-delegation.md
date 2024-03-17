@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 事件委托
+title: 浅谈事件委托
 categories: [JavaScript]
-description: 事件委托
+description: 浅谈事件委托
 keywords: [JavaScript, 事件委托]
 ---
 
