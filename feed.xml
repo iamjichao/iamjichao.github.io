@@ -1,447 +1,1369 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://fehub.net/feed.xml" rel="self" type="application/atom+xml" /><link href="https://fehub.net/" rel="alternate" type="text/html" /><updated>2022-01-26T22:36:06+08:00</updated><id>https://fehub.net/feed.xml</id><title type="html">FEHub</title><subtitle></subtitle><author><name>Ji Chao</name></author><entry><title type="html">一次搞懂 rem 布局</title><link href="https://fehub.net/2021/01/02/rem/" rel="alternate" type="text/html" title="一次搞懂 rem 布局" /><published>2021-01-02T00:00:00+08:00</published><updated>2021-01-02T00:00:00+08:00</updated><id>https://fehub.net/2021/01/02/rem</id><content type="html" xml:base="https://fehub.net/2021/01/02/rem/">&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="https://fehub.net/feed.xml" rel="self" type="application/atom+xml" /><link href="https://fehub.net/" rel="alternate" type="text/html" /><updated>2024-03-17T22:34:13+08:00</updated><id>https://fehub.net/feed.xml</id><title type="html">FEHub</title><subtitle></subtitle><author><name>Ji Chao</name></author><entry><title type="html">网站换肤的正确打开方式</title><link href="https://fehub.net/2022/06/25/website-skin/" rel="alternate" type="text/html" title="网站换肤的正确打开方式" /><published>2022-06-25T00:00:00+08:00</published><updated>2022-06-25T00:00:00+08:00</updated><id>https://fehub.net/2022/06/25/website-skin</id><content type="html" xml:base="https://fehub.net/2022/06/25/website-skin/"><![CDATA[<p>网站换肤是一个常见的前端需求，比如切换日间和夜间模式。它的思路很简单，就是通过加载不同的 CSS 让页面显示不同的样式。实现方法有很多，但效果不尽相同。</p>
 
-&lt;p&gt;在进入正题之前，首先认识几个名词，便于后续理解。&lt;/p&gt;
+<h3 id="常见的网站换肤实现">常见的网站换肤实现</h3>
 
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;像素&lt;/strong&gt;&lt;/p&gt;
+<ul>
+  <li>一个全局的 class 控制样式切换</li>
+</ul>
 
-    &lt;p&gt;&lt;strong&gt;像素&lt;/strong&gt;是指组成图像的小方块，是整个图像中不可分割的最小单位，每个小方块都有一个明确的位置和被分配的色彩数值。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;分辨率&lt;/strong&gt;&lt;/p&gt;
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.default.light</span> <span class="p">{</span>
+   <span class="nl">background</span><span class="p">:</span> <span class="no">white</span><span class="p">;</span>
+<span class="p">}</span>
 
-    &lt;p&gt;&lt;strong&gt;分辨率&lt;/strong&gt;是指每一个方向上的像素数量，比如我们常说的 1920×1080 分辨率，就是指横向有 1920 个像素，竖向有 1080 个像素。描述分辨率的单位有：dpi（设备分辨率，dots per inch，点每英寸）、lpi（网屏分辨率，lines per inch，线每英寸）、ppi（图像分辨率，pixels per inch，像素每英寸）和 ppd（角分辨率，Pixels Per Degree，像素每度）。&lt;strong&gt;ppi 和 dpi 有时会混用。&lt;/strong&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;ppi (pixels per inch)&lt;/strong&gt;&lt;/p&gt;
+<span class="nc">.dark</span> <span class="p">{</span>
+   <span class="nl">background</span><span class="p">:</span> <span class="no">gray</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
-    &lt;p&gt;图像分辨率（Image Resolution）指图像中存储的信息量。ppi 也叫像素密度单位，所表示的是每英寸所拥有的像素数量。ppi 数值越高，代表显示屏能够以越高的密度显示图像，显示的密度越高，拟真度就越高。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;dpi (dots per inch)&lt;/strong&gt;&lt;/p&gt;
+<p>这个方法的缺点是代码啰嗦，优先级不好控制，维护成本高，不推荐。</p>
 
-    &lt;p&gt;设备分辨率（Device Resolution）又称输出分辨率，指的是各类输出设备每英寸上可产生的点数。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;物理分辨率&lt;/strong&gt;&lt;/p&gt;
+<ul>
+  <li>改变 <code class="language-plaintext highlighter-rouge">link</code> 元素的 <code class="language-plaintext highlighter-rouge">href</code> 地址</li>
+</ul>
 
-    &lt;p&gt;物理分辨率是指液晶屏最高可显示的像素数，它是液晶屏固有的参数不能调节，表示方法与分辨率相同。一般来讲物理分辨率的大小可直接决定屏幕的最高分辨率，分辨率不会大于物理分辨率。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;CSS 像素 (CSS Pixel)&lt;/strong&gt;&lt;/p&gt;
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;link</span> <span class="na">id=</span><span class="s">"skin"</span> <span class="na">href=</span><span class="s">"default.css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
 
-    &lt;p&gt;CSS 像素是 Web 编程的概念，指的是CSS样式代码中使用的逻辑像素，是一个抽象概念，实际并不存在。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;设备独立像素 (Device Independent Pixel)&lt;/strong&gt;&lt;/p&gt;
+<p>通过 JS 改变 <code class="language-plaintext highlighter-rouge">href</code> 地址：</p>
 
-    &lt;p&gt;与设备无关的逻辑像素，代表可以通过程序控制使用的虚拟像素，是一个总体概念，包括了 CSS 像素。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;设备像素 (Device Pixel)&lt;/strong&gt;&lt;/p&gt;
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">#skin</span><span class="dl">'</span><span class="p">).</span><span class="nx">href</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">dark.css</span><span class="dl">'</span><span class="p">;</span>
+</code></pre></div></div>
 
-    &lt;p&gt;物理像素，设备能控制显示的最小单位，我们常说的 1920×1080 像素分辨率就是用的设备像素单位。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;devicePixelRatio&lt;/strong&gt;&lt;/p&gt;
+<p>这个方法的缺点是有延迟，切换不流畅。</p>
 
-    &lt;p&gt;设备像素 dp 和设备独立像素 dips 的比例，也就是 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dpr = dp / dips&lt;/code&gt;，在浏览器中可以通过 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;window.devicePixelRatio&lt;/code&gt; 获取到对应设备的 dpr。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+<h3 id="使用原生-html-特性实现流畅的换肤效果">使用原生 HTML 特性实现流畅的换肤效果</h3>
 
-&lt;p&gt;举个例子🌰：&lt;/p&gt;
+<p>首先了解一下 <code class="language-plaintext highlighter-rouge">link</code> 标签的 <code class="language-plaintext highlighter-rouge">rel</code> <code class="language-plaintext highlighter-rouge">title</code> <code class="language-plaintext highlighter-rouge">disabled</code> 属性，详细内容参考 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/link">&lt;link&gt;：外部资源链接元素</a>。</p>
 
-&lt;p&gt;iPhone 6 的屏幕参数是，4.7英寸（对角线）Retina 高清显示屏，750 x 1334 px 分辨率，326 ppi。iPhone 6 横向的 CSS 像素（设备独立像素）为 375px，dpr（devicePixelRatio）是 2，所以它的横向分辨率（设备像素）是 750px。&lt;/p&gt;
+<ul>
+  <li>rel 属性用于声明链接文档与当前文档的关系，属性值参考 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Link_types">链接类型值</a>，多个用空格分隔。</li>
+</ul>
 
-&lt;h2 id=&quot;进入正题&quot;&gt;进入正题&lt;/h2&gt;
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"alternate stylesheet"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
 
-&lt;p&gt;CSS 中有两种类型的长度，绝对长度和相对长度，绝对长度有我们常见的 px，pt 等，而 rem 是一个相对长度，另外还有 em，vw，vh 这些都是相对长度，这里不再赘述，具体请参考 &lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Values_and_units&quot;&gt;CSS 的值与单位&lt;/a&gt;。rem 单位的意思是“根元素的字体大小”，即 html 元素的 font-size 是多少 px，1rem 就是多少 px。&lt;/p&gt;
+<ul>
+  <li>
+    <p>title 属性用于 <code class="language-plaintext highlighter-rouge">&lt;link rel="stylesheet"&gt;</code> 时会定义一个首选样式表或备用样式表。</p>
+  </li>
+  <li>
+    <p>disabled 属性仅用于 <code class="language-plaintext highlighter-rouge">&lt;link rel="stylesheet"&gt;</code>，控制是否加载并应用所描述的样式表。如果指定了 <code class="language-plaintext highlighter-rouge">disabled</code>，在页面加载期间不会加载此样式表。如果将 <code class="language-plaintext highlighter-rouge">disabled</code> 属性更改为 <code class="language-plaintext highlighter-rouge">false</code> 或删除，样式表将按需加载。</p>
+  </li>
+</ul>
 
-&lt;p&gt;如果我们按设计稿的尺寸实现了一个页面，理论上只在设计稿对应分辨率的屏幕上看才是正好的，在更大或者更小的屏幕上看可能就不合适了，这时候我们就要用到 rem 布局通过放大或者缩小让页面适应当前的屏幕。&lt;/p&gt;
+<p>网页中的样式表分为三类：</p>
 
-&lt;p&gt;rem 布局是弹性布局的一种实现方式，而弹性布局可以算作响应式布局的一种，但响应式布局不是弹性布局，弹性布局强调等比缩放，100%还原，rem 布局的本质就是等比缩放；响应式布局强调不同屏幕要有不同的显示，比如媒体查询。&lt;/p&gt;
+<ul>
+  <li>
+    <p>Persistent (no rel=”alternate”, no title)：总是应用。</p>
+  </li>
+  <li>
+    <p>Preferred (no rel=”alternate”, with title=”…”)：默认应用，如果选择了另一个样式表则禁用。只能有一个首选样式表，多个不同标题的样式表只能生效一个。</p>
+  </li>
+  <li>
+    <p>Alternate (rel=”alternate stylesheet”, title=”…”)：默认禁用，可以选择。</p>
+  </li>
+</ul>
 
-&lt;h3 id=&quot;rem-布局原理&quot;&gt;rem 布局原理&lt;/h3&gt;
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- 加载并渲染，总是应用 --&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"basic.css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="nt">/&gt;</span>
 
-&lt;p&gt;以设计稿的尺寸（一般是宽度）为标准，比如设计师按照 750px 宽度的标准做设计稿，在此基础上，我们定义一个数值代表此时的 1rem 是多少，为了方便计算我们取 100px 为 1rem，那么设计稿的宽度就是 7.5rem，不同设备对应的 1rem 数值即 html 元素的 font-size 就是 deviceWidth / 7.5，例如 iPhone6 横向的CSS 像素为 375px，那么对应的 1rem 数值就是 375 / 7.5=50px，也就是 html 元素上的 font-size 的值。&lt;/p&gt;
+<span class="c">&lt;!-- 加载并渲染，默认应用 --&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"default.css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">title=</span><span class="s">"Default"</span> <span class="nt">/&gt;</span>
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;不同设备对应的 1rem = deviceWidth / (设计稿宽度 / 设计稿参照的 1rem 值)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<span class="c">&lt;!-- 只加载不渲染，备用可选 --&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"light.css"</span> <span class="na">rel=</span><span class="s">"alternate stylesheet"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">title=</span><span class="s">"Light"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"dark.css"</span> <span class="na">rel=</span><span class="s">"alternate stylesheet"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">title=</span><span class="s">"Dark"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
 
-&lt;p&gt;浏览器渲染页面阶段，在加载 CSS 之前，我们通过 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;document.documentElement.clientWidth&lt;/code&gt; 获取到当前设备的 CSS 像素，根据上面的公式动态计算出根元素的 font-size 值，然后把这个值赋给 html 元素，这些通过 JS 动态完成。在解析 CSS 时，浏览器会根据 html 元素上 font-size 的值把 rem 值换算成适合自己的 px 值，这样就实现了使用一套 CSS 代码适配不同的设备。&lt;/p&gt;
+<p>通过 JS 控制 <code class="language-plaintext highlighter-rouge">link</code> 元素的 <code class="language-plaintext highlighter-rouge">disabled</code> 属性来启用和禁用样式表：</p>
 
-&lt;h3 id=&quot;注意事项&quot;&gt;注意事项&lt;/h3&gt;
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 启用</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">link[href="light.css"]</span><span class="dl">'</span><span class="p">).</span><span class="nx">disabled</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
 
-&lt;ul&gt;
-  &lt;li&gt;在实现 CSS 代码时，我们可以提前计算好 rem 值直接使用，也可以直接按设计稿标注写 px，然后通过 CSS 处理器去转换，但要注意配置好 px2rem 的比例。&lt;/li&gt;
-  &lt;li&gt;HTML 中要对视口做如下设置：&lt;/li&gt;
-&lt;/ul&gt;
+<span class="c1">// 禁用</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">link[href="light.css"]</span><span class="dl">'</span><span class="p">).</span><span class="nx">disabled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</code></pre></div></div>
 
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;viewport&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<p>这个方法兼容性很好，切换不会有延迟，交互体验更好，推荐使用。</p>
 
-&lt;h3 id=&quot;提出疑问&quot;&gt;提出疑问&lt;/h3&gt;
+<p>以上。</p>
 
-&lt;p&gt;到这里好像已经实现了 rem 布局来适配不同的设备 ，但是感觉还有点疑问，设计师说设计稿是按 iPhone 6 横向分辨率 750px 的标准给的，我们是按 750px 的 CSS 像素来实现的代码，所以按 375px 的 CSS 像素计算时实际上经过了一次缩小的过程。那么 CSS 像素作为一个抽象概念，它对于同一设备是不变的吗？&lt;/p&gt;
+<h3 id="参考资料">参考资料</h3>
 
-&lt;p&gt;上边我们在 HTML 中设置了 viewport，其中的 scale 表示缩放比例，width = device-width 表示整个网页在设备内显示时的页面宽度等于设备逻辑像素（CSS 像素）大小。这个 device-width 的计算公式为：&lt;/p&gt;
+<ul>
+  <li><a href="https://b23.tv/PLImiGs">网站换肤的最佳实现 - 哔哩哔哩</a></li>
+  <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/link">&lt;link&gt;：外部资源链接元素 - MDN</a></li>
+  <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Link_types">链接类型 - MDN</a></li>
+  <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Alternative_style_sheets">Alternative style sheets - MDN</a></li>
+</ul>]]></content><author><name>Ji Chao</name></author><category term="HTML" /><category term="CSS" /><summary type="html"><![CDATA[网站换肤的正确打开方式]]></summary></entry><entry><title type="html">与用户行为相关的 CSS 属性</title><link href="https://fehub.net/2022/05/28/user-behavior-css/" rel="alternate" type="text/html" title="与用户行为相关的 CSS 属性" /><published>2022-05-28T00:00:00+08:00</published><updated>2022-05-28T00:00:00+08:00</updated><id>https://fehub.net/2022/05/28/user-behavior-css</id><content type="html" xml:base="https://fehub.net/2022/05/28/user-behavior-css/"><![CDATA[<p>CSS 中有几个和用户行为密切相关的属性，虽然平时不怎么用，但要知道有这几个东西，以备不时之需。</p>
 
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;device&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;width&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;设备的物理分辨率&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;devicePixelRatio&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;scale&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<h3 id="user-select">user-select</h3>
 
-&lt;p&gt;如果 viewport 的 scale 根据 devicePixelRatio 动态设置：&lt;/p&gt;
+<blockquote>
+  <p>CSS 属性 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/user-select">user-select</a> 控制用户能否选中文本。</p>
+</blockquote>
 
-&lt;ul&gt;
-  &lt;li&gt;当 devicePixelRatio 为 1 时，scale 为 1&lt;/li&gt;
-  &lt;li&gt;当 devicePixelRatio 为 2 时，scale 为 0.5&lt;/li&gt;
-  &lt;li&gt;当 devicePixelRatio 为 3 时，scale 为 0.3333&lt;/li&gt;
-&lt;/ul&gt;
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">user-select</span><span class="o">:</span> <span class="nt">none</span><span class="o">;</span> <span class="c">/* 文本不可选中 */</span>
+<span class="nt">user-select</span><span class="o">:</span> <span class="nt">auto</span><span class="o">;</span> <span class="c">/* 自动 */</span>
+<span class="nt">user-select</span><span class="o">:</span> <span class="nt">text</span><span class="o">;</span> <span class="c">/* 文本可选中 */</span>
+<span class="nt">user-select</span><span class="o">:</span> <span class="nt">all</span><span class="o">;</span> <span class="c">/* 元素及其子元素会全部被选中 */</span>
+<span class="nt">user-select</span><span class="o">:</span> <span class="nt">contain</span><span class="o">;</span> <span class="c">/* 允许在元素内选择 */</span>
+</code></pre></div></div>
 
-&lt;p&gt;也就是说，devicePixelRatio * scale 始终等于 1，那么 device-width 就和设备的物理分辨率始终相等。iPhone 6 的 devicePixelRatio 值为 2，当 scale 为 0.5 时，iPhone 6 的横向 CSS 像素就和设计稿一样了。&lt;/p&gt;
+<p>我们常实现的禁止文本复制功能，手机端会设置如下 CSS 代码，此时整个页面无法通过长按唤起系统自带的复制等操作：</p>
 
-&lt;p&gt;所以，scale 的值会改变设备的 CSS 像素。&lt;/p&gt;
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">body</span> <span class="p">{</span>
+  <span class="nl">-webkit-user-select</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+  <span class="nl">-moz-user-select</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+  <span class="nl">-ms-user-select</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+  <span class="py">user-select</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
-&lt;h3 id=&quot;网易的做法&quot;&gt;网易的做法&lt;/h3&gt;
+<p>这个属性的兼容性还不错，可以放心使用。</p>
 
-&lt;p&gt;网易使用了我们上边说的 scale 固定为 1 的方法。以 iPhone 6 的 750px 设计稿为例：&lt;/p&gt;
+<p><img src="https://fehub.net/images/posts/2022/user-behavior-css-1.png" alt="image" /></p>
 
-&lt;ul&gt;
-  &lt;li&gt;为了方便计算，以 100px 的 font-size 为参照，此时 1rem = 100px&lt;/li&gt;
-  &lt;li&gt;计算设计稿的宽度为 750 / 100 = 7.5rem&lt;/li&gt;
-  &lt;li&gt;通过以下代码动态设置 html 的 font-size：&lt;/li&gt;
-&lt;/ul&gt;
+<h3 id="user-drag">user-drag</h3>
 
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;documentElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fontSize&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;documentElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;clientWidth&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;7.5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;px&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<blockquote>
+  <p>CSS 属性 -webkit-user-drag 控制用户拖拽行为。</p>
+</blockquote>
 
-&lt;ul&gt;
-  &lt;li&gt;写 CSS 时，各元素的 CSS 尺寸（rem 值）= 设计稿标注尺寸 / 100&lt;/li&gt;
-&lt;/ul&gt;
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">-webkit-user-drag</span><span class="o">:</span> <span class="nt">none</span><span class="o">;</span> <span class="c">/* 图片文字可拖拽 */</span>
+<span class="nt">-webkit-user-drag</span><span class="o">:</span> <span class="nt">auto</span><span class="o">;</span> <span class="c">/* 图片文字不可拖拽 */</span>
+<span class="nt">-webkit-user-drag</span><span class="o">:</span> <span class="nt">text</span><span class="o">;</span> <span class="c">/* 元素可拖拽 Safari only */</span>
+</code></pre></div></div>
 
-&lt;h3 id=&quot;淘宝的做法&quot;&gt;淘宝的做法&lt;/h3&gt;
+<p>设置图片不可拖拽：</p>
 
-&lt;p&gt;淘宝使用了动态设置 scale 的方法，如上述所说根据设备的 devicePixelRatio 动态设置 scale 的值，使设备的物理像素和 CSS 像素相等。还是以 iPhone 6 的 750px 设计稿为例：&lt;/p&gt;
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">img</span><span class="nc">.no-drag</span> <span class="p">{</span>
+  <span class="nl">-webkit-user-drag</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
-&lt;ul&gt;
-  &lt;li&gt;以 deviceWidth / 10 = 750 / 10 = 75px 的 font-size 为参照，此时 1rem = 75px&lt;/li&gt;
-  &lt;li&gt;计算设计稿的宽度为 750 / 75 = 10rem&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;动态设置 viewport 的 scale&lt;/p&gt;
+<p>这个属性兼容性不好，要谨慎使用。</p>
 
-    &lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;scale&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;devicePixelRatio&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;querySelector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;meta[name=&quot;viewport&quot;]&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setAttribute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;initial-scale=&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;scale&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;, maximum-scale=&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;scale&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;, minimum-scale=&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;scale&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;, user-scalable=no&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+<p><img src="https://fehub.net/images/posts/2022/user-behavior-css-2.png" alt="image" /></p>
 
-    &lt;p&gt;上边说了这么做的目的是为了保证页面的大小与设计稿保持一致，比如设计稿是 750px 的横向分辨率，那么实际页面的 device-width，以 iPhone 6 来说，也等于750px，这样的话设计稿上标注的尺寸只要除以某一个值就能够转换为 rem 了。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;动态计算 html 的 font-size&lt;/p&gt;
+<p>如果有相关需求可以使用 HTML 元素的 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/draggable"><code class="language-plaintext highlighter-rouge">draggable</code></a> 属性实现：</p>
 
-    &lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;documentElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fontSize&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;documentElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;clientWidth&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;px&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;写 CSS 时，各元素的 CSS 尺寸（rem 值）= 设计稿标注尺寸 / 设计稿横向分辨率 / 10 = 设计稿标注尺寸 / 75&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;举一反三&quot;&gt;举一反三&lt;/h2&gt;
-
-&lt;h3 id=&quot;移动端和-pc-端的临界点&quot;&gt;移动端和 PC 端的临界点&lt;/h3&gt;
-
-&lt;p&gt;通常情况下，移动端和 PC 端的页面不是同一种展示方式。如果我们按 iPhone 6 的标准实现的页面，那么在 iPhone 6/7/8 Plus 等更大的屏幕上页面会等比放大，但当屏幕继续增大时，比如 iPad/PC 等，我们就没必要让它继续放大了，此时应该去访问 PC 网站。比如我们用手机访问百度看到的是移动端的页面，用 iPad 或者 PC 访问百度看到的则是电脑版的页面。&lt;/p&gt;
-
-&lt;p&gt;当 deviceWidth 大于某个值时，就可以让 html 的 font-size 不再变化了。动态设置 html font-size 的代码改动一下：&lt;/p&gt;
-
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;deviceWidth&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;documentElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;clientWidth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// 640 只是举例，具体数值按需求确定&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;deviceWidth&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;640&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;deviceWidth&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;640&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;documentElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fontSize&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;deviceWidth&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;7.5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;px&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- 元素可以拖拽 --&gt;</span>
+<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"demo.png"</span> <span class="na">draggable=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
 
-&lt;h3 id=&quot;工作中与设计师协作&quot;&gt;工作中与设计师协作&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;视觉设计阶段，设计师按宽度 750px（iPhone 6/X）做设计稿，除图片外所有设计元素用矢量路径来做。设计定稿后在 750px 的设计稿上做标注，输出标注图。同时等比放大 1.5 倍生成宽度 1125px 的设计稿，在 1125px 的稿子里切图。&lt;/li&gt;
-  &lt;li&gt;设计师输出宽度 750px 的设计标注图和 @3x 切图资源交付给开发工程师。&lt;/li&gt;
-  &lt;li&gt;开发工程师拿到 750px 标注图和 @3x 切图资源，完成 iPhone 6/X（375pt）的界面开发。开发阶段用我们上面所说的 rem 布局实现。&lt;/li&gt;
-  &lt;li&gt;适配调试阶段，基于 iPhone 6/X 的界面效果，分别向上向下调试 iPhone 6/7/8 plus / iPhone 11（414pt），iPhone 12（390pt）和 iPhone 5S 及以下（320pt）的界面效果，由此完成大中小三屏适配。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;以上。&lt;/p&gt;
-
-&lt;h2 id=&quot;参考资料&quot;&gt;参考资料&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://blog.csdn.net/xwqqq/article/details/54862279&quot;&gt;手机端 rem 布局详解&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.jianshu.com/p/af6dad66e49a&quot;&gt;前端工程师需要明白的「像素」&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.cnblogs.com/jiangzilong/p/6700023.html&quot;&gt;CSS 像素、设备独立像素、设备像素之间关系&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.quirksmode.org/blog/archives/2010/04/a_pixel_is_not.html&quot;&gt;A pixel is not a pixel is not a pixel&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.zhangxinxu.com/wordpress/2012/08/window-devicepixelratio/&quot;&gt;设备像素比 devicePixelRatio 简单介绍&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Ji Chao</name></author><category term="CSS" /><summary type="html">前言</summary></entry><entry><title type="html">使用 canvas 实现图片的合成</title><link href="https://fehub.net/2020/05/16/canvas-for-image-composition/" rel="alternate" type="text/html" title="使用 canvas 实现图片的合成" /><published>2020-05-16T00:00:00+08:00</published><updated>2020-05-16T00:00:00+08:00</updated><id>https://fehub.net/2020/05/16/canvas-for-image-composition</id><content type="html" xml:base="https://fehub.net/2020/05/16/canvas-for-image-composition/">&lt;h3 id=&quot;需求&quot;&gt;需求&lt;/h3&gt;
-
-&lt;p&gt;根据不同的推荐链接生成不同的二维码，将二维码和一张静态的图片合成一张完整的海报，用于不同推荐人的推广。&lt;/p&gt;
-
-&lt;h3 id=&quot;思路&quot;&gt;思路&lt;/h3&gt;
-
-&lt;p&gt;先用 &lt;a href=&quot;https://github.com/davidshimjs/qrcodejs&quot;&gt;qrcode.js&lt;/a&gt; 生成对应链接的二维码图片，然后用一个画布 &lt;a href=&quot;https://www.runoob.com/html/html5-canvas.html&quot;&gt;canvas&lt;/a&gt; 把静态图片画上，再把生成的二维码画到静态图片上的指定位置，最后将整个 canvas 转成图片并下载。&lt;/p&gt;
-
-&lt;h3 id=&quot;实现&quot;&gt;实现&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;首先用 qrcode.js 生成二维码，代码如下。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'qrcode'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;qrcode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;QRCode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;qrcode&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;https://iamjichao.net/&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;创建一个画布，将静态图片画上去，代码如下。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'canbox'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;canvas&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'myCanvas'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/canvas&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;CARD&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;../assets/card.jpg&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;width&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;height&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;myCanvas&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;width&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;height&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ctx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;2d&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// 首先画上背景图&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;CARD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// img.setAttribute('crossOrigin', 'anonymous');&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// 必须等待图片加载完成&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;onload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;drawImage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;这里有两点要注意：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;由于 canvas 的绘制需要的是已经加载完成的图片，我们需要确保绘制的素材图片是已经加载完成的，因此我们需要使用 img 的 onload 事件，可以使用 html 中已存在的图片，或者用js创建一个图片对象；&lt;/li&gt;
-  &lt;li&gt;图片加载并绘制涉及了图片的跨域问题，因此如果是一张在线的图片，需要在图片服务器上设置跨域头，并且在前端加载图片之前将 img 标签的 crossOrigin 属性设置为 anonymous，否则绘制到画布的时候会报跨域的错误。这里我用的本地资源，所以没有跨域问题，不需要设置 crossOrigin 属性。关于 crossOrigin 可以参考&lt;a href=&quot;http://ilucas.me/2017/04/19/crossorign-attribute-img-tag/&quot;&gt;这篇文章&lt;/a&gt;。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;将生成的二维码画到静态图片指定位置&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;onload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;drawImage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// 直接使用生成的 base64 图片&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;qrImg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;qrcode&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementsByTagName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// 把 canvas 转成图片&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// const canvas = document.getElementById('qrcode').getElementsByTagName('canvas')[0];&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// const data = canvas.toDataURL('image/jpg');&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// const qrImg = new Image();&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// qrImg.src = data;&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// qrImg.setAttribute('crossOrigin', 'Anonymous');&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// 把二维码图片画上&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;drawImage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;qrImg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;400&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;400&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;这里要注意：&lt;/p&gt;
-
-&lt;p&gt;qrcode.js 会在容器内生成一个 canvas 和一个 img，我们可以直接把这个 base64 图片画到画布上，也可以把生成的 canvas 转成图片，再画到画布上。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;将整个画布转成图片并下载&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;onload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// 画上背景图&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;drawImage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// 画上二维码&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;qrImg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;qrcode&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementsByTagName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// const canvas = document.getElementById('qrcode').getElementsByTagName('canvas')[0];&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// const data = canvas.toDataURL('image/jpg');&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// const qrImg = new Image();&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// qrImg.src = data;&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// qrImg.setAttribute('crossOrigin', 'Anonymous');&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;drawImage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;qrImg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;400&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;400&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// 画布转图片&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;myCanvas&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;myCanvas&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;myCanvas&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toDataURL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;image/jpg&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cardImg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;cardImg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// cardImg.setAttribute('crossOrigin', 'Anonymous');&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;filename&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;iamjichao.net&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;saveFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;saveFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;save_link&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createElementNS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;http://www.w3.org/1999/xhtml&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;save_link&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;href&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;save_link&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;download&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createEvent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;MouseEvents&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;initMouseEvent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;save_link&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;dispatchEvent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;以上。&lt;/p&gt;</content><author><name>Ji Chao</name></author><category term="HTML5" /><category term="JavaScript" /><summary type="html">需求</summary></entry><entry><title type="html">使用 we-cropper 实现微信小程序头像裁剪并上传</title><link href="https://fehub.net/2019/11/23/we-cropper/" rel="alternate" type="text/html" title="使用 we-cropper 实现微信小程序头像裁剪并上传" /><published>2019-11-23T00:00:00+08:00</published><updated>2019-11-23T00:00:00+08:00</updated><id>https://fehub.net/2019/11/23/we-cropper</id><content type="html" xml:base="https://fehub.net/2019/11/23/we-cropper/">&lt;h3 id=&quot;需求&quot;&gt;需求&lt;/h3&gt;
-
-&lt;p&gt;工作中需要在微信小程序中实现头像裁剪并上传的功能，图片上传配合后端可以实现，图片裁剪则需要在小程序中实现。在 Github 上找到一个微信小程序图片裁剪工具 &lt;a href=&quot;https://github.com/we-plugin/we-cropper&quot;&gt;we-cropper&lt;/a&gt;，在这里记录一下使用步骤。&lt;/p&gt;
-
-&lt;h3 id=&quot;引用插件资源&quot;&gt;引用插件资源&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;克隆项目或者直接下载 zip 包&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://github.com/we-plugin/we-cropper.git
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;dist 目录下是我们要使用的资源。&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;we-cropper.js
-we-cropper.min.js
-we-cropper.wxml
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;WXML&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;首先需要在 WXML 结构中置入一个 canvas 作为裁剪图片的容器，并绑定相应的事件。&lt;/p&gt;
-
-&lt;p&gt;这里直接使用项目 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/dist/we-cropper.wxml&lt;/code&gt; 里的结构。&lt;/p&gt;
-
-&lt;p&gt;canvas 的宽高需要和 we-cropper 构造器参数中的保持一致。&lt;/p&gt;
-
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;template&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;we-cropper&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;canvas&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cropper&quot;&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;disable-scroll=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;bindtouchstart=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;touchStart&quot;&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;bindtouchmove=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;touchMove&quot;&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;bindtouchend=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;touchEnd&quot;&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;style=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;width:px;height:px;background-color: rgba(0, 0, 0, 0.8)&quot;&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;canvas-id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/canvas&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;canvas&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cropper&quot;&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;disable-scroll=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;style=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;position: fixed; top: -px; left: -px; width:px;height:px;&quot;&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;canvas-id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/canvas&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/template&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;引入 WeCropper 插件&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;引用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/dist/we-cropper.js&lt;/code&gt; 或 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/dist/we-cropper.min.js&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;WeCropper&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;we-cropper.min.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// import WeCropper from 'we-cropper.js'&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;device&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;wx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getSystemInfoSync&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 获取设备信息&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;width&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;device&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;windowWidth&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 示例为一个与屏幕等宽的正方形裁剪框&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;height&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;device&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;windowHeight&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;Page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;cropperOpt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 图片的路径&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;cropper&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 用于手势操作的canvas组件标识符&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;targetId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;targetCropper&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 用于用于生成截图的canvas组件标识符&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;pixelRatio&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;device&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pixelRatio&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 传入设备像素比&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// 画布宽度&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 画布高度&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;scale&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;2.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 最大缩放倍数&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;zoom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 缩放系数&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;cut&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;width&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 裁剪框x轴起点&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;width&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 裁剪框y轴期起点&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 裁剪框宽度&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;300&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 裁剪框高度&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;boundStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;mask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;rgba(0, 0, 0, 0.8)&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;wecropper-实例化&quot;&gt;WeCropper 实例化&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;在 onload 中实例化&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cropper&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;WeCropper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cropperOpt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;ready&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ctx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;}).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;beforeImageLoad&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ctx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;}).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;imageLoad&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ctx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;事件绑定&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;touchStart&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cropper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;touchStart&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;touches&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;touches&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;undefined&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;touchMove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cropper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;touchMove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;touches&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;touches&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;undefined&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;touchEnd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cropper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;touchEnd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;touches: e.touches.filter(i =&amp;gt; i.x !== undefined)&lt;/code&gt; 是为了解决&lt;a href=&quot;https://github.com/we-plugin/we-cropper/issues/41&quot;&gt;移动图片后黑屏&lt;/a&gt;的问题。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;图片载入&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;实例化时在参数 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;this.cropperOpt&lt;/code&gt; 中加入构造参数 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src&lt;/code&gt;，当检测到构造参数 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src&lt;/code&gt; 有值时，会尝试通过 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wx.getImageInfo&lt;/code&gt; 获取图片信息。&lt;/p&gt;
-
-&lt;p&gt;也可以在实例化后通过 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;this.cropper.pushOrign(src)&lt;/code&gt; 方法载入图片，当检测到通过 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pushOrign&lt;/code&gt; 方法传入的值不为空时，会尝试通过 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wx.getImageInfo&lt;/code&gt; 获取图片信息。&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src&lt;/code&gt; 是图片的路径，可以是相对路径、临时文件路径、存储文件路径、网络图片路径。&lt;/p&gt;
-
-&lt;h3 id=&quot;生成裁剪图片&quot;&gt;生成裁剪图片&lt;/h3&gt;
-
-&lt;p&gt;调整好要裁剪的图片，点击完成按钮，调用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;getCropperImage&lt;/code&gt; 方法，得到裁剪后图片的临时路径，然后与后端配合进行图片上传就可以了。&lt;/p&gt;
-
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;getCropperImage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;wecropper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getCropperImage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;fileType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;jpg&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;tempFilePath&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// tempFilePath 为裁剪后的图片临时路径&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;tempFilePath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;wx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;previewImage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;current&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;tempFilePath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;urls&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;tempFilePath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;获取图片地址失败，请稍后重试&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;关于微信小程序上传文件的 API &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wx.uploadFile&lt;/code&gt;，详见&lt;a href=&quot;https://developers.weixin.qq.com/miniprogram/dev/api/network/upload/wx.uploadFile.html&quot;&gt;微信官方文档&lt;/a&gt;。&lt;/p&gt;
-
-&lt;p&gt;以上。&lt;/p&gt;</content><author><name>Ji Chao</name></author><category term="mini program" /><category term="JavaScript" /><summary type="html">需求</summary></entry></feed>
+<span class="c">&lt;!-- 元素不可以拖拽 --&gt;</span>
+<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"demo.png"</span> <span class="na">draggable=</span><span class="s">"false"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<h3 id="user-modify">user-modify</h3>
+
+<p>CSS 属性 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/user-modify">user-modify</a> 控制元素的内容是否可以由用户编辑。</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">user-modify</span><span class="o">:</span> <span class="nt">read-only</span><span class="o">;</span> <span class="c">/* 内容只读 */</span>
+<span class="nt">user-modify</span><span class="o">:</span> <span class="nt">read-write</span><span class="o">;</span> <span class="c">/* 用户能够读取和写入内容，支持富文本 */</span>
+<span class="nt">user-modify</span><span class="o">:</span> <span class="nt">read-write-plaintext-only</span><span class="o">;</span> <span class="c">/* 用户能够读取和写入内容，但富文本格式将丢失 */</span>
+<span class="nt">user-modify</span><span class="o">:</span> <span class="nt">write-only</span><span class="o">;</span> <span class="c">/* 用户可以编辑内容，但不能阅读 */</span>
+</code></pre></div></div>
+
+<p>这个属性的兼容性还不错，但它不是标准语法，可能会从相关的 Web 标准中删除，不再推荐使用此功能。</p>
+
+<p><img src="https://fehub.net/images/posts/2022/user-behavior-css-3.png" alt="image" /></p>
+
+<p>如果有相关需求可以使用 HTML 元素的 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/contenteditable"><code class="language-plaintext highlighter-rouge">contenteditable</code></a> 属性实现：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- 元素可编辑 --&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">contenteditable=</span><span class="s">"true"</span><span class="nt">&gt;&lt;/div&gt;</span>
+
+<span class="c">&lt;!-- 元素可编辑，只能输入纯文本 --&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">contenteditable=</span><span class="s">"plaintext-only"</span><span class="nt">&gt;&lt;/div&gt;</span>
+
+<span class="c">&lt;!-- 元素不可编辑 --&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">contenteditable=</span><span class="s">"false"</span><span class="nt">&gt;&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<p>以上。</p>
+
+<h3 id="参考资料">参考资料</h3>
+
+<ul>
+  <li><a href="https://b23.tv/C17dK3j">用户行为CSS三剑客 - 哔哩哔哩</a></li>
+  <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/user-select">user-select CSS - MDN</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/user-modify">user-modify CSS - MDN</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/draggable">draggable HTML - MDN</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/contenteditable">contenteditable HTML - MDN</a></li>
+</ul>]]></content><author><name>Ji Chao</name></author><category term="CSS" /><summary type="html"><![CDATA[与用户行为相关的 CSS 属性]]></summary></entry><entry><title type="html">网页设置全局字体的正确打开方式</title><link href="https://fehub.net/2022/05/21/global-font/" rel="alternate" type="text/html" title="网页设置全局字体的正确打开方式" /><published>2022-05-21T00:00:00+08:00</published><updated>2022-05-21T00:00:00+08:00</updated><id>https://fehub.net/2022/05/21/global-font</id><content type="html" xml:base="https://fehub.net/2022/05/21/global-font/"><![CDATA[<p>最近看了张鑫旭大神关于网页全局字体的视频，突然意识到我们前端项目中的全局字体设置似乎都是一代一代继承下来的，平时也不会太在意这些 CSS 代码，但仔细研究一下发现还是有很多问题的。</p>
+
+<p>进入正题。</p>
+
+<h3 id="font-family">font-family</h3>
+
+<blockquote>
+  <p>CSS 属性 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/font-family">font-family</a> 允许通过给定一个有先后顺序的由字体名或者字体族名组成的列表来为选定的元素设置字体，属性值用逗号隔开。浏览器会选择列表中第一个该计算机上有安装的字体，或者是通过 @font-face 指定的可以直接下载的字体。</p>
+</blockquote>
+
+<h3 id="font-face">@font-face</h3>
+
+<blockquote>
+  <p>CSS at-rule <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/@font-face">@font-face</a> 指定一个用于显示文本的自定义字体，字体能从远程服务器或者用户本地安装的字体中加载。如果提供了 local() 函数，从用户本地查找指定的字体名称，并且找到了一个匹配项，本地字体就会被使用，否则字体就会使用 url() 函数下载的资源。</p>
+</blockquote>
+
+<h3 id="在项目中的应用">在项目中的应用</h3>
+
+<p>我们通常会给页面的根元素设置 font-family 属性来指定全局字体，但是不同系统对于字体的支持效果不同，比如苹果系统中的苹方字体在 Windows 系统的 1 倍屏下是瘦的，而且边缘模糊。</p>
+
+<p>对于同一系统来说，不同版本的系统字体也有所不同，比如 macOS：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">macOS 版本</th>
+      <th style="text-align: left">系统字体</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">10.11</td>
+      <td style="text-align: left">San Francisco</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">10.9</td>
+      <td style="text-align: left">Lucida Grande</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">10.1</td>
+      <td style="text-align: left">Helvetica Neue</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>如果给 font-family 设置一种具体的字体，不仅可能不适配不同系统，而且在系统升级时，网页将无法享受字体升级的体验，所以全局字体应该设置成系统字体，不要指定具体的字体。</p>
+
+<p>全局字体 font-family 应该包含：</p>
+
+<ul>
+  <li>系统字体</li>
+  <li>兜底字体：系统字体不支持时使用的字体</li>
+  <li>Emoji 字体：支持彩色的 emoji 表情 👉 😏😳😱</li>
+</ul>
+
+<h3 id="怎样设置全局字体">怎样设置全局字体</h3>
+
+<p>直接上干货：</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* font-family 最佳设置 */</span>
+<span class="k">@font-face</span> <span class="p">{</span>
+  <span class="nl">font-family</span><span class="p">:</span> <span class="n">Emoji</span><span class="p">;</span>
+  <span class="nl">src</span><span class="p">:</span>
+    <span class="n">local</span><span class="p">(</span><span class="s1">"Apple Color Emojiji"</span><span class="p">),</span> <span class="c">/* macOS/iOS */</span>
+    <span class="n">local</span><span class="p">(</span><span class="s1">"Segoe UI Emoji"</span><span class="p">),</span> <span class="c">/* Windows8.1/10 */</span>
+    <span class="n">local</span><span class="p">(</span><span class="s1">"Segoe UI Symbol"</span><span class="p">),</span> <span class="c">/* windows7/8 */</span>
+    <span class="n">local</span><span class="p">(</span><span class="s1">"Noto Color Emoji"</span><span class="p">);</span> <span class="c">/* Android */</span>
+  <span class="py">unicode-range</span><span class="p">:</span> <span class="n">U</span><span class="err">+</span><span class="m">1</span><span class="n">F000-1F644</span><span class="p">,</span> <span class="n">U</span><span class="err">+</span><span class="m">203</span><span class="n">C-3299</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">html</span> <span class="p">{</span>
+  <span class="nl">font-family</span><span class="p">:</span>
+    <span class="n">system-ui</span><span class="p">,</span> <span class="c">/* 最新规范的系统字体 Chrome/Safari */</span>
+    <span class="err">—</span><span class="n">apple-system</span><span class="p">,</span> <span class="c">/* 系统字体 macOS 下的 FireFox */</span>
+    <span class="n">Segoe</span> <span class="n">UI</span><span class="p">,</span> <span class="c">/* 兜底字体 Windows */</span>
+    <span class="n">Rototo</span><span class="p">,</span> <span class="c">/* 兜底字体 Android */</span>
+    <span class="n">Emoji</span><span class="p">,</span> <span class="c">/* Emoji 自定义字体 */</span>
+    <span class="n">Helvetica</span><span class="p">,</span> <span class="c">/* 兜底字体 macOS/iOS */</span>
+    <span class="n">Arial</span><span class="p">,</span> <span class="c">/* 兜底字体 old Windows */</span>
+    <span class="nb">sans-serif</span><span class="p">;</span> <span class="c">/* 兜底字体 old Android */</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>注意 Emoji 字体的位置，因为 Helvetica 和 Arial 字体的 Unicode 范围会覆盖 Emoji 字体，所以要把 Emoji 字体放在它们前边。把 Emoji 字体放在最前边也会有问题，因为可能会覆盖其他普通字体，这时可以通过 @font-face 中的 unicode-range 来限制 Emoji 字体作用的字符范围，即 Unicode 在此范围内时可以使用 Emoji 字体。</p>
+
+<p>还有一些其他字体的设置：</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* 衬线字体 */</span>
+<span class="nc">.font-serif</span> <span class="p">{</span>
+  <span class="nl">font-family</span><span class="p">:</span> <span class="n">Georgia</span><span class="p">,</span> <span class="n">Cambria</span><span class="p">,</span> <span class="s1">"Times New Roman"</span><span class="p">,</span> <span class="n">Times</span><span class="p">,</span> <span class="nb">serif</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c">/* 等宽字体 */</span>
+<span class="nc">.font-mono</span> <span class="p">{</span>
+  <span class="nl">font-family</span><span class="p">:</span> <span class="n">Menlo</span><span class="p">,</span> <span class="n">Monaco</span><span class="p">,</span> <span class="n">Consolas</span><span class="p">,</span> <span class="s1">"Liberation Mono"</span><span class="p">,</span> <span class="s1">"Courier New"</span><span class="p">,</span> <span class="nb">monospace</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="举一反三">举一反三</h3>
+
+<ul>
+  <li>通用字体 generic-name 是某一类字体的统称，它又包括多个字体族。在 font-family 列表的末尾应该至少有一个通用字体族名，这是一种备选机制，可以在指定的字体不可用时显示较好的字体。</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">通用字体族名</th>
+      <th style="text-align: left">字体</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">serif</td>
+      <td style="text-align: left">带衬线字体</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">sans-serif</td>
+      <td style="text-align: left">无衬线字体</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">monospace</td>
+      <td style="text-align: left">等宽字体</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">cursive</td>
+      <td style="text-align: left">草书字体</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">fantasy</td>
+      <td style="text-align: left">具有特殊艺术效果的字体</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">system-ui</td>
+      <td style="text-align: left">从浏览器所处平台处获取的默认用户界面字体</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">math</td>
+      <td style="text-align: left">针对显示数学相关字符的特殊样式问题而设计的字体</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">emoji</td>
+      <td style="text-align: left">专门用于呈现 Emoji 表情符号的字体</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">fangsong</td>
+      <td style="text-align: left">一种汉字字体</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>在 font-family 列表中，字体族名如果包含空格，应该加引号。</li>
+</ul>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">font-family</span><span class="o">:</span> <span class="s1">"Gill Sans Extrabold"</span><span class="o">,</span> <span class="nt">sans-serif</span><span class="o">;</span>
+</code></pre></div></div>
+
+<p>以上。</p>
+
+<h3 id="参考资料">参考资料</h3>
+
+<ul>
+  <li><a href="https://b23.tv/8zYhEob">网页的默认全局字体该如何设置？- 哔哩哔哩</a></li>
+  <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/font-family">font-family CSS - MDN</a></li>
+  <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/@font-face">@font-face CSS - MDN</a></li>
+</ul>]]></content><author><name>Ji Chao</name></author><category term="CSS" /><summary type="html"><![CDATA[网页设置全局字体的正确打开方式]]></summary></entry><entry><title type="html">一次搞懂 rem 布局</title><link href="https://fehub.net/2021/01/02/rem/" rel="alternate" type="text/html" title="一次搞懂 rem 布局" /><published>2021-01-02T00:00:00+08:00</published><updated>2021-01-02T00:00:00+08:00</updated><id>https://fehub.net/2021/01/02/rem</id><content type="html" xml:base="https://fehub.net/2021/01/02/rem/"><![CDATA[<p>rem 弹性布局目前仍是移动端适配的主流方案，以前觉得 rem 布局就是等比缩放，很简单，然而真正把它讲明白却很难。写这篇文章的过程也是一次重新学习的过程。</p>
+
+<h2 id="前言">前言</h2>
+
+<p>在进入正题之前，首先认识几个名词，便于后续理解。</p>
+
+<ul>
+  <li>
+    <p><strong>像素</strong></p>
+
+    <p>像素是指组成图像的小方块，是整个图像中不可分割的最小单位，每个小方块都有一个明确的位置和被分配的色彩值。</p>
+  </li>
+  <li>
+    <p><strong>分辨率</strong></p>
+
+    <p>分辨率是指每一个方向上的像素数量，比如我们常说的 1920×1080 分辨率，就是指横向有 1920 个像素，竖向有 1080 个像素。描述分辨率的单位有：</p>
+
+    <ul>
+      <li>dpi - dots per inch，设备分辨率，又称输出分辨率，指的是设备每英寸上可产生的点数。</li>
+      <li>ppi - pixels per inch，图像分辨率，又称像素密度单位，指的是每英寸所拥有的像素数量。</li>
+      <li>lpi - lines per inch，网屏分辨率，线每英寸。</li>
+      <li>ppd - pixels per degree，角分辨率，像素每度。</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>物理分辨率</strong></p>
+
+    <p>物理分辨率是指液晶屏最高可显示的像素数，它是液晶屏固有的参数不能调节，表示方法与分辨率相同。一般来讲物理分辨率的大小可直接决定屏幕的最高分辨率，分辨率不会大于物理分辨率。</p>
+
+    <p>比如说，一款物理分辨率为 1366x768 的液晶电视，号称<strong>兼容</strong> 1080P 的信号，其实是 1080P 的信号电视可以接收，但输出时只会按照液晶电视 1366x768 的物理分辨率进行输出。只有物理分辨率达到 1920x1080 的液晶电视才能<strong>支持</strong> 1080P 的信号输出。</p>
+  </li>
+  <li>
+    <p><strong>设备像素 dp (Device Pixel)</strong></p>
+
+    <p>物理像素，是指设备能控制显示的最小单位，我们常说的显示器 1920×1080 分辨率就是设备像素。</p>
+  </li>
+  <li>
+    <p><strong>设备独立像素 dip (Device Independent Pixel)</strong></p>
+
+    <p>逻辑像素，是指可以通过程序控制使用的虚拟像素，与设备无关，包括了 CSS 像素 px，iOS 的 pt，Android 的 dp 等。</p>
+
+    <ul>
+      <li>
+        <p><strong>CSS 像素</strong></p>
+
+        <p>CSS 像素是 Web 编程的概念，指的是 CSS 样式代码中使用的逻辑像素，是一个抽象概念，实际并不存在。</p>
+      </li>
+      <li>
+        <p><strong>pt</strong></p>
+
+        <p>pt 是苹果自定义的设计单位（不是绝对长度为 1/72 英寸的 pt）。第一代 iPhone 3G 的屏幕是 320x480 分辨率，163ppi，苹果规定在 163ppi 的时候 1pt = 1px，所以 1pt = (ppi/163)px（这里的 px 是屏幕的物理像素）。</p>
+
+        <p>比如 iPhone 6 是 326ppi，那么 1pt = (326/163)px = 2px。iPhone 6 Plus 是 401ppi，计算得出 1pt = 2.46px，而实际是 3px，因为在图像呈现在屏幕之前做了一次采样处理。</p>
+      </li>
+      <li>
+        <p><strong>dp</strong></p>
+
+        <p>和苹果的 pt 一样，dp 是安卓为了设计而创造的独立单位，1dp = (ppi/160)px。</p>
+      </li>
+      <li>
+        <p><strong>pt、dp 与 px 的关系</strong></p>
+
+        <p>如果在 HTML head 中设置了 <code class="language-plaintext highlighter-rouge">&lt;meta name="viewport" content="width=device-width,initial-scale=1"&gt;</code>，此时 CSS 像素的显示尺寸和 Native APP 中 pt、dp 的显示尺寸相等。</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>devicePixelRatio (dpr)</strong></p>
+
+    <p>设备像素 dp 和设备独立像素 dip 的比例，也就是 <code class="language-plaintext highlighter-rouge">dpr = dp / dip</code>，在浏览器中可以通过 <code class="language-plaintext highlighter-rouge">window.devicePixelRatio</code> 获取到对应设备的 dpr。</p>
+  </li>
+</ul>
+
+<p>举个例子🌰：</p>
+
+<p>iPhone 6 的屏幕参数是，4.7英寸（对角线）Retina 高清显示屏，750x1334 分辨率，326ppi。iPhone 6 的横向分辨率（设备像素）是 750px，dpr（devicePixelRatio）是 2，所以它横向的 CSS 像素（设备独立像素）为 375px。</p>
+
+<p><img src="https://fehub.net/images/posts/2021/rem-1.jpg" alt="image" /></p>
+
+<h2 id="进入正题">进入正题</h2>
+
+<p>CSS 中有两种类型的长度，绝对长度和相对长度，绝对长度有我们常见的 px，pt（point）等，而 rem 是一个相对长度，另外还有 em，vw，vh 这些都是相对长度，这里不再赘述，具体请参考 <a href="https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Values_and_units">CSS 的值与单位</a>。</p>
+
+<p>rem 单位的意思是“根元素的字体大小”，即 html 元素的 font-size 是多少 px，1rem 就是多少 px。</p>
+
+<p>如果我们按设计稿的尺寸用 px 为单位实现了一个页面，理论上只在设计稿对应分辨率的屏幕上看才是正好的，在更大或者更小的屏幕上看可能就不合适了，这时候我们就要用到 rem 布局通过放大或者缩小让页面适应当前的屏幕。</p>
+
+<p>rem 布局是弹性布局的一种实现方式，弹性布局可以算作响应式布局的一种，但响应式布局不全是弹性布局。弹性布局强调等比缩放，100% 还原，rem 布局的本质就是等比缩放；响应式布局强调不同屏幕要有不同的显示，比如媒体查询。</p>
+
+<h3 id="rem-布局原理">rem 布局原理</h3>
+
+<p>以设计稿的尺寸（一般是宽度）为标准，我们定义一个数值代表此时的 1rem 是多少，因为 rem 的本质是等比缩放，我们可以得到：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>设计稿宽度 / 设计稿的 1rem = 页面视口宽度 / 页面的 1rem
+</code></pre></div></div>
+
+<p>这里的视口是指布局视口（layout viewport），在浏览器中可以通过 <code class="language-plaintext highlighter-rouge">window.innerWidth</code> 或 <code class="language-plaintext highlighter-rouge">document.documentElement.clientWidth</code> 获取视口宽度。具体请参考 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Viewport_concepts">视口概念</a>。</p>
+
+<p>然后我们可以计算出不同设备上页面对应的 1rem 的值：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>页面的 1rem = 页面视口宽度 / (设计稿宽度 / 设计稿的 1rem)
+</code></pre></div></div>
+
+<p>其中，<code class="language-plaintext highlighter-rouge">设计稿宽度 / 设计稿的 1rem</code> 相当于以 1rem 为基准将设计稿平均分成了若干份，那么上边的式子我们可以理解为：把不同设备上页面的视口平均分成和设计稿相同的份数，每一份就是 1rem。</p>
+
+<p>接下来，在浏览器渲染页面阶段，加载 CSS 之前，我们通过 <code class="language-plaintext highlighter-rouge">document.documentElement.clientWidth</code> 获取到当前设备上页面视口的宽度（CSS 像素），根据上面的公式动态计算出根元素的 font-size 值，然后通过 JS 动态把值赋给 html 元素。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">fontSize</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">clientWidth</span> <span class="o">/</span> <span class="mf">7.5</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">px</span><span class="dl">'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>在解析 CSS 时，浏览器会根据 html 元素的 font-size 值把 rem 值换算成适合自己的 px 值，这样就实现了使用一套 CSS 代码适配不同的设备。</p>
+
+<p>举个例子🌰：</p>
+
+<p>设计师按照 750px 的标准做设计稿，为了方便计算我们取 100px 为 1rem，那么设计稿的宽度就是 7.5rem，不同设备上页面对应的 1rem 的值就是页面视口宽度 / 7.5。iPhone6 横向的 CSS 像素为 375px，那么对应的 1rem 数值就是 375/7.5 = 50px。</p>
+
+<h3 id="注意事项">注意事项</h3>
+
+<ul>
+  <li>
+    <p>在实现 CSS 代码时，我们可以提前计算好 rem 值写在代码中，也可以直接按设计稿标注写 px，然后通过 CSS 处理器去转换，但要注意配置好 px2rem 的比例。</p>
+  </li>
+  <li>
+    <p>HTML 中要对视口做如下设置：</p>
+  </li>
+</ul>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<p>有关 <code class="language-plaintext highlighter-rouge">&lt;meta name="viewport"&gt;</code> content 属性的值，可以参考 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/meta/name">标准元数据名称</a>。</p>
+
+<h3 id="提出疑问">提出疑问</h3>
+
+<p>到这里我们好像已经实现了使用 rem 布局来适配不同的设备，但是感觉还有点疑问。</p>
+
+<p>设计师：设计稿是按照 iPhone 6 横向分辨率 750px 的标准给出的。</p>
+
+<p>我：秋豆麻袋，iPhone 6 横向的 CSS 像素为 375px，所以说上边的例子我们实现的其实是两倍的 iPhone 6 的视图，应用在页面上时，首先经过了一次缩小的过程。总感觉怪怪的。</p>
+
+<p>上边我们在 HTML 中设置了 <code class="language-plaintext highlighter-rouge">viewport</code>，其中的 <code class="language-plaintext highlighter-rouge">scale</code> 表示缩放比例，<code class="language-plaintext highlighter-rouge">width=device-width</code> 表示整个页面在设备上显示时的视口宽度（布局视口，CSS 像素）等于设备屏幕宽度（CSS 像素）。此时页面视口宽度的计算公式为：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">页面的视口宽度</span> <span class="o">=</span> <span class="nx">设备的物理分辨率</span> <span class="o">/</span> <span class="p">(</span><span class="nx">devicePixelRatio</span> <span class="o">*</span> <span class="nx">scale</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>如果 viewport 的 scale 根据 devicePixelRatio 动态设置：</p>
+
+<ul>
+  <li>当 devicePixelRatio 为 1 时，scale 为 1。</li>
+  <li>当 devicePixelRatio 为 2 时，scale 为 0.5。</li>
+  <li>当 devicePixelRatio 为 3 时，scale 为 0.3333。</li>
+</ul>
+
+<p>也就是说，devicePixelRatio * scale 始终等于 1，那么页面的视口宽度就和设备的物理分辨率始终相等。iPhone 6 的 devicePixelRatio 为 2，当 scale 为 0.5 时，iPhone 6 显示的页面视口宽度就和设计稿一样都是 750px 了。</p>
+
+<p><img src="https://fehub.net/images/posts/2021/rem-2.jpg" alt="image" /></p>
+
+<h3 id="网易的做法">网易的做法</h3>
+
+<p>网易使用了我们上边说的 scale 固定为 1 的方法。以 iPhone 6 的 750px 设计稿为例：</p>
+
+<ul>
+  <li>
+    <p>为了方便计算，以 100px 的 font-size 为参照，此时 1rem = 100px。</p>
+  </li>
+  <li>
+    <p>计算设计稿的宽度为 750 / 100 = 7.5rem。</p>
+  </li>
+  <li>
+    <p>通过以下代码动态设置 html 元素的 font-size：</p>
+  </li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">fontSize</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">clientWidth</span> <span class="o">/</span> <span class="mf">7.5</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">px</span><span class="dl">'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>写 CSS 代码时，各元素的 CSS 尺寸（rem 值）= 设计稿标注尺寸 / 100。</li>
+</ul>
+
+<h3 id="淘宝的做法">淘宝的做法</h3>
+
+<p>淘宝使用了动态设置 scale 的方法，如上述所说根据设备的 devicePixelRatio 动态设置 scale 的值，使页面的视口宽度和设备的物理分辨率始终相等。还是以 iPhone 6 的 750px 设计稿为例：</p>
+
+<ul>
+  <li>
+    <p>设定设计稿的宽度为 10rem。</p>
+  </li>
+  <li>
+    <p>此时 html 元素的 font-size 值为 750 / 10 = 75px，即 1rem = 75px。</p>
+  </li>
+  <li>
+    <p>动态设置 viewport 的 scale：</p>
+  </li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">scale</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="nx">devicePixelRatio</span><span class="p">;</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">meta[name="viewport"]</span><span class="dl">'</span><span class="p">).</span><span class="nx">setAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">content</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">initial-scale=</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">scale</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">, maximum-scale=</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">scale</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">, minimum-scale=</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">scale</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">, user-scalable=no</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<ul>
+  <li>动态计算 html 元素的 font-size：</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">fontSize</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">clientWidth</span> <span class="o">/</span> <span class="mi">10</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">px</span><span class="dl">'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>写 CSS 代码时，各元素的 CSS 尺寸（rem 值）= 设计稿标注尺寸 / 75。</li>
+</ul>
+
+<h2 id="举一反三">举一反三</h2>
+
+<h3 id="移动端和-pc-端的临界点">移动端和 PC 端的临界点</h3>
+
+<p>通常情况下，移动端和 PC 端的页面不是同一种展示方式。如果我们按 iPhone 6 的标准实现页面，那么在 iPhone 6/7/8 Plus 等更大的屏幕上页面会等比放大，但当屏幕继续增大时，比如 iPad/PC 等，我们就没必要让它继续放大了，此时应该去访问 PC 网站。比如我们用手机访问百度看到的是移动端的页面，用 iPad 或者 PC 访问百度看到的则是电脑端的页面。</p>
+
+<p>当页面的视口宽度大于某个值时，就可以让 html 元素的 font-size 不再变化了。动态设置 html 元素 font-size 的代码改动一下：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">deviceWidth</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">clientWidth</span><span class="p">;</span>
+<span class="c1">// 980 只是举例，具体数值按需求确定</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">deviceWidth</span> <span class="o">&gt;</span> <span class="mi">980</span><span class="p">)</span> <span class="nx">deviceWidth</span> <span class="o">=</span> <span class="mi">980</span><span class="p">;</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">fontSize</span> <span class="o">=</span> <span class="nx">deviceWidth</span> <span class="o">/</span> <span class="mf">7.5</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">px</span><span class="dl">'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="工作中与设计师协作">工作中与设计师协作</h3>
+
+<ul>
+  <li>
+    <p>视觉设计阶段，设计师按 750px 分辨率（iPhone 6/X）做设计稿。设计定稿后在 750px 的设计稿上做标注，输出标注图。同时等比放大 1.5 倍生成宽度 1125px 的设计稿，在 1125px 的稿子里切图。</p>
+  </li>
+  <li>
+    <p>设计师输出宽度 750px 的设计标注图和 @2x/@3x 切图资源交付给前端开发工程师。</p>
+  </li>
+  <li>
+    <p>开发工程师拿到标注图和切图资源，完成 iPhone 6/X（375pt）的界面开发。开发阶段用我们上面所说的 rem 布局实现。</p>
+  </li>
+  <li>
+    <p>适配调试阶段，基于 iPhone 6/X 的界面效果，分别向上向下调试 iPhone 6/7/8 plus / iPhone 11（414pt），iPhone 12（390pt）和 iPhone 5S 及以下（320pt）的界面效果，由此完成大中小三屏适配。</p>
+  </li>
+</ul>
+
+<p>以上。</p>
+
+<h2 id="参考资料">参考资料</h2>
+
+<ul>
+  <li><a href="https://www.jianshu.com/p/af6dad66e49a">前端工程师需要明白的「像素」</a></li>
+  <li><a href="https://www.cnblogs.com/jiangzilong/p/6700023.html">CSS 像素、设备独立像素、设备像素之间关系</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/70383462">基础 px、pt、ppi 的知识</a></li>
+  <li><a href="https://www.quirksmode.org/blog/archives/2010/04/a_pixel_is_not.html">A pixel is not a pixel is not a pixel</a></li>
+  <li><a href="https://www.zhangxinxu.com/wordpress/2012/08/window-devicepixelratio/">设备像素比 devicePixelRatio 简单介绍</a></li>
+  <li><a href="http://t.zoukankan.com/wmhuang-p-6817057.html">针对 iPhone 的 pt、Android 的 dp、HTML 的 CSS 像素与 dpr、设计尺寸和物理像素的浅分析</a></li>
+  <li><a href="https://blog.csdn.net/xwqqq/article/details/54862279">手机端 rem 布局详解</a></li>
+</ul>]]></content><author><name>Ji Chao</name></author><category term="一次搞懂系列" /><category term="CSS" /><summary type="html"><![CDATA[一次搞懂 rem 布局]]></summary></entry><entry><title type="html">一次搞懂 JSON.stringify</title><link href="https://fehub.net/2020/12/12/json-stringify/" rel="alternate" type="text/html" title="一次搞懂 JSON.stringify" /><published>2020-12-12T00:00:00+08:00</published><updated>2020-12-12T00:00:00+08:00</updated><id>https://fehub.net/2020/12/12/json-stringify</id><content type="html" xml:base="https://fehub.net/2020/12/12/json-stringify/"><![CDATA[<p>在这里你可以找到 JSON.stringify 的所有常规和非常规的用法。</p>
+
+<h2 id="前言">前言</h2>
+
+<p>先看一个面试题：实现一个对象的 map 函数，类似 <code class="language-plaintext highlighter-rouge">Array.prototype.map</code>，先看答案，然后带着问题往下看。</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_map</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">oThis</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">fn</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">function</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nx">TypeError</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">fn</span><span class="p">}</span><span class="s2"> is not a function!`</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">fn</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">oThis</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">val</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">val</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}));</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="na">a</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">b</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="na">c</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="na">d</span><span class="p">:</span> <span class="mi">5</span> <span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">_obj</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">_map</span><span class="p">((</span><span class="nx">key</span><span class="p">,</span> <span class="nx">val</span><span class="p">,</span> <span class="nx">o</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="o">++</span><span class="nx">val</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">_obj</span><span class="p">);</span> <span class="c1">// {a: 3, b: 4, c: 5, d: 6}</span>
+</code></pre></div></div>
+
+<p>这里用到了 <code class="language-plaintext highlighter-rouge">JSON.stringify()</code> 方法。通常情况下，我们对它的使用往往局限在对 Object 的序列化，或者使用它对 Object 进行深拷贝。这次我们一次搞懂 <code class="language-plaintext highlighter-rouge">JSON.stringify()</code> 的所有用法。</p>
+
+<h2 id="jsonstringify">JSON.stringify()</h2>
+
+<p><code class="language-plaintext highlighter-rouge">JSON.stringify()</code> 方法将一个 JavaScript 对象或值转换为 JSON 字符串，如果指定了一个 replacer 函数，则可以选择性地替换值，或者指定的 replacer 是数组，则可选择性地仅包含数组指定的属性。</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">value</span><span class="p">[,</span> <span class="nx">replacer</span> <span class="p">[,</span> <span class="nx">space</span><span class="p">]])</span>
+</code></pre></div></div>
+
+<h2 id="九个特性">九个特性</h2>
+
+<p>如果只传一个参数，<code class="language-plaintext highlighter-rouge">JSON.stringify()</code> 将第一个参数的值转换为相应的 JSON 格式，有以下九个特性：</p>
+
+<ul>
+  <li>转换值如果有 <code class="language-plaintext highlighter-rouge">toJSON()</code> 方法，序列化的结果就是这个方法的返回值，忽略其他属性的值。</li>
+  <li><code class="language-plaintext highlighter-rouge">Date</code> 对象包含 <code class="language-plaintext highlighter-rouge">toJSON()</code> 方法（同 <code class="language-plaintext highlighter-rouge">Date.toISOString()</code>），因此会被当做字符串处理。</li>
+</ul>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Li Lei</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">toJSON</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="dl">"</span><span class="s2">Han Meimei</span><span class="dl">"</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+<span class="c1">// '"Han Meimei"'</span>
+
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">());</span>
+<span class="c1">// '"2020-12-05T09:11:20.566Z"'</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">now</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">()</span> <span class="p">});</span>
+<span class="c1">// '{"now":"2020-12-05T09:11:20.566Z"}'</span>
+</code></pre></div></div>
+
+<ul>
+  <li><strong>函数</strong>、<strong>undefined</strong> 以及 <strong>symbol</strong> 单独序列化时会转换为 <code class="language-plaintext highlighter-rouge">undefined</code>，作为数组元素序列化时会转换为 <code class="language-plaintext highlighter-rouge">null</code>，作为对象的属性值序列化时会被忽略。</li>
+  <li>当 <strong>symbol</strong> 作为对象的<strong>属性键</strong>序列化时，该属性会被完全忽略掉，即使 <code class="language-plaintext highlighter-rouge">replacer</code> 参数中强制指定了包含它（<code class="language-plaintext highlighter-rouge">replacer</code> 参数我们稍后会说到），序列化时也会忽略。</li>
+  <li>因为非数组对象序列化时会忽略一些特殊的值，所以对象的属性不能保证以特定的顺序出现在序列化后的字符串中，数组除外。</li>
+</ul>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="kd">function</span><span class="p">(){});</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{});</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="kc">undefined</span><span class="p">);</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nb">Symbol</span><span class="p">(</span><span class="dl">'</span><span class="s1">stringify</span><span class="dl">'</span><span class="p">));</span>
+<span class="c1">// undefined</span>
+
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+  <span class="na">a</span><span class="p">:</span> <span class="dl">"</span><span class="s2">stringify</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">b</span><span class="p">:</span> <span class="kc">undefined</span><span class="p">,</span>
+  <span class="na">c</span><span class="p">:</span> <span class="nb">Symbol</span><span class="p">(</span><span class="dl">"</span><span class="s2">stringify</span><span class="dl">"</span><span class="p">),</span>
+  <span class="na">d</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{}</span>
+<span class="p">});</span>
+<span class="c1">// '{"a":"stringify"}'</span>
+
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">([</span><span class="dl">"</span><span class="s2">stringify</span><span class="dl">"</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nb">Symbol</span><span class="p">(</span><span class="dl">"</span><span class="s2">stringify</span><span class="dl">"</span><span class="p">),</span> <span class="kd">function</span><span class="p">(){}]);</span>
+<span class="c1">// '["stringify",null,null,null]'</span>
+
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="p">[</span><span class="nb">Symbol</span><span class="p">(</span><span class="dl">"</span><span class="s2">json</span><span class="dl">"</span><span class="p">)]:</span> <span class="dl">"</span><span class="s2">stringify</span><span class="dl">"</span> <span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">k</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">k</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">symbol</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">v</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// undefined</span>
+</code></pre></div></div>
+
+<ul>
+  <li><strong>NaN</strong>、<strong>Infinity</strong> 格式的数值以及 <strong>null</strong> 都会被当做 <code class="language-plaintext highlighter-rouge">null</code>，单独序列化时会转换为字符串 <code class="language-plaintext highlighter-rouge">"null"</code>，作为数组元素以及对象的属性值序列化时都会转换为 <code class="language-plaintext highlighter-rouge">null</code>。对 <code class="language-plaintext highlighter-rouge">BigInt</code> 类型（大于 2^53-1 的任意大的整数）的值序列化时会抛出 <code class="language-plaintext highlighter-rouge">Uncaught TypeError: Do not know how to serialize a BigInt</code> 。</li>
+</ul>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="kc">NaN</span><span class="p">);</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="kc">Infinity</span><span class="p">);</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+<span class="c1">// "null"</span>
+
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+  <span class="na">a</span><span class="p">:</span> <span class="kc">NaN</span><span class="p">,</span>
+  <span class="na">b</span><span class="p">:</span> <span class="kc">Infinity</span><span class="p">,</span>
+  <span class="na">c</span><span class="p">:</span> <span class="kc">null</span>
+<span class="p">});</span>
+<span class="c1">// '{"a":null,"b":null,"c":null}'</span>
+
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">([</span><span class="kc">NaN</span><span class="p">,</span> <span class="kc">Infinity</span><span class="p">,</span> <span class="kc">null</span><span class="p">]);</span>
+<span class="c1">// '[null,null,null]'</span>
+
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="mi">1</span><span class="nx">n</span><span class="p">);</span>
+<span class="c1">// Uncaught TypeError: Do not know how to serialize a BigInt</span>
+</code></pre></div></div>
+
+<ul>
+  <li><strong>布尔值</strong>、<strong>数字</strong>、<strong>字符串</strong>的包装对象作为数组元素以及对象的属性值序列化时会自动转换成对应的原始值，单独序列化时会转化为对应的字符串。</li>
+</ul>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="k">new</span> <span class="nb">Number</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+<span class="c1">// '1'</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="k">new</span> <span class="nb">String</span><span class="p">(</span><span class="dl">"</span><span class="s2">false</span><span class="dl">"</span><span class="p">));</span>
+<span class="c1">// '"false"'</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="k">new</span> <span class="nb">Boolean</span><span class="p">(</span><span class="kc">false</span><span class="p">));</span>
+<span class="c1">// 'false'</span>
+
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+	<span class="na">a</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Number</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+	<span class="na">b</span><span class="p">:</span> <span class="k">new</span> <span class="nb">String</span><span class="p">(</span><span class="dl">"</span><span class="s2">false</span><span class="dl">"</span><span class="p">),</span>
+	<span class="na">c</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Boolean</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+<span class="p">});</span>
+<span class="c1">// '{"a":1,"b":"false","c":false}'</span>
+
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">([</span><span class="k">new</span> <span class="nb">Number</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="k">new</span> <span class="nb">String</span><span class="p">(</span><span class="dl">"</span><span class="s2">false</span><span class="dl">"</span><span class="p">),</span> <span class="k">new</span> <span class="nb">Boolean</span><span class="p">(</span><span class="kc">false</span><span class="p">)]);</span>
+<span class="c1">// '[1,"false",false]'</span>
+</code></pre></div></div>
+
+<ul>
+  <li>其他类型的对象，包括 <strong>Map</strong>/<strong>Set</strong>/<strong>WeakMap</strong>/<strong>WeakSet</strong>，仅会序列化可枚举的属性。</li>
+</ul>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span>
+  <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">a</span><span class="p">:</span> <span class="p">{</span> <span class="na">value</span><span class="p">:</span> <span class="dl">'</span><span class="s1">json</span><span class="dl">'</span><span class="p">,</span> <span class="na">enumerable</span><span class="p">:</span> <span class="kc">false</span> <span class="p">},</span>
+    <span class="na">b</span><span class="p">:</span> <span class="p">{</span> <span class="na">value</span><span class="p">:</span> <span class="dl">'</span><span class="s1">stringify</span><span class="dl">'</span><span class="p">,</span> <span class="na">enumerable</span><span class="p">:</span> <span class="kc">true</span> <span class="p">}</span>
+  <span class="p">})</span>
+<span class="p">);</span>
+<span class="c1">// '{"b":"stringify"}'</span>
+</code></pre></div></div>
+
+<ul>
+  <li>对包含循环引用的对象（对象之间相互引用，形成无限循环）执行此方法，会抛出错误。当我们试图通过 <code class="language-plaintext highlighter-rouge">JSON.parse(JSON.stringify())</code> 方法实现深拷贝时，要注意对象不能包含循环引用，否则会报错。</li>
+</ul>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Uncaught TypeError: Converting circular structure to JSON</span>
+</code></pre></div></div>
+
+<h2 id="第二个参数">第二个参数</h2>
+
+<p>接下来看第二个和第三个参数。两个参数都是可选的。</p>
+
+<p>第二个参数 <code class="language-plaintext highlighter-rouge">replacer</code> 可以是一个函数，也可以是一个数组。</p>
+
+<ul>
+  <li>当它是一个函数时，它有两个参数，键（key）和值（value），被序列化的值的每个属性都会经过该函数的处理，类似于数组方法 <code class="language-plaintext highlighter-rouge">map</code>、<code class="language-plaintext highlighter-rouge">filter</code> 等方法的回调函数。</li>
+  <li>当它是一个数组时，只有数组中包含的属性名才会被序列化到 JSON 字符串中。</li>
+  <li>当它是 null 或者未传时，对象所有的属性都会被序列化。</li>
+</ul>
+
+<p>通过 <code class="language-plaintext highlighter-rouge">replacer</code> 参数，我们可以打破上述九个特性中的一些特性。</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">a</span><span class="p">:</span> <span class="dl">"</span><span class="s2">stringify</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">b</span><span class="p">:</span> <span class="kc">undefined</span><span class="p">,</span>
+  <span class="na">c</span><span class="p">:</span> <span class="nb">Symbol</span><span class="p">(</span><span class="dl">"</span><span class="s2">stringify</span><span class="dl">"</span><span class="p">),</span>
+  <span class="na">d</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{}</span>
+<span class="p">};</span>
+
+<span class="c1">// 不用 replacer 参数时</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="c1">// '{"a":"stringify"}'</span>
+
+<span class="c1">// 使用 replacer 参数时</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">undefined</span><span class="dl">"</span><span class="p">:</span>
+      <span class="k">return</span> <span class="dl">"</span><span class="s2">undefined</span><span class="dl">"</span><span class="p">;</span>
+    <span class="k">case</span> <span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">symbol</span><span class="dl">"</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">value</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+    <span class="k">case</span> <span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">function</span><span class="dl">"</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">value</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+    <span class="nl">default</span><span class="p">:</span>
+      <span class="k">break</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">value</span><span class="p">;</span>
+<span class="p">});</span>
+<span class="c1">// '{"a":"stringify","b":"undefined","c":"Symbol(stringify)","d":"function() {}"}'</span>
+</code></pre></div></div>
+
+<p>需要注意的是，<code class="language-plaintext highlighter-rouge">replacer</code> 传入函数时，第一个参数不是对象的第一个键值对，而是空字符串作为 key 值，value 值是整个对象的键值对：</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span> <span class="na">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">b</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">c</span><span class="p">:</span> <span class="mi">3</span> <span class="p">};</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">value</span><span class="p">;</span>
+<span class="p">});</span>
+<span class="c1">// 第一个传入 replacer 函数的是 {"":{a:1,b:2,c:3}}</span>
+<span class="c1">// { a: 1, b: 2, c: 3 }   </span>
+<span class="c1">// 1</span>
+<span class="c1">// 2</span>
+<span class="c1">// 3</span>
+</code></pre></div></div>
+
+<p>这时候我们再返回开头看看实现 Object.map 的方法，是不是恍然大悟呢？</p>
+
+<p>当 <code class="language-plaintext highlighter-rouge">replacer</code> 是一个数组时，很简单，只会序列化数组中包含的属性值。</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span> <span class="na">a</span><span class="p">:</span> <span class="dl">"</span><span class="s2">JSON</span><span class="dl">"</span><span class="p">,</span> <span class="na">b</span><span class="p">:</span> <span class="dl">"</span><span class="s2">stringify</span><span class="dl">"</span> <span class="p">};</span>
+
+<span class="c1">// 只保留 b 属性的值</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="p">[</span><span class="dl">"</span><span class="s2">b</span><span class="dl">"</span><span class="p">]);</span>
+<span class="c1">// '{"b":"stringify"}'</span>
+</code></pre></div></div>
+
+<h2 id="第三个参数">第三个参数</h2>
+
+<p>第三个参数 <code class="language-plaintext highlighter-rouge">space</code> 指定缩进用的空白字符串，用于美化输出，它可以是数字，也可以是字符串。这个参数用处不大。</p>
+
+<ul>
+  <li>如果参数是数字，代表缩进有多少个空格，最大是 10，小于 1 则没有空格。</li>
+  <li>如果参数是字符串，那么这个字符串将作为缩进的空格，当字符串超过 10 个字母时，取它的前 10 个字母。</li>
+  <li>如果参数没有或者为 null，将没有空格。</li>
+</ul>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span> <span class="na">a</span><span class="p">:</span> <span class="dl">"</span><span class="s2">JSON</span><span class="dl">"</span><span class="p">,</span> <span class="na">b</span><span class="p">:</span> <span class="dl">"</span><span class="s2">stringify</span><span class="dl">"</span> <span class="p">};</span>
+
+<span class="c1">// 缩进有 12 个空格</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="mi">12</span><span class="p">);</span>
+<span class="c1">// '{\n          "a": "JSON",\n          "b": "stringify"\n}'</span>
+
+<span class="c1">// 用'a'代替缩进的空格</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">);</span>
+<span class="c1">// '{\na"a": "JSON",\na"b": "stringify"\n}'</span>
+</code></pre></div></div>
+
+<h2 id="举一反三">举一反三</h2>
+
+<h3 id="json-对象">JSON 对象</h3>
+
+<p><code class="language-plaintext highlighter-rouge">JSON</code> 是一种语法，用来序列化对象、数组、数值、字符串、布尔值和 <code class="language-plaintext highlighter-rouge">null</code> 。<code class="language-plaintext highlighter-rouge">JSON</code> 对象包含两个方法：<code class="language-plaintext highlighter-rouge">parse</code> 和 <code class="language-plaintext highlighter-rouge">stringify</code>。除了这两个方法，<code class="language-plaintext highlighter-rouge">JSON</code> 这个对象本身并没有其他作用，也不能被调用或者作为构造函数调用。</p>
+
+<p><code class="language-plaintext highlighter-rouge">JSON</code> 基于 JavaScript 语法，但 JSON 不是 JavaScript，JavaScript 也不是 JSON。</p>
+
+<ul>
+  <li>对象和数组：属性名称必须是双引号括起来的字符串；最后一个属性后不能有逗号。</li>
+  <li>数值：不能出现前导零；如果有小数点，后面至少跟着一位数字。</li>
+  <li>字符串：字符串必须用双引号括起来。</li>
+</ul>
+
+<h3 id="jsonparse">JSON.parse()</h3>
+
+<p><code class="language-plaintext highlighter-rouge">JSON.parse()</code> 方法用来解析 JSON 字符串，构造由字符串描述的 JavaScript 值或对象。</p>
+
+<h4 id="语法">语法</h4>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">text</span><span class="p">[,</span> <span class="nx">reviver</span><span class="p">])</span>
+</code></pre></div></div>
+
+<h4 id="参数">参数</h4>
+
+<ul>
+  <li><strong><code class="language-plaintext highlighter-rouge">text</code></strong></li>
+</ul>
+
+<p>要被解析成 JavaScript 值的字符串，必须符合 JSON 的语法格式。</p>
+
+<ul>
+  <li><strong><code class="language-plaintext highlighter-rouge">reviver</code> 可选</strong></li>
+</ul>
+
+<p>转换器函数，如果传入该函数，可以用来修改解析生成的原始值，在 parse 返回之前调用。这个函数的遍历顺序从最内层开始，按照层级顺序，依次向外遍历，当遍历到最顶层的解析值时，传入 <code class="language-plaintext highlighter-rouge">reviver</code> 函数的参数是空字符串和当前的解析值（有可能已经被修改过了）。</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="dl">'</span><span class="s1">{"p": 5}</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">k</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">k</span> <span class="o">===</span> <span class="dl">''</span><span class="p">)</span> <span class="k">return</span> <span class="nx">v</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nx">v</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
+<span class="p">});</span>
+<span class="c1">// { p: 10 }</span>
+</code></pre></div></div>
+
+<h4 id="返回值">返回值</h4>
+
+<ul>
+  <li>Object 类型，对应给定 JSON 文本的对象/值。</li>
+</ul>
+
+<h4 id="异常">异常</h4>
+
+<ul>
+  <li>若传入的字符串不符合 JSON 规范，则会抛出 SyntaxError 异常。</li>
+</ul>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 不允许用逗号作为结尾</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="dl">"</span><span class="s2">[1, 2, 3, 4, ]</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="dl">'</span><span class="s1">{"foo" : 1, }</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>以上。</p>
+
+<h2 id="参考资料">参考资料</h2>
+
+<ul>
+  <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify">JSON.stringify() - MDN</a></li>
+  <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON">JSON - MDN</a></li>
+  <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse">JSON.parse() - MDN</a></li>
+  <li><a href="https://github.com/NieZhuZhu/Blog/issues/1">你不知道的 JSON.stringify() 的威力</a></li>
+</ul>]]></content><author><name>Ji Chao</name></author><category term="一次搞懂系列" /><category term="JavaScript" /><summary type="html"><![CDATA[一次搞懂 JSON.stringify]]></summary></entry><entry><title type="html">推荐一些好用的 VSCode 扩展</title><link href="https://fehub.net/2020/10/18/vscode-extension/" rel="alternate" type="text/html" title="推荐一些好用的 VSCode 扩展" /><published>2020-10-18T00:00:00+08:00</published><updated>2020-10-18T00:00:00+08:00</updated><id>https://fehub.net/2020/10/18/vscode-extension</id><content type="html" xml:base="https://fehub.net/2020/10/18/vscode-extension/"><![CDATA[<p>VSCode（Visual Studio Code）作为代码编辑器，不仅开源、免费、颜值高，而且有丰富的扩展帮助我们提高开发效率，在前端开发中广受青睐。这篇文章总结了一些好用的扩展，不定期更新。</p>
+
+<h3 id="chinese-simplified-简体中文-language-pack">Chinese (Simplified) (简体中文) Language Pack</h3>
+
+<p>刚下载的 VSCode 默认是英文，可以选择安装官方的中文语言包。<a href="https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-zh-hans">【传送门】</a></p>
+
+<h3 id="更换主题">更换主题</h3>
+
+<p><code class="language-plaintext highlighter-rouge">Command+Shift+P</code> 打开命令框，输入 color theme，进入主题列表，可以设置你喜欢的主题。</p>
+
+<h3 id="添加代码片段">添加代码片段</h3>
+
+<p><code class="language-plaintext highlighter-rouge">Command+Shift+P</code> 打开命令框，输入 user snippets，新建全局代码片段文件，在文件中设置代码片段。</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="err">//</span><span class="w"> </span><span class="err">Example</span><span class="w">
+  </span><span class="nl">"Print to console"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"javascript,typescript"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"prefix"</span><span class="p">:</span><span class="w"> </span><span class="s2">"log"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"console.log('$1');"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"$2"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Log output to console"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="auto-close-tag">Auto Close Tag</h3>
+
+<p>输入 HTML 标签时自动关闭。<a href="https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-close-tag">【传送门】</a></p>
+
+<p>比如，输入 <code class="language-plaintext highlighter-rouge">&lt;div&gt;</code> 会自动填充后半部分 <code class="language-plaintext highlighter-rouge">&lt;/div&gt;</code>。</p>
+
+<h3 id="auto-rename-tag">Auto Rename Tag</h3>
+
+<p>修改 HTML 标签时自动修改整个标签。<a href="https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-rename-tag">【传送门】</a></p>
+
+<p>比如，我想把 <code class="language-plaintext highlighter-rouge">&lt;div&gt;&lt;/div&gt;</code> 修改为 <code class="language-plaintext highlighter-rouge">&lt;p&gt;&lt;/p&gt;</code>，只需要把第一个 div 修改为 p，第二个 div 会自动修改。</p>
+
+<h3 id="highlight-matching-tag">Highlight Matching Tag</h3>
+
+<p>突出显示匹配的开始和结束标签。<a href="https://marketplace.visualstudio.com/items?itemName=vincaslt.highlight-matching-tag">【传送门】</a></p>
+
+<p>比如，一个闭合的标签 <code class="language-plaintext highlighter-rouge">&lt;div&gt;&lt;/div&gt;</code>，当把光标定位到第一个 <code class="language-plaintext highlighter-rouge">div</code> 上时，两个 <code class="language-plaintext highlighter-rouge">div</code> 都会高亮显示。当元素内部层级较多，开始和结束的两个标签相隔较远时，此扩展对于快速定位到某个闭合标签很有用处。</p>
+
+<h3 id="css-peek">CSS Peek</h3>
+
+<p><code class="language-plaintext highlighter-rouge">Command+点击</code> id 或 class 名可以从 HTML 文件定位到 CSS 文件对应位置。<a href="https://marketplace.visualstudio.com/items?itemName=pranaygp.vscode-css-peek">【传送门】</a></p>
+
+<h3 id="autoprefixer">Autoprefixer</h3>
+
+<p>自动给 CSS 代码添加兼容性前缀。<a href="https://marketplace.visualstudio.com/items?itemName=mrmlnc.vscode-autoprefixer">【传送门】</a></p>
+
+<h3 id="image-preview">Image Preview</h3>
+
+<p>引用图片时会在代码左侧显示图片的缩略图，方便预览。<a href="https://marketplace.visualstudio.com/items?itemName=kisstkondoros.vscode-gutter-preview">【传送门】</a></p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">div</span> <span class="p">{</span>
+  <span class="nl">background</span><span class="p">:</span> <span class="sx">url('assets/play.png')</span> <span class="nb">no-repeat</span> <span class="nb">center</span><span class="p">;</span> 
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="code-spell-checker">Code Spell Checker</h3>
+
+<p>一个拼写检查器，帮助捕获常见的拼写错误。<a href="https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker">【传送门】</a></p>
+
+<h3 id="eslint">ESLint</h3>
+
+<p>代码格式校验工具，配合项目中的校验规则，实现保存时格式化代码。<a href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint">【传送门】</a></p>
+
+<h3 id="prettier">Prettier</h3>
+
+<p>代码格式化工具，在项目中可以配置自己的格式化规则。<a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">【传送门】</a></p>
+
+<h3 id="javascript-console-utils">Javascript console utils</h3>
+
+<p>帮助插入和删除 <code class="language-plaintext highlighter-rouge">console.(*)</code> 语句。<a href="https://marketplace.visualstudio.com/items?itemName=whtouche.vscode-js-console-utils">【传送门】</a></p>
+
+<ul>
+  <li>选择一个变量 <code class="language-plaintext highlighter-rouge">test</code>，<code class="language-plaintext highlighter-rouge">Command+Shift+L</code> 会在下一行代码插入 <code class="language-plaintext highlighter-rouge">console.log('test', test)</code> 语句。</li>
+  <li><code class="language-plaintext highlighter-rouge">Command+Shift+D</code> 将删除当前文档中的所有 <code class="language-plaintext highlighter-rouge">console.log</code> 语句。</li>
+</ul>
+
+<h3 id="korofileheader">koroFileHeader</h3>
+
+<p>用于生成文件头部注释和函数注释。<a href="https://marketplace.visualstudio.com/items?itemName=OBKoro1.korofileheader">【传送门】</a></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Command+Shift+I</code> 生成文件头部注释。</li>
+  <li><code class="language-plaintext highlighter-rouge">Command+Shift+T</code> 生成函数注释。</li>
+</ul>
+
+<h3 id="npm-intellisense">npm Intellisense</h3>
+
+<p>在 import 语句中自动完成 npm 模块。<a href="https://marketplace.visualstudio.com/items?itemName=christian-kohler.npm-intellisense">【传送门】</a></p>
+
+<h3 id="path-intellisense">Path Intellisense</h3>
+
+<p>自动识别文件路径，自动完成文件名。<a href="https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense">【传送门】</a></p>
+
+<h3 id="import-cost">Import Cost</h3>
+
+<p>在编辑器中显示 import/require 包的大小。<a href="https://marketplace.visualstudio.com/items?itemName=wix.vscode-import-cost">【传送门】</a></p>
+
+<h3 id="gitlens">GitLens</h3>
+
+<p>可以查看每行代码的提交记录，包括提交人、提交时间、提交备注等。<a href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens">【传送门】</a></p>
+
+<h3 id="git-history">Git History</h3>
+
+<p>在 VSCode 中集成 Git 工具，可以查看 Git 日志、文件历史、比较分支或提交代码。<a href="https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory">【传送门】</a></p>
+
+<h3 id="git-graph">Git Graph</h3>
+
+<p>类似于 SourceTree 的可视化版本控制插件，可以查看提交记录或执行 Git 操作。<a href="https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph">【传送门】</a></p>
+
+<h3 id="todo-tree">Todo Tree</h3>
+
+<p>在树形图中显示 TODO、FIXME 等注释标签。单击树形图中的注释标签将打开文件并将光标定位在包含注释标签的行上。<a href="https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree">【传送门】</a></p>
+
+<p>安装插件后会在左侧菜单栏生成一个待办事项菜单，点击可以查看项目下注释标签的树形图。</p>
+
+<p>以上。</p>
+
+<h3 id="参考资料">参考资料</h3>
+
+<ul>
+  <li><a href="https://blog.csdn.net/weixin_43363871/article/details/122041130">VScode 常用必备插件</a></li>
+</ul>]]></content><author><name>Ji Chao</name></author><category term="VSCode" /><summary type="html"><![CDATA[推荐一些好用的 VSCode 扩展]]></summary></entry><entry><title type="html">图片加载出错的处理方式</title><link href="https://fehub.net/2020/08/08/img-load-error/" rel="alternate" type="text/html" title="图片加载出错的处理方式" /><published>2020-08-08T00:00:00+08:00</published><updated>2020-08-08T00:00:00+08:00</updated><id>https://fehub.net/2020/08/08/img-load-error</id><content type="html" xml:base="https://fehub.net/2020/08/08/img-load-error/"><![CDATA[<p>通常情况下，HTML 中的 img 标签加载出错后会默认显示一张裂开的图片，如果设置了 <code class="language-plaintext highlighter-rouge">alt</code> 属性，还会在默认图片后面显示 <code class="language-plaintext highlighter-rouge">alt</code> 属性的内容。</p>
+
+<p>比如这张不存在的图片：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"https://fehub.net/images/xxx.png"</span> <span class="na">alt=</span><span class="s">"我是一张图片"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<p>在浏览器中的显示效果如图：</p>
+
+<p><img src="https://fehub.net/images/posts/2020/img-load-error-1.png" alt="image" /></p>
+
+<p>这种默认效果显得非常粗糙，对于用户也不太友好。</p>
+
+<h3 id="使用默认图片占位">使用默认图片占位</h3>
+
+<p>当图片加载出错的时候，使用一张默认图片（比如一张经过设计师设计的裂开的图片）进行占位，保证页面结构不会错乱。</p>
+
+<p>实现方法如下：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"https://fehub.net/images/xxx.png"</span> <span class="na">alt=</span><span class="s">"我是一张图片"</span> <span class="na">onerror=</span><span class="s">"this.src='error.svg'"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">img</span><span class="o">[</span><span class="nt">src</span><span class="err">$</span><span class="o">=</span><span class="s1">"error.svg"</span><span class="o">]</span> <span class="p">{</span>
+  <span class="nl">object-fit</span><span class="p">:</span> <span class="n">contain</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>这里要注意 <code class="language-plaintext highlighter-rouge">error.svg</code> 必须可以访问到，否则会一直触发 <code class="language-plaintext highlighter-rouge">onerror</code> 进入死循环。</p>
+
+<p>在浏览器中的显示效果如图：</p>
+
+<p><img src="https://fehub.net/images/posts/2020/img-load-error-2.png" alt="image" /></p>
+
+<h3 id="增加内容识别">增加内容识别</h3>
+
+<p>当图片加载出错的时候，如果仅仅使用一张默认图片，用户其实并不能识别这张图片的含义。从用户的角度讲，最佳的实现方法应该兼顾视觉表现和内容识别。</p>
+
+<p>实现方法如下：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"https://fehub.net/images/xxx.png"</span> <span class="na">alt=</span><span class="s">"我是一张图片"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">img</span> <span class="p">{</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">inline-block</span><span class="p">;</span>
+  <span class="nl">transform</span><span class="p">:</span> <span class="n">scale</span><span class="p">(</span><span class="m">1</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nt">img</span><span class="nd">::before</span> <span class="p">{</span>
+  <span class="nl">content</span><span class="p">:</span> <span class="s2">' '</span><span class="p">;</span>
+  <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>
+  <span class="nl">left</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">top</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+  <span class="nl">height</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+  <span class="nl">background</span><span class="p">:</span> <span class="m">#f5f5f5</span> <span class="sx">url(error.svg)</span> <span class="nb">no-repeat</span> <span class="nb">center</span> <span class="p">/</span> <span class="m">50%</span> <span class="m">50%</span><span class="p">;</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="nb">transparent</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">img</span><span class="nd">::after</span> <span class="p">{</span>
+  <span class="nl">content</span><span class="p">:</span> <span class="n">attr</span><span class="p">(</span><span class="n">alt</span><span class="p">);</span>
+  <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>
+  <span class="nl">left</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">bottom</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+  <span class="nl">line-height</span><span class="p">:</span> <span class="m">2</span><span class="p">;</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">.5</span><span class="p">);</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="m">#ffffff</span><span class="p">;</span>
+  <span class="nl">font-size</span><span class="p">:</span> <span class="m">12px</span><span class="p">;</span>
+  <span class="nl">text-align</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+  <span class="nl">white-space</span><span class="p">:</span> <span class="nb">nowrap</span><span class="p">;</span>
+  <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
+  <span class="nl">text-overflow</span><span class="p">:</span> <span class="n">ellipsis</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>在浏览器中的显示效果：</p>
+
+<p><img src="https://fehub.net/images/posts/2020/img-load-error-3.png" alt="image" /></p>
+
+<h3 id="实现用户没有头像时显示昵称的第一个汉字或字母">实现用户没有头像时显示昵称的第一个汉字或字母</h3>
+
+<p>实现思路如下：</p>
+
+<ul>
+  <li>
+    <p>如果 <code class="language-plaintext highlighter-rouge">img</code> 加载正常，<code class="language-plaintext highlighter-rouge">::before</code> 不会生效，利用这个特性在 <code class="language-plaintext highlighter-rouge">::before</code> 中实现没有头像时的显示效果。</p>
+  </li>
+  <li>
+    <p>利用大字体大行高以及文字换行，在 <code class="language-plaintext highlighter-rouge">::before</code> 中实现只显示昵称的第一个字。</p>
+  </li>
+</ul>
+
+<p>实现方法如下：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;img</span> <span class="na">class=</span><span class="s">"avatar"</span> <span class="na">src=</span><span class="s">"https://fehub.net/images/avatar.png"</span> <span class="na">alt=</span><span class="s">"FEHub"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">img</span><span class="nc">.avatar</span> <span class="p">{</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">inline-block</span><span class="p">;</span>
+  <span class="py">--s</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--size</span><span class="p">,</span> <span class="m">1.5rem</span><span class="p">);</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--s</span><span class="p">);</span>
+  <span class="nl">height</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--s</span><span class="p">);</span>
+  <span class="nl">border-radius</span><span class="p">:</span> <span class="m">50%</span><span class="p">;</span>
+  <span class="nl">white-space</span><span class="p">:</span> <span class="nb">normal</span><span class="p">;</span>
+  <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">img</span><span class="nc">.avatar</span><span class="nd">::before</span> <span class="p">{</span>
+  <span class="nl">content</span><span class="p">:</span> <span class="n">attr</span><span class="p">(</span><span class="n">alt</span><span class="p">);</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+  <span class="nl">font-size</span><span class="p">:</span> <span class="n">calc</span><span class="p">(</span><span class="n">var</span><span class="p">(</span><span class="n">--s</span><span class="p">)</span> <span class="p">/</span> <span class="m">2</span><span class="p">);</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+  <span class="nl">height</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="no">bisque</span><span class="p">;</span>
+  <span class="nl">line-height</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--s</span><span class="p">);</span>
+  <span class="nl">letter-spacing</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--s</span><span class="p">);</span>
+  <span class="nl">text-indent</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--s</span><span class="p">);</span>
+  <span class="nl">justify-content</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+  <span class="nl">text-align</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="nb">inherit</span><span class="p">;</span>
+  <span class="nl">line-break</span><span class="p">:</span> <span class="n">anywhere</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>在浏览器中的显示效果如图：</p>
+
+<p><img src="https://fehub.net/images/posts/2020/img-load-error-4.png" alt="image" /></p>
+
+<p><a href="https://fehub.net/demos/posts/2020/img-load-error.html">查看完整 demo</a></p>
+
+<p>以上。</p>]]></content><author><name>Ji Chao</name></author><category term="HTML" /><category term="CSS" /><summary type="html"><![CDATA[图片加载出错的处理方式]]></summary></entry><entry><title type="html">浅谈 history.scrollRestoration</title><link href="https://fehub.net/2020/06/28/history-scroll-restoration/" rel="alternate" type="text/html" title="浅谈 history.scrollRestoration" /><published>2020-06-28T00:00:00+08:00</published><updated>2020-06-28T00:00:00+08:00</updated><id>https://fehub.net/2020/06/28/history-scroll-restoration</id><content type="html" xml:base="https://fehub.net/2020/06/28/history-scroll-restoration/"><![CDATA[<p>当我们刷新页面时，浏览器在默认情况下会记住当前的滚动位置，但在有些场景下，我们不需要记住之前的滚动位置，每次刷新都定位到最顶端，这时候应该怎样实现呢？</p>
+
+<h3 id="硬实现">硬实现</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 页面 load 完毕执行</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">scrollingElement</span><span class="p">.</span><span class="nx">scrollTop</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>虽然功能实现了，但是页面会产生晃动，用户体验不太好。</p>
+
+<h3 id="优雅的实现方式">优雅的实现方式</h3>
+
+<p>浏览器提供了原生的 API 用来设置滚动位置的恢复行为：<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/History/scrollRestoration"><code class="language-plaintext highlighter-rouge">history.scrollRestoration</code></a></p>
+
+<p>这个 API 有两个值：</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">auto</code> 浏览器默认行为，恢复页面的滚动位置</li>
+  <li><code class="language-plaintext highlighter-rouge">manual</code> 不恢复页面的滚动位置</li>
+</ul>
+
+<p>在任意位置添加以下代码，即可实现刷新定位到初始位置，防止自动恢复页面的滚动位置。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="nx">history</span><span class="p">.</span><span class="nx">scrollRestoration</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">history</span><span class="p">.</span><span class="nx">scrollRestoration</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">manual</span><span class="dl">'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>这个 API 的兼容性非常好，即使一些老版本浏览器不支持，也不影响用户的正常使用，所以不用担心兼容性问题。</p>
+
+<p><img src="https://fehub.net/images/posts/2020/history-scroll-restoration-1.png" alt="image" /></p>
+
+<p>以上。</p>
+
+<h3 id="参考资料">参考资料</h3>
+
+<ul>
+  <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/History/scrollRestoration">History.scrollRestoration - MDN</a></li>
+</ul>]]></content><author><name>Ji Chao</name></author><category term="JavaScript" /><summary type="html"><![CDATA[浅谈 history.scrollRestoration]]></summary></entry><entry><title type="html">使用 canvas 实现图片的合成</title><link href="https://fehub.net/2020/05/16/canvas-for-image-composition/" rel="alternate" type="text/html" title="使用 canvas 实现图片的合成" /><published>2020-05-16T00:00:00+08:00</published><updated>2020-05-16T00:00:00+08:00</updated><id>https://fehub.net/2020/05/16/canvas-for-image-composition</id><content type="html" xml:base="https://fehub.net/2020/05/16/canvas-for-image-composition/"><![CDATA[<p>工作中需要实现这样一个需求：根据不同的推荐链接生成不同的二维码，将二维码和一张静态的图片合成一张完整的海报，用于不同推荐人的推广。</p>
+
+<h3 id="思路">思路</h3>
+
+<p>先用 <a href="https://github.com/davidshimjs/qrcodejs">qrcode.js</a> 生成对应链接的二维码图片，然后用一个画布 <a href="https://www.runoob.com/html/html5-canvas.html">canvas</a> 把静态图片画上，再把生成的二维码画到静态图片上的指定位置，最后将整个 canvas 转成图片并下载。</p>
+
+<h3 id="实现">实现</h3>
+
+<ul>
+  <li>首先用 qrcode.js 生成二维码，代码如下。</li>
+</ul>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">'qrcode'</span><span class="nt">&gt;&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">qrcode</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">QRCode</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">qrcode</span><span class="dl">'</span><span class="p">),</span> <span class="dl">'</span><span class="s1">https://fehub.net/</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<ul>
+  <li>创建一个画布，将静态图片画上去，代码如下。</li>
+</ul>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">'canbox'</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;canvas</span> <span class="na">id=</span><span class="s">'myCanvas'</span><span class="nt">&gt;&lt;/canvas&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">CARD</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../assets/card.jpg</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">width</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">height</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">c</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">myCanvas</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">c</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
+<span class="nx">c</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">ctx</span> <span class="o">=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="dl">'</span><span class="s1">2d</span><span class="dl">'</span><span class="p">);</span>
+<span class="c1">// 首先画上背景图</span>
+<span class="kd">const</span> <span class="nx">img</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
+<span class="nx">img</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">CARD</span><span class="p">;</span>
+<span class="c1">// img.setAttribute('crossOrigin', 'anonymous');</span>
+<span class="c1">// 必须等待图片加载完成</span>
+<span class="nx">img</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">ctx</span><span class="p">.</span><span class="nx">drawImage</span><span class="p">(</span><span class="nx">img</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>这里有两点要注意：</p>
+
+<ol>
+  <li>由于 canvas 的绘制需要的是已经加载完成的图片，我们需要确保绘制的素材图片是已经加载完成的，因此我们需要使用 img 的 onload 事件，可以使用 html 中已存在的图片，或者用js创建一个图片对象；</li>
+  <li>图片加载并绘制涉及了图片的跨域问题，因此如果是一张在线的图片，需要在图片服务器上设置跨域头，并且在前端加载图片之前将 img 标签的 crossOrigin 属性设置为 anonymous，否则绘制到画布的时候会报跨域的错误。这里我用的本地资源，所以没有跨域问题，不需要设置 crossOrigin 属性。关于 crossOrigin 可以参考这篇 <a href="http://ilucas.me/2017/04/19/crossorign-attribute-img-tag/">文章</a>。</li>
+</ol>
+
+<ul>
+  <li>将生成的二维码画到静态图片指定位置</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">img</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">ctx</span><span class="p">.</span><span class="nx">drawImage</span><span class="p">(</span><span class="nx">img</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+  <span class="c1">// 直接使用生成的 base64 图片</span>
+  <span class="kd">const</span> <span class="nx">qrImg</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">qrcode</span><span class="dl">"</span><span class="p">).</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="dl">"</span><span class="s2">img</span><span class="dl">"</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="c1">// 把 canvas 转成图片</span>
+  <span class="c1">// const canvas = document.getElementById('qrcode').getElementsByTagName('canvas')[0];</span>
+  <span class="c1">// const data = canvas.toDataURL('image/jpg');</span>
+  <span class="c1">// const qrImg = new Image();</span>
+  <span class="c1">// qrImg.src = data;</span>
+  <span class="c1">// qrImg.setAttribute('crossOrigin', 'Anonymous');</span>
+  <span class="c1">// 把二维码图片画上</span>
+  <span class="nx">ctx</span><span class="p">.</span><span class="nx">drawImage</span><span class="p">(</span><span class="nx">qrImg</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>这里要注意：</p>
+
+<p>qrcode.js 会在容器内生成一个 canvas 和一个 img，我们可以直接把这个 base64 图片画到画布上，也可以把生成的 canvas 转成图片，再画到画布上。</p>
+
+<ul>
+  <li>将整个画布转成图片并下载</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">img</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// 画上背景图</span>
+  <span class="nx">ctx</span><span class="p">.</span><span class="nx">drawImage</span><span class="p">(</span><span class="nx">img</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+  <span class="c1">// 画上二维码</span>
+  <span class="kd">const</span> <span class="nx">qrImg</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">qrcode</span><span class="dl">"</span><span class="p">).</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="dl">"</span><span class="s2">img</span><span class="dl">"</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="c1">// const canvas = document.getElementById('qrcode').getElementsByTagName('canvas')[0];</span>
+  <span class="c1">// const data = canvas.toDataURL('image/jpg');</span>
+  <span class="c1">// const qrImg = new Image();</span>
+  <span class="c1">// qrImg.src = data;</span>
+  <span class="c1">// qrImg.setAttribute('crossOrigin', 'Anonymous');</span>
+  <span class="nx">ctx</span><span class="p">.</span><span class="nx">drawImage</span><span class="p">(</span><span class="nx">qrImg</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
+  <span class="c1">// 画布转图片</span>
+  <span class="kd">const</span> <span class="nx">myCanvas</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">myCanvas</span><span class="dl">'</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">src</span> <span class="o">=</span> <span class="nx">myCanvas</span><span class="p">.</span><span class="nx">toDataURL</span><span class="p">(</span><span class="dl">'</span><span class="s1">image/jpg</span><span class="dl">'</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">cardImg</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
+  <span class="nx">cardImg</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">src</span><span class="p">;</span>
+  <span class="c1">// cardImg.setAttribute('crossOrigin', 'Anonymous');</span>
+  <span class="kd">const</span> <span class="nx">filename</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">iamjichao.net</span><span class="dl">'</span><span class="p">;</span>
+  <span class="nx">saveFile</span><span class="p">(</span><span class="nx">src</span><span class="p">,</span> <span class="nx">filename</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">saveFile</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">filename</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">save_link</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElementNS</span><span class="p">(</span><span class="dl">'</span><span class="s1">http://www.w3.org/1999/xhtml</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nx">save_link</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nx">data</span><span class="p">;</span>
+  <span class="nx">save_link</span><span class="p">.</span><span class="nx">download</span> <span class="o">=</span> <span class="nx">filename</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">event</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createEvent</span><span class="p">(</span><span class="dl">'</span><span class="s1">MouseEvents</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nx">event</span><span class="p">.</span><span class="nx">initMouseEvent</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="nb">window</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+  <span class="nx">save_link</span><span class="p">.</span><span class="nx">dispatchEvent</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>以上。</p>]]></content><author><name>Ji Chao</name></author><category term="JavaScript" /><category term="HTML" /><summary type="html"><![CDATA[使用 canvas 实现图片的合成]]></summary></entry><entry><title type="html">解决 Git 远程仓库文件名大小写问题</title><link href="https://fehub.net/2020/03/21/git-filename-case/" rel="alternate" type="text/html" title="解决 Git 远程仓库文件名大小写问题" /><published>2020-03-21T00:00:00+08:00</published><updated>2020-03-21T00:00:00+08:00</updated><id>https://fehub.net/2020/03/21/git-filename-case</id><content type="html" xml:base="https://fehub.net/2020/03/21/git-filename-case/"><![CDATA[<p>Git 远程仓库已经存在了小写文件名，需要将小写改为首字母大写。直接粗暴地修改了文件名，Git 却无法检测出更改。记录一下解决步骤。</p>
+
+<h3 id="修改-git-配置">修改 Git 配置</h3>
+
+<p>Git 默认配置为忽略大小写，因此无法正确检测文件大小写的更改。运行以下命令将 Git 配置为大小写敏感：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config core.ignorecase false
+</code></pre></div></div>
+
+<p>此时 Git 可以检测出文件名大小写的更改，将修改后的文件 push 到远程仓库后又发现远程仓库中原来的文件还存在。</p>
+
+<h3 id="删除多余文件">删除多余文件</h3>
+
+<p>运行：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rm --cached src/pages/index -r
+</code></pre></div></div>
+
+<p>删除文件夹里面的文件，文件夹也会消失。</p>
+
+<p>操作成功提示：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rm 'src/pages/index/index.jsx'
+rm 'src/pages/index/index.scss'
+</code></pre></div></div>
+
+<h3 id="提交到远程仓库">提交到远程仓库</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add .
+git commit -m 'rm files'
+git push origin master
+</code></pre></div></div>
+
+<p>以上步骤顺利完成，远程仓库更新成功。</p>]]></content><author><name>Ji Chao</name></author><category term="Git" /><summary type="html"><![CDATA[解决 Git 远程仓库文件名大小写问题]]></summary></entry></feed>

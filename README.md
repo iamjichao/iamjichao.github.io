@@ -7,8 +7,8 @@
 * [效果预览](#效果预览)
 * [Fork 指南](#fork-指南)
 * [使用文档](#使用文档)
+* [在本地运行站点](#在本地运行站点)
 * [经验与思考](#经验与思考)
-* [联系我](#联系我)
 * [致谢](#致谢)
 
 <!-- vim-markdown-toc -->
@@ -17,7 +17,7 @@
 
 **[在线预览 &rarr;](https://fehub.net)**
 
-![screenshot home](https://mazhuang.org/assets/images/screenshots/home.png)
+![screenshot home](https://fehub.net/assets/images/screenshots/home.png)
 
 ## Fork 指南
 
@@ -56,7 +56,13 @@ Fork 本项目之后，还需要做一些事情才能让你的页面「正确」
 
 - [本博客模板常见问题 Q & A](https://mazhuang.org/2020/05/03/blog-template-qna/)。
 
-- 在本地预览博客效果可以参考 [Setting up your Pages site locally with Jekyll][2]。
+- 在本地预览博客效果可以参考 [使用 Jekyll 在本地测试 GitHub Pages 站点][2]。
+
+## 在本地运行站点
+
+```
+$ bundle exec jekyll serve
+```
 
 ## 经验与思考
 
@@ -83,5 +89,5 @@ Thanks for JetBrains' support.
 <a href="https://www.jetbrains.com/?from=mzlogin.github.io"><img src="./assets/images/jetbrains.svg"/></a>
 
 [1]: https://github.com/mzlogin/chinese-copywriting-guidelines
-[2]: https://help.github.com/articles/setting-up-your-pages-site-locally-with-jekyll/
+[2]: https://docs.github.com/cn/pages/setting-up-a-github-pages-site-with-jekyll/testing-your-github-pages-site-locally-with-jekyll
 [3]: https://github.com/mzlogin/mzlogin.github.io/issues/2

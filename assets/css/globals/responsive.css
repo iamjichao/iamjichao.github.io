@@ -1,18 +1,18 @@
 .container {
   width: auto;
-  max-width: 1020px;
+  max-width: 1080px;
   padding-left: 20px;
-  padding-right: 20px
+  padding-right: 20px;
 }
 
 .mobile-visible {
-  display: none
+  display: none;
 }
 
 @media (max-width:60em) {
   .collection-card {
     width: 45%;
-    height: 225px
+    height: 225px;
   }
 }
 
@@ -20,23 +20,23 @@
   .collection-card {
     width: 100%;
     max-width: 350px;
-    margin: 10px auto
+    margin: 10px auto;
   }
 }
 
 @media (max-width:50em) {
   .mobile-block {
     display: block;
-    float: none
+    float: none;
   }
   .mobile-hidden {
-    display: none
+    display: none;
   }
   .mobile-visible {
-    display: inline-block
+    display: inline-block;
   }
   .mobile-md-section {
-    padding: 10px 0
+    padding: 10px 0;
   }
   .column,
   .one-third-column {
@@ -108,22 +108,22 @@
 
   .mini-repo-list-item .owner.css-truncate-target,
   .mini-repo-list-item .repo-and-owner.css-truncate-target {
-    max-width: 300px
+    max-width: 300px;
   }
   .markdown-body h1 {
-    font-size: 2rem
+    font-size: 2rem;
   }
   .markdown-body h2 {
-    font-size: 1.4rem
+    font-size: 1.4rem;
   }
   .markdown-body h3 {
-    font-size: 1.2rem
+    font-size: 1.2rem;
   }
   .markdown-body h4 {
-    font-size: 1.1em
+    font-size: 1.1em;
   }
   .markdown-body h5 {
-    font-size: 1em
+    font-size: 1em;
   }
 
   .tools-wrapper {
@@ -133,10 +133,10 @@
 
 @media (max-width:20em) {
   .site-header-nav .site-header-nav-item {
-    min-width: 20%
+    min-width: 20%;
   }
   .collection-head .collection-info .meta-info {
     display: block;
-    margin-top: 15px
+    margin-top: 15px;
   }
 }
