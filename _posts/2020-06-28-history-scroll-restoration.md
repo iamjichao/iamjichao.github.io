@@ -1,8 +1,8 @@
 ---
 layout: post
-title: history.scrollRestoration
+title: 浅谈 history.scrollRestoration
 categories: [JavaScript]
-description: history.scrollRestoration
+description: 浅谈 history.scrollRestoration
 keywords: [页面滚动, scrollRestoration]
 ---
 
