@@ -1,7 +1,7 @@
 ---
 layout: mindmap
 title: 前端技能树
-cate1: Front-End
+cate1: Work
 cate2:
 description: 前端技能树
 keywords: 技能树, 思维导图, mindmap

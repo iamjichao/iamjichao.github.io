@@ -1,7 +1,7 @@
 ---
 layout: wiki
 title: 前端工程师规范
-cate1: Front-End
+cate1: Work
 cate2:
 description: 前端工程师规范
 keywords: Front-End
