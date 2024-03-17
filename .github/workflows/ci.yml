@@ -14,10 +14,9 @@ jobs:
           persist-credentials: false
 
       - name: Set Ruby
-        uses: actions/setup-ruby@v1
+        uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3'
-          bundler-cache: true
+          ruby-version: 2.7
 
       - name: Install and Build
         run: |
