@@ -1,4 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="https://fehub.net/feed.xml" rel="self" type="application/atom+xml" /><link href="https://fehub.net/" rel="alternate" type="text/html" /><updated>2024-03-20T23:28:48+08:00</updated><id>https://fehub.net/feed.xml</id><title type="html">FEHub</title><subtitle></subtitle><author><name>Ji Chao</name></author><entry><title type="html">网站换肤的正确打开方式</title><link href="https://fehub.net/2022/06/25/website-skin/" rel="alternate" type="text/html" title="网站换肤的正确打开方式" /><published>2022-06-25T00:00:00+08:00</published><updated>2022-06-25T00:00:00+08:00</updated><id>https://fehub.net/2022/06/25/website-skin</id><content type="html" xml:base="https://fehub.net/2022/06/25/website-skin/"><![CDATA[<p>网站换肤是一个常见的前端需求，比如切换日间和夜间模式。它的思路很简单，就是通过加载不同的 CSS 让页面显示不同的样式。实现方法有很多，但效果不尽相同。</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="https://fehub.net/feed.xml" rel="self" type="application/atom+xml" /><link href="https://fehub.net/" rel="alternate" type="text/html" /><updated>2024-03-23T15:17:10+08:00</updated><id>https://fehub.net/feed.xml</id><title type="html">FEHub</title><subtitle></subtitle><author><name>Ji Chao</name></author><entry><title type="html">我对 AI 的思考</title><link href="https://fehub.net/2023/04/23/about-ai/" rel="alternate" type="text/html" title="我对 AI 的思考" /><published>2023-04-23T00:00:00+08:00</published><updated>2023-04-23T00:00:00+08:00</updated><id>https://fehub.net/2023/04/23/about-ai</id><content type="html" xml:base="https://fehub.net/2023/04/23/about-ai/"><![CDATA[<blockquote>
+  <p>2023 年 3 月 14 日，OpenAI 宣布正式发布 GPT-4，它拥有图像识别、高级推理、庞大的单词掌握能力，并可以用所有流行的编程语言写代码。</p>
+</blockquote>
+
+<p>1776 年，一位纺织厂的女工听说一个叫瓦特的发明家改良了蒸汽机，已经应用于生产，于是她开始担忧在不久的将来，自己的工作将会被蒸汽机取代。9 年后的 1785 年，瓦特的改良蒸汽机开始用作纺织机械的动力，并很快推广开来，引起了第一次技术和工业革命的高潮，人类从此进入了机器和蒸汽的时代。由此而来的不是失业和萧条，而是社会生产力的大幅提升，一些职业被消灭的同时又出现了更多的新职业，人们的生活水平也水涨船高。</p>
+
+<p>2022 年，OpenAI 发布了 ChatGPT，经过多个版本的迭代，ChatGPT 已经可以根据用户的输入生成各种各样的文本，包括代码。此时，一个新时代的流水线码农开始担忧在不久的将来，AI 将会取代自己的工作，想到自己的房贷、车贷和嗷嗷待哺的孩子，他对未来的不确定性充满悲观。</p>
+
+<p>毫无疑问，我们已经身处又一次技术革命的浪潮中，而这次的主角就是 AI。AI 对人类社会会产生怎样的影响，我们现在还没办法预测，但可以肯定的是，技术革命必然会带来生产力的提升，生产力的提升又会创造更多的工作岗位，因此我认为，我们没有必要杞人忧天，担忧未来不确定的失业问题。虽然 AI 在不久的将来可能会取代程序员的工作，但同时它也会创造出更多新的工作岗位。例如，AI 训练师，训练 AI 模型，使其更好地理解和执行任务；AI 维护工程师，保证 AI 系统的正常运行。我们应该把 AI 看作是一个机会，而不是威胁。</p>
+
+<p>事物都是不断发展，不断变化的，我们需要的是拥抱变化，不断学习的能力。保持对新事物的好奇，积极学习新的技能，是我们面对未来最好的武器。</p>]]></content><author><name>Ji Chao</name></author><category term="Blog" /><summary type="html"><![CDATA[我对 AI 的思考]]></summary></entry><entry><title type="html">网站换肤的正确打开方式</title><link href="https://fehub.net/2022/06/25/website-skin/" rel="alternate" type="text/html" title="网站换肤的正确打开方式" /><published>2022-06-25T00:00:00+08:00</published><updated>2022-06-25T00:00:00+08:00</updated><id>https://fehub.net/2022/06/25/website-skin</id><content type="html" xml:base="https://fehub.net/2022/06/25/website-skin/"><![CDATA[<p>网站换肤是一个常见的前端需求，比如切换日间和夜间模式。它的思路很简单，就是通过加载不同的 CSS 让页面显示不同的样式。实现方法有很多，但效果不尽相同。</p>
 
 <h3 id="常见的网站换肤实现">常见的网站换肤实现</h3>
 
@@ -1333,37 +1343,4 @@
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p>以上。</p>]]></content><author><name>Ji Chao</name></author><category term="JavaScript" /><category term="HTML" /><summary type="html"><![CDATA[使用 canvas 实现图片的合成]]></summary></entry><entry><title type="html">解决 Git 远程仓库文件名大小写问题</title><link href="https://fehub.net/2020/03/21/git-filename-case/" rel="alternate" type="text/html" title="解决 Git 远程仓库文件名大小写问题" /><published>2020-03-21T00:00:00+08:00</published><updated>2020-03-21T00:00:00+08:00</updated><id>https://fehub.net/2020/03/21/git-filename-case</id><content type="html" xml:base="https://fehub.net/2020/03/21/git-filename-case/"><![CDATA[<p>Git 远程仓库已经存在了小写文件名，需要将小写改为首字母大写。直接粗暴地修改了文件名，Git 却无法检测出更改。记录一下解决步骤。</p>
-
-<h3 id="修改-git-配置">修改 Git 配置</h3>
-
-<p>Git 默认配置为忽略大小写，因此无法正确检测文件大小写的更改。运行以下命令将 Git 配置为大小写敏感：</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config core.ignorecase false
-</code></pre></div></div>
-
-<p>此时 Git 可以检测出文件名大小写的更改，将修改后的文件 push 到远程仓库后又发现远程仓库中原来的文件还存在。</p>
-
-<h3 id="删除多余文件">删除多余文件</h3>
-
-<p>运行：</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rm --cached src/pages/index -r
-</code></pre></div></div>
-
-<p>删除文件夹里面的文件，文件夹也会消失。</p>
-
-<p>操作成功提示：</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rm 'src/pages/index/index.jsx'
-rm 'src/pages/index/index.scss'
-</code></pre></div></div>
-
-<h3 id="提交到远程仓库">提交到远程仓库</h3>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add .
-git commit -m 'rm files'
-git push origin master
-</code></pre></div></div>
-
-<p>以上步骤顺利完成，远程仓库更新成功。</p>]]></content><author><name>Ji Chao</name></author><category term="Git" /><summary type="html"><![CDATA[解决 Git 远程仓库文件名大小写问题]]></summary></entry></feed>
+<p>以上。</p>]]></content><author><name>Ji Chao</name></author><category term="JavaScript" /><category term="HTML" /><summary type="html"><![CDATA[使用 canvas 实现图片的合成]]></summary></entry></feed>
