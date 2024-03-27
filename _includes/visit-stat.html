@@ -3,15 +3,15 @@
 <script async src="{{ assets_base_url }}/assets/vendor/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <div class="mobile-hidden" style="margin-top:8px">
   <span id="busuanzi_container_site_pv" style="display:none">
-    本站访问量<span id="busuanzi_value_site_pv"></span>次
+    本站访问量<span id="busuanzi_value_site_pv" style="margin:0 1px"></span>次
   </span>
   <span id="busuanzi_container_site_uv" style="display:none">
-    / 本站访客数<span id="busuanzi_value_site_uv"></span>人
+    / 本站访客数<span id="busuanzi_value_site_uv" style="margin:0 1px"></span>人
   </span>
   <span id="busuanzi_container_page_pv" style="display:none">
     <!-- / 本页访问量<span id="busuanzi_value_page_pv"></span>次 -->
     {% if site.components.busuanzi.start_date %}
-    / 统计始于{{ site.components.busuanzi.start_date }}
+    / 统计始于<span style="margin-left:1px">{{ site.components.busuanzi.start_date }}</span>
     {% endif %}
   </span>
 </div>
