@@ -269,6 +269,14 @@
     } ,
   
     {
+      "title"    : "一次搞懂作用域和闭包",
+      "category" : "一次搞懂系列",
+      
+      "url"      : "https://fehub.net/2021/03/20/scope-closure/",
+      "keywords" : "[&quot;JavaScript&quot;, &quot;作用域&quot;, &quot;闭包&quot;]"
+    } ,
+  
+    {
       "title"    : "网页设置全局字体的正确打开方式",
       "category" : "CSS",
       
