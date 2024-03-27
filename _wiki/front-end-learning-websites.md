@@ -9,6 +9,8 @@ keywords: 前端学习网站
 
 - [MDN Web Docs - Documenting web technologies](https://developer.mozilla.org/zh-CN/)
 
+- [Annotated ECMAScript 5.1](https://es5.github.io/)
+
 - [W3School - 领先的 Web 技术教程](https://www.w3school.com.cn)
 
 - [菜鸟教程 - 小白零基础入门教程](https://runoob.com/)
@@ -34,3 +36,5 @@ keywords: 前端学习网站
 - [CSS Tricks - 一些 CSS 常用样式](https://github.com/QiShaoXuan/css_tricks)
 
 - [CSS-Tricks](https://css-tricks.com/)
+
+- [代码整洁的 JavaScript](https://www.yuque.com/lpldplws/web/uc3snh)
