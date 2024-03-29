@@ -277,6 +277,14 @@
     } ,
   
     {
+      "title"    : "一次搞懂原型和原型链",
+      "category" : "一次搞懂系列",
+      
+      "url"      : "https://fehub.net/2021/06/06/prototype/",
+      "keywords" : "[&quot;JavaScript&quot;, &quot;原型&quot;, &quot;原型链&quot;]"
+    } ,
+  
+    {
       "title"    : "网页设置全局字体的正确打开方式",
       "category" : "CSS",
       

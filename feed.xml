@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="https://fehub.net/feed.xml" rel="self" type="application/atom+xml" /><link href="https://fehub.net/" rel="alternate" type="text/html" /><updated>2024-03-27T23:36:18+08:00</updated><id>https://fehub.net/feed.xml</id><title type="html">FEHub</title><subtitle></subtitle><author><name>Ji Chao</name></author><entry><title type="html">我对 AI 的思考</title><link href="https://fehub.net/2023/04/23/about-ai/" rel="alternate" type="text/html" title="我对 AI 的思考" /><published>2023-04-23T00:00:00+08:00</published><updated>2023-04-23T00:00:00+08:00</updated><id>https://fehub.net/2023/04/23/about-ai</id><content type="html" xml:base="https://fehub.net/2023/04/23/about-ai/"><![CDATA[<blockquote>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="https://fehub.net/feed.xml" rel="self" type="application/atom+xml" /><link href="https://fehub.net/" rel="alternate" type="text/html" /><updated>2024-03-29T22:15:00+08:00</updated><id>https://fehub.net/feed.xml</id><title type="html">FEHub</title><subtitle></subtitle><author><name>Ji Chao</name></author><entry><title type="html">我对 AI 的思考</title><link href="https://fehub.net/2023/04/23/about-ai/" rel="alternate" type="text/html" title="我对 AI 的思考" /><published>2023-04-23T00:00:00+08:00</published><updated>2023-04-23T00:00:00+08:00</updated><id>https://fehub.net/2023/04/23/about-ai</id><content type="html" xml:base="https://fehub.net/2023/04/23/about-ai/"><![CDATA[<blockquote>
   <p>2023 年 3 月 14 日，OpenAI 宣布正式发布 GPT-4，它拥有图像识别、高级推理、庞大的单词掌握能力，并可以用所有流行的编程语言写代码。</p>
 </blockquote>
 
@@ -369,7 +369,53 @@
   <li><a href="https://b23.tv/8zYhEob">网页的默认全局字体该如何设置？- 哔哩哔哩</a></li>
   <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/font-family">font-family CSS - MDN</a></li>
   <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/@font-face">@font-face CSS - MDN</a></li>
-</ul>]]></content><author><name>Ji Chao</name></author><category term="CSS" /><summary type="html"><![CDATA[网页设置全局字体的正确打开方式]]></summary></entry><entry><title type="html">一次搞懂作用域和闭包</title><link href="https://fehub.net/2021/03/20/scope-closure/" rel="alternate" type="text/html" title="一次搞懂作用域和闭包" /><published>2021-03-20T00:00:00+08:00</published><updated>2021-03-20T00:00:00+08:00</updated><id>https://fehub.net/2021/03/20/scope-closure</id><content type="html" xml:base="https://fehub.net/2021/03/20/scope-closure/"><![CDATA[<blockquote>
+</ul>]]></content><author><name>Ji Chao</name></author><category term="CSS" /><summary type="html"><![CDATA[网页设置全局字体的正确打开方式]]></summary></entry><entry><title type="html">一次搞懂原型和原型链</title><link href="https://fehub.net/2021/06/06/prototype/" rel="alternate" type="text/html" title="一次搞懂原型和原型链" /><published>2021-06-06T00:00:00+08:00</published><updated>2021-06-06T00:00:00+08:00</updated><id>https://fehub.net/2021/06/06/prototype</id><content type="html" xml:base="https://fehub.net/2021/06/06/prototype/"><![CDATA[<h2 id="有图有真相">有图有真相</h2>
+
+<p><img src="https://fehub.net/images/posts/2021/prototype.png" alt="image" /></p>
+
+<h2 id="真想只有一个">真想只有一个</h2>
+
+<ul>
+  <li>构造函数 <code class="language-plaintext highlighter-rouge">Person</code>，通过 <code class="language-plaintext highlighter-rouge">new</code> 实例化它的一个实例 <code class="language-plaintext highlighter-rouge">person</code>，实例 <code class="language-plaintext highlighter-rouge">person</code> 的原型就是构造函数 <code class="language-plaintext highlighter-rouge">Person</code> 的 <code class="language-plaintext highlighter-rouge">prototype</code> 属性，即 <code class="language-plaintext highlighter-rouge">Person.prototype</code>。</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Person</span><span class="p">()</span> <span class="p">{}</span> <span class="c1">// 构造函数</span>
+<span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">()</span> <span class="c1">// 实例</span>
+<span class="c1">// person的原型 === Person.prototype</span>
+</code></pre></div></div>
+
+<ul>
+  <li>实例的原型 <code class="language-plaintext highlighter-rouge">Person.prototype</code> 通过 <code class="language-plaintext highlighter-rouge">constructor</code> 属性可以访问到构造函数 <code class="language-plaintext highlighter-rouge">Person</code>，也就是实例原型的 <code class="language-plaintext highlighter-rouge">constructor</code> 属性指向构造函数。</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="kd">constructor</span> <span class="o">===</span> <span class="nx">Person</span>
+</code></pre></div></div>
+
+<ul>
+  <li>实例 <code class="language-plaintext highlighter-rouge">person</code> 通过 <code class="language-plaintext highlighter-rouge">__proto__</code> 属性可以访问到实例 <code class="language-plaintext highlighter-rouge">person</code> 的原型，也就是说实例的 <code class="language-plaintext highlighter-rouge">__proto__</code> 属性指向实例的原型。<code class="language-plaintext highlighter-rouge">Object.getPrototypeOf()</code> 方法也可以返回指定对象的原型。</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">person</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">getPrototypeOf</span><span class="p">(</span><span class="nx">person</span><span class="p">)</span> <span class="o">===</span> <span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span>
+</code></pre></div></div>
+
+<ul>
+  <li>实例的原型 <code class="language-plaintext highlighter-rouge">Person.prototype</code> 本身是一个对象，也就是说它是内置构造函数 <code class="language-plaintext highlighter-rouge">Object</code> 的一个实例，那么 <code class="language-plaintext highlighter-rouge">Person.prototype</code> 也可以通过 <code class="language-plaintext highlighter-rouge">__proto__</code> 属性或者 <code class="language-plaintext highlighter-rouge">Object.getPrototypeOf()</code> 方法访问到它的原型。</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">getPrototypeOf</span><span class="p">(</span><span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span> <span class="o">===</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Object.prototype</code> 是原型链的终点，所以通过 <code class="language-plaintext highlighter-rouge">__proto__</code> 属性或者 <code class="language-plaintext highlighter-rouge">Object.getPrototypeOf()</code> 方法访问它的原型时是 <code class="language-plaintext highlighter-rouge">null</code>。试想，如果 <code class="language-plaintext highlighter-rouge">Object.prototype</code> 也是一个对象，那么它就可以通过 <code class="language-plaintext highlighter-rouge">__proto__</code> 属性或者 <code class="language-plaintext highlighter-rouge">Object.getPrototypeOf()</code> 方法访问到它的原型 <code class="language-plaintext highlighter-rouge">Object.prototype</code>，这样就变成了自己指向自己，陷入死循环了。<code class="language-plaintext highlighter-rouge">Object.prototype</code> 是由 JS 引擎创建的，而不是由构造函数 <code class="language-plaintext highlighter-rouge">Object</code> 创建的，没有继承任何属性。</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="kc">null</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">getPrototypeOf</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span> <span class="o">===</span> <span class="kc">null</span>
+</code></pre></div></div>
+
+<p>以上。</p>]]></content><author><name>Ji Chao</name></author><category term="一次搞懂系列" /><category term="JavaScript" /><summary type="html"><![CDATA[一次搞懂原型和原型链]]></summary></entry><entry><title type="html">一次搞懂作用域和闭包</title><link href="https://fehub.net/2021/03/20/scope-closure/" rel="alternate" type="text/html" title="一次搞懂作用域和闭包" /><published>2021-03-20T00:00:00+08:00</published><updated>2021-03-20T00:00:00+08:00</updated><id>https://fehub.net/2021/03/20/scope-closure</id><content type="html" xml:base="https://fehub.net/2021/03/20/scope-closure/"><![CDATA[<blockquote>
   <p>对于那些有一点 JavaScript 使用经验但从未真正理解闭包概念的人来说，理解闭包可以看作是某种意义上的重生，但需要付出非常多的努力和牺牲才能理解这个概念。</p>
 </blockquote>
 
@@ -1553,42 +1599,4 @@
 
 <p><a href="https://fehub.net/demos/posts/2020/img-load-error.html">查看完整 demo</a></p>
 
-<p>以上。</p>]]></content><author><name>Ji Chao</name></author><category term="HTML" /><category term="CSS" /><summary type="html"><![CDATA[图片加载出错的处理方式]]></summary></entry><entry><title type="html">浅谈 history.scrollRestoration</title><link href="https://fehub.net/2020/06/28/history-scroll-restoration/" rel="alternate" type="text/html" title="浅谈 history.scrollRestoration" /><published>2020-06-28T00:00:00+08:00</published><updated>2020-06-28T00:00:00+08:00</updated><id>https://fehub.net/2020/06/28/history-scroll-restoration</id><content type="html" xml:base="https://fehub.net/2020/06/28/history-scroll-restoration/"><![CDATA[<p>当我们刷新页面时，浏览器在默认情况下会记住当前的滚动位置，但在有些场景下，我们不需要记住之前的滚动位置，每次刷新都定位到最顶端，这时候应该怎样实现呢？</p>
-
-<h3 id="硬实现">硬实现</h3>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 页面 load 完毕执行</span>
-<span class="nb">document</span><span class="p">.</span><span class="nx">scrollingElement</span><span class="p">.</span><span class="nx">scrollTop</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>虽然功能实现了，但是页面会产生晃动，用户体验不太好。</p>
-
-<h3 id="优雅的实现方式">优雅的实现方式</h3>
-
-<p>浏览器提供了原生的 API 用来设置滚动位置的恢复行为：<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/History/scrollRestoration"><code class="language-plaintext highlighter-rouge">history.scrollRestoration</code></a></p>
-
-<p>这个 API 有两个值：</p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">auto</code> 浏览器默认行为，恢复页面的滚动位置</li>
-  <li><code class="language-plaintext highlighter-rouge">manual</code> 不恢复页面的滚动位置</li>
-</ul>
-
-<p>在任意位置添加以下代码，即可实现刷新定位到初始位置，防止自动恢复页面的滚动位置。</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="nx">history</span><span class="p">.</span><span class="nx">scrollRestoration</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">history</span><span class="p">.</span><span class="nx">scrollRestoration</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">manual</span><span class="dl">'</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>这个 API 的兼容性非常好，即使一些老版本浏览器不支持，也不影响用户的正常使用，所以不用担心兼容性问题。</p>
-
-<p><img src="https://fehub.net/images/posts/2020/history-scroll-restoration-1.png" alt="image" /></p>
-
-<p>以上。</p>
-
-<h3 id="参考资料">参考资料</h3>
-
-<ul>
-  <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/History/scrollRestoration">History.scrollRestoration - MDN</a></li>
-</ul>]]></content><author><name>Ji Chao</name></author><category term="JavaScript" /><summary type="html"><![CDATA[浅谈 history.scrollRestoration]]></summary></entry></feed>
+<p>以上。</p>]]></content><author><name>Ji Chao</name></author><category term="HTML" /><category term="CSS" /><summary type="html"><![CDATA[图片加载出错的处理方式]]></summary></entry></feed>
