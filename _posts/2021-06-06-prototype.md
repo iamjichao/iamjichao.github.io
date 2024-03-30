@@ -9,7 +9,7 @@ topmost: true
 
 ## 有图有真相
 
-![image](https://fehub.net/images/posts/2021/prototype.png)
+![image](https://fehub.net/images/posts/2021/prototype.jpg)
 
 ## 真想只有一个
 
