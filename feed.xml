@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="https://fehub.net/feed.xml" rel="self" type="application/atom+xml" /><link href="https://fehub.net/" rel="alternate" type="text/html" /><updated>2024-03-29T22:21:46+08:00</updated><id>https://fehub.net/feed.xml</id><title type="html">FEHub</title><subtitle></subtitle><author><name>Ji Chao</name></author><entry><title type="html">我对 AI 的思考</title><link href="https://fehub.net/2023/04/23/about-ai/" rel="alternate" type="text/html" title="我对 AI 的思考" /><published>2023-04-23T00:00:00+08:00</published><updated>2023-04-23T00:00:00+08:00</updated><id>https://fehub.net/2023/04/23/about-ai</id><content type="html" xml:base="https://fehub.net/2023/04/23/about-ai/"><![CDATA[<blockquote>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="https://fehub.net/feed.xml" rel="self" type="application/atom+xml" /><link href="https://fehub.net/" rel="alternate" type="text/html" /><updated>2024-03-30T20:46:13+08:00</updated><id>https://fehub.net/feed.xml</id><title type="html">FEHub</title><subtitle></subtitle><author><name>Ji Chao</name></author><entry><title type="html">我对 AI 的思考</title><link href="https://fehub.net/2023/04/23/about-ai/" rel="alternate" type="text/html" title="我对 AI 的思考" /><published>2023-04-23T00:00:00+08:00</published><updated>2023-04-23T00:00:00+08:00</updated><id>https://fehub.net/2023/04/23/about-ai</id><content type="html" xml:base="https://fehub.net/2023/04/23/about-ai/"><![CDATA[<blockquote>
   <p>2023 年 3 月 14 日，OpenAI 宣布正式发布 GPT-4，它拥有图像识别、高级推理、庞大的单词掌握能力，并可以用所有流行的编程语言写代码。</p>
 </blockquote>
 
@@ -371,7 +371,7 @@
   <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/@font-face">@font-face CSS - MDN</a></li>
 </ul>]]></content><author><name>Ji Chao</name></author><category term="CSS" /><summary type="html"><![CDATA[网页设置全局字体的正确打开方式]]></summary></entry><entry><title type="html">一次搞懂原型和原型链</title><link href="https://fehub.net/2021/06/06/prototype/" rel="alternate" type="text/html" title="一次搞懂原型和原型链" /><published>2021-06-06T00:00:00+08:00</published><updated>2021-06-06T00:00:00+08:00</updated><id>https://fehub.net/2021/06/06/prototype</id><content type="html" xml:base="https://fehub.net/2021/06/06/prototype/"><![CDATA[<h2 id="有图有真相">有图有真相</h2>
 
-<p><img src="https://fehub.net/images/posts/2021/prototype.png" alt="image" /></p>
+<p><img src="https://fehub.net/images/posts/2021/prototype.jpg" alt="image" /></p>
 
 <h2 id="真想只有一个">真想只有一个</h2>
 
