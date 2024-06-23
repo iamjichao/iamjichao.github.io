@@ -38,3 +38,7 @@ keywords: 前端学习网站
 - [CSS-Tricks](https://css-tricks.com/)
 
 - [代码整洁的 JavaScript](https://www.yuque.com/lpldplws/web/uc3snh)
+
+- [前端设计能力提升](https://www.yuque.com/lpldplws/web/ugszzbc7q8hrpx4o)
+
+- [react 学习路径](https://www.yuque.com/lpldplws/web/bgn3sl)

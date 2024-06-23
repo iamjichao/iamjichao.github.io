@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>卡片翻转</title>
+  <style>
+    .content-box {
+      width: 400px;
+      height: 600px;
+      position: relative;
+      /* 距离观测者的距离，使翻转效果有立体感 */
+      perspective: 2000px;
+      -webkit-perspective: 2000px;
+    }
+
+    .content {
+      width: 400px;
+      height: 600px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      backface-visibility: hidden;
+      transition: 1s;
+    }
+
+    .front {
+      background: skyblue;
+    }
+
+    .back {
+      background: gold;
+      transform: rotateY(180deg);
+    }
+
+    .front.turn {
+      transform: rotateY(-180deg);
+    }
+
+    .back.turn {
+      transform: rotateY(0deg);
+    }
+  </style>
+</head>
+<body>
+  <div class="content-box">
+    <div class="content front">正面</div>
+    <div class="content back">反面</div>
+  </div>
+</body>
+<script>
+  document.querySelector('.content-box').addEventListener('click', function () {
+    document.querySelector('.front').classList.add('turn');
+    document.querySelector('.back').classList.add('turn');
+  });
+</script>
+</html>
