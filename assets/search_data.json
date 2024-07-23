@@ -285,6 +285,14 @@
     } ,
   
     {
+      "title"    : "interface 和 type 的区别",
+      "category" : "TypeScript",
+      
+      "url"      : "https://fehub.net/2022/04/09/interface-type/",
+      "keywords" : "[&quot;TypeScript&quot;, &quot;interface&quot;, &quot;type&quot;]"
+    } ,
+  
+    {
       "title"    : "网页设置全局字体的正确打开方式",
       "category" : "CSS",
       
