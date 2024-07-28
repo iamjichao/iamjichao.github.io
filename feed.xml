@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="https://fehub.net/feed.xml" rel="self" type="application/atom+xml" /><link href="https://fehub.net/" rel="alternate" type="text/html" /><updated>2024-07-28T16:41:27+08:00</updated><id>https://fehub.net/feed.xml</id><title type="html">FEHub</title><subtitle></subtitle><author><name>Ji Chao</name></author><entry><title type="html">我对 AI 的思考</title><link href="https://fehub.net/2023/04/23/about-ai/" rel="alternate" type="text/html" title="我对 AI 的思考" /><published>2023-04-23T00:00:00+08:00</published><updated>2023-04-23T00:00:00+08:00</updated><id>https://fehub.net/2023/04/23/about-ai</id><content type="html" xml:base="https://fehub.net/2023/04/23/about-ai/"><![CDATA[<blockquote>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="https://fehub.net/feed.xml" rel="self" type="application/atom+xml" /><link href="https://fehub.net/" rel="alternate" type="text/html" /><updated>2024-07-28T17:56:38+08:00</updated><id>https://fehub.net/feed.xml</id><title type="html">FEHub</title><subtitle></subtitle><author><name>Ji Chao</name></author><entry><title type="html">我对 AI 的思考</title><link href="https://fehub.net/2023/04/23/about-ai/" rel="alternate" type="text/html" title="我对 AI 的思考" /><published>2023-04-23T00:00:00+08:00</published><updated>2023-04-23T00:00:00+08:00</updated><id>https://fehub.net/2023/04/23/about-ai</id><content type="html" xml:base="https://fehub.net/2023/04/23/about-ai/"><![CDATA[<blockquote>
   <p>2023 年 3 月 14 日，OpenAI 宣布正式发布 GPT-4，它拥有图像识别、高级推理、庞大的单词掌握能力，并可以用所有流行的编程语言写代码。</p>
 </blockquote>
 
@@ -410,7 +410,66 @@
 
 <p>在上面的示例中，我们使用 type 定义了三种复杂类型：联合类型 MyUnionType、交叉类型 MyIntersectionType 和元组类型 MyTupleType。这些类型使用了 type 独有的语法，可以更加灵活地定义不同类型的结构。</p>
 
-<p>以上。</p>]]></content><author><name>Ji Chao</name></author><category term="TypeScript" /><summary type="html"><![CDATA[interface 和 type 的区别]]></summary></entry><entry><title type="html">React Hooks 依赖项比较</title><link href="https://fehub.net/2021/10/16/react-hooks-dependencies/" rel="alternate" type="text/html" title="React Hooks 依赖项比较" /><published>2021-10-16T00:00:00+08:00</published><updated>2021-10-16T00:00:00+08:00</updated><id>https://fehub.net/2021/10/16/react-hooks-dependencies</id><content type="html" xml:base="https://fehub.net/2021/10/16/react-hooks-dependencies/"><![CDATA[<p>在使用 React Hooks 中的 <code class="language-plaintext highlighter-rouge">useEffect</code>  <code class="language-plaintext highlighter-rouge">useCallback</code> <code class="language-plaintext highlighter-rouge">useMemo</code> 等钩子函数时，需要传递一个依赖项数组，用于指定钩子函数的执行时机和条件。React 会比较依赖项数组中的每个元素，判断它们是否发生了变化，如果有变化则会执行对应的钩子函数。</p>
+<p>以上。</p>]]></content><author><name>Ji Chao</name></author><category term="TypeScript" /><summary type="html"><![CDATA[interface 和 type 的区别]]></summary></entry><entry><title type="html">事件循环：宏任务和微任务</title><link href="https://fehub.net/2022/01/15/event-loop/" rel="alternate" type="text/html" title="事件循环：宏任务和微任务" /><published>2022-01-15T00:00:00+08:00</published><updated>2022-01-15T00:00:00+08:00</updated><id>https://fehub.net/2022/01/15/event-loop</id><content type="html" xml:base="https://fehub.net/2022/01/15/event-loop/"><![CDATA[<p>当 JavaScript 引擎执行 JavaScript 代码时，会按照先后顺序将任务分为两类：宏任务（Macro Task）和微任务（Micro Task），并将它们放入不同的任务队列中。</p>
+
+<p>宏任务包括以下几种：</p>
+
+<ul>
+  <li>script（整体代码）</li>
+  <li>setTimeout</li>
+  <li>setInterval</li>
+  <li>I/O 操作</li>
+  <li>UI 渲染（浏览器的渲染进程会单独维护一个 UI 渲染线程）</li>
+</ul>
+
+<p>微任务包括以下几种：</p>
+
+<ul>
+  <li>Promise.then</li>
+  <li>MutationObserver（监视 DOM 变动的接口）</li>
+  <li>process.nextTick（Node.js 环境中）</li>
+</ul>
+
+<p>当一个宏任务执行完毕后，JavaScript 引擎会检查微任务队列中是否有任务，如果有，就会依次执行它们，直到微任务队列为空。然后再执行下一个宏任务，再依次检查微任务队列，以此类推。</p>
+
+<p>通常情况下，微任务的执行优先级要高于宏任务，也就是说，当一个宏任务执行完成之后，如果有微任务的话，会优先执行微任务，然后再执行下一个宏任务。这样做的好处是可以确保异步代码执行的及时性和准确性。</p>
+
+<p>下面是一个例子：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">script start</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">setTimeout</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">},</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">promise1</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">promise2</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">script end</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="c1">// 输出顺序为:</span>
+<span class="c1">// script start</span>
+<span class="c1">// script end</span>
+<span class="c1">// promise1</span>
+<span class="c1">// promise2</span>
+<span class="c1">// setTimeout</span>
+</code></pre></div></div>
+
+<p>在这个例子中，首先执行同步代码，输出 <code class="language-plaintext highlighter-rouge">script start</code> 和 <code class="language-plaintext highlighter-rouge">script end</code>。然后当执行栈为空时，执行两个微任务，输出 <code class="language-plaintext highlighter-rouge">promise1</code> 和 <code class="language-plaintext highlighter-rouge">promise2</code>。最后当再次遍历宏任务时，输出 <code class="language-plaintext highlighter-rouge">setTimeout</code>。</p>
+
+<p>综上所述，JavaScript 的事件循环机制是基于宏任务和微任务，事件循环的顺序是：</p>
+
+<ol>
+  <li>执行同步代码（宏任务）。</li>
+  <li>执行栈为空后，执行微任务，直到微任务队列为空。</li>
+  <li>再次执行同步代码（宏任务）。</li>
+  <li>重复步骤 2 和 3，直到没有微任务或者宏任务。</li>
+</ol>
+
+<p>以上。</p>]]></content><author><name>Ji Chao</name></author><category term="JavaScript" /><summary type="html"><![CDATA[事件循环：宏任务和微任务]]></summary></entry><entry><title type="html">React Hooks 依赖项比较</title><link href="https://fehub.net/2021/10/16/react-hooks-dependencies/" rel="alternate" type="text/html" title="React Hooks 依赖项比较" /><published>2021-10-16T00:00:00+08:00</published><updated>2021-10-16T00:00:00+08:00</updated><id>https://fehub.net/2021/10/16/react-hooks-dependencies</id><content type="html" xml:base="https://fehub.net/2021/10/16/react-hooks-dependencies/"><![CDATA[<p>在使用 React Hooks 中的 <code class="language-plaintext highlighter-rouge">useEffect</code>  <code class="language-plaintext highlighter-rouge">useCallback</code> <code class="language-plaintext highlighter-rouge">useMemo</code> 等钩子函数时，需要传递一个依赖项数组，用于指定钩子函数的执行时机和条件。React 会比较依赖项数组中的每个元素，判断它们是否发生了变化，如果有变化则会执行对应的钩子函数。</p>
 
 <h3 id="变量的比较">变量的比较</h3>
 
@@ -1097,318 +1156,4 @@
   <li><a href="https://www.zhangxinxu.com/wordpress/2012/08/window-devicepixelratio/">设备像素比 devicePixelRatio 简单介绍</a></li>
   <li><a href="http://t.zoukankan.com/wmhuang-p-6817057.html">针对 iPhone 的 pt、Android 的 dp、HTML 的 CSS 像素与 dpr、设计尺寸和物理像素的浅分析</a></li>
   <li><a href="https://blog.csdn.net/xwqqq/article/details/54862279">手机端 rem 布局详解</a></li>
-</ul>]]></content><author><name>Ji Chao</name></author><category term="一次搞懂系列" /><category term="CSS" /><summary type="html"><![CDATA[一次搞懂 rem 布局]]></summary></entry><entry><title type="html">一次搞懂 JSON.stringify</title><link href="https://fehub.net/2020/12/12/json-stringify/" rel="alternate" type="text/html" title="一次搞懂 JSON.stringify" /><published>2020-12-12T00:00:00+08:00</published><updated>2020-12-12T00:00:00+08:00</updated><id>https://fehub.net/2020/12/12/json-stringify</id><content type="html" xml:base="https://fehub.net/2020/12/12/json-stringify/"><![CDATA[<p>在这里你可以找到 JSON.stringify 的所有常规和非常规的用法。</p>
-
-<h2 id="前言">前言</h2>
-
-<p>先看一个面试题：实现一个对象的 map 函数，类似 <code class="language-plaintext highlighter-rouge">Array.prototype.map</code>，先看答案，然后带着问题往下看。</p>
-
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_map</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">oThis</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">fn</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">function</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nx">TypeError</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">fn</span><span class="p">}</span><span class="s2"> is not a function!`</span><span class="p">);</span>
-  <span class="p">}</span>
-  <span class="k">return</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">return</span> <span class="nx">fn</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">oThis</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">val</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-      <span class="k">return</span> <span class="nx">val</span><span class="p">;</span>
-    <span class="p">}</span>
-  <span class="p">}));</span>
-<span class="p">}</span>
-
-<span class="kd">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="na">a</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">b</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="na">c</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="na">d</span><span class="p">:</span> <span class="mi">5</span> <span class="p">};</span>
-
-<span class="kd">const</span> <span class="nx">_obj</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">_map</span><span class="p">((</span><span class="nx">key</span><span class="p">,</span> <span class="nx">val</span><span class="p">,</span> <span class="nx">o</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="o">++</span><span class="nx">val</span><span class="p">;</span>
-<span class="p">});</span>
-
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">_obj</span><span class="p">);</span> <span class="c1">// {a: 3, b: 4, c: 5, d: 6}</span>
-</code></pre></div></div>
-
-<p>这里用到了 <code class="language-plaintext highlighter-rouge">JSON.stringify()</code> 方法。通常情况下，我们对它的使用往往局限在对 Object 的序列化，或者使用它对 Object 进行深拷贝。这次我们一次搞懂 <code class="language-plaintext highlighter-rouge">JSON.stringify()</code> 的所有用法。</p>
-
-<h2 id="jsonstringify">JSON.stringify()</h2>
-
-<p><code class="language-plaintext highlighter-rouge">JSON.stringify()</code> 方法将一个 JavaScript 对象或值转换为 JSON 字符串，如果指定了一个 replacer 函数，则可以选择性地替换值，或者指定的 replacer 是数组，则可选择性地仅包含数组指定的属性。</p>
-
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">value</span><span class="p">[,</span> <span class="nx">replacer</span> <span class="p">[,</span> <span class="nx">space</span><span class="p">]])</span>
-</code></pre></div></div>
-
-<h2 id="九个特性">九个特性</h2>
-
-<p>如果只传一个参数，<code class="language-plaintext highlighter-rouge">JSON.stringify()</code> 将第一个参数的值转换为相应的 JSON 格式，有以下九个特性：</p>
-
-<ul>
-  <li>转换值如果有 <code class="language-plaintext highlighter-rouge">toJSON()</code> 方法，序列化的结果就是这个方法的返回值，忽略其他属性的值。</li>
-  <li><code class="language-plaintext highlighter-rouge">Date</code> 对象包含 <code class="language-plaintext highlighter-rouge">toJSON()</code> 方法（同 <code class="language-plaintext highlighter-rouge">Date.toISOString()</code>），因此会被当做字符串处理。</li>
-</ul>
-
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
-  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Li Lei</span><span class="dl">"</span><span class="p">,</span>
-  <span class="na">toJSON</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="dl">"</span><span class="s2">Han Meimei</span><span class="dl">"</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">})</span>
-<span class="c1">// '"Han Meimei"'</span>
-
-<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">());</span>
-<span class="c1">// '"2020-12-05T09:11:20.566Z"'</span>
-<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">now</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">()</span> <span class="p">});</span>
-<span class="c1">// '{"now":"2020-12-05T09:11:20.566Z"}'</span>
-</code></pre></div></div>
-
-<ul>
-  <li><strong>函数</strong>、<strong>undefined</strong> 以及 <strong>symbol</strong> 单独序列化时会转换为 <code class="language-plaintext highlighter-rouge">undefined</code>，作为数组元素序列化时会转换为 <code class="language-plaintext highlighter-rouge">null</code>，作为对象的属性值序列化时会被忽略。</li>
-  <li>当 <strong>symbol</strong> 作为对象的<strong>属性键</strong>序列化时，该属性会被完全忽略掉，即使 <code class="language-plaintext highlighter-rouge">replacer</code> 参数中强制指定了包含它（<code class="language-plaintext highlighter-rouge">replacer</code> 参数我们稍后会说到），序列化时也会忽略。</li>
-  <li>因为非数组对象序列化时会忽略一些特殊的值，所以对象的属性不能保证以特定的顺序出现在序列化后的字符串中，数组除外。</li>
-</ul>
-
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="kd">function</span><span class="p">(){});</span>
-<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{});</span>
-<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="kc">undefined</span><span class="p">);</span>
-<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nb">Symbol</span><span class="p">(</span><span class="dl">'</span><span class="s1">stringify</span><span class="dl">'</span><span class="p">));</span>
-<span class="c1">// undefined</span>
-
-<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
-  <span class="na">a</span><span class="p">:</span> <span class="dl">"</span><span class="s2">stringify</span><span class="dl">"</span><span class="p">,</span>
-  <span class="na">b</span><span class="p">:</span> <span class="kc">undefined</span><span class="p">,</span>
-  <span class="na">c</span><span class="p">:</span> <span class="nb">Symbol</span><span class="p">(</span><span class="dl">"</span><span class="s2">stringify</span><span class="dl">"</span><span class="p">),</span>
-  <span class="na">d</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{}</span>
-<span class="p">});</span>
-<span class="c1">// '{"a":"stringify"}'</span>
-
-<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">([</span><span class="dl">"</span><span class="s2">stringify</span><span class="dl">"</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nb">Symbol</span><span class="p">(</span><span class="dl">"</span><span class="s2">stringify</span><span class="dl">"</span><span class="p">),</span> <span class="kd">function</span><span class="p">(){}]);</span>
-<span class="c1">// '["stringify",null,null,null]'</span>
-
-<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="p">[</span><span class="nb">Symbol</span><span class="p">(</span><span class="dl">"</span><span class="s2">json</span><span class="dl">"</span><span class="p">)]:</span> <span class="dl">"</span><span class="s2">stringify</span><span class="dl">"</span> <span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">k</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">k</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">symbol</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">v</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">});</span>
-<span class="c1">// undefined</span>
-</code></pre></div></div>
-
-<ul>
-  <li><strong>NaN</strong>、<strong>Infinity</strong> 格式的数值以及 <strong>null</strong> 都会被当做 <code class="language-plaintext highlighter-rouge">null</code>，单独序列化时会转换为字符串 <code class="language-plaintext highlighter-rouge">"null"</code>，作为数组元素以及对象的属性值序列化时都会转换为 <code class="language-plaintext highlighter-rouge">null</code>。对 <code class="language-plaintext highlighter-rouge">BigInt</code> 类型（大于 2^53-1 的任意大的整数）的值序列化时会抛出 <code class="language-plaintext highlighter-rouge">Uncaught TypeError: Do not know how to serialize a BigInt</code> 。</li>
-</ul>
-
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="kc">NaN</span><span class="p">);</span>
-<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="kc">Infinity</span><span class="p">);</span>
-<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
-<span class="c1">// "null"</span>
-
-<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
-  <span class="na">a</span><span class="p">:</span> <span class="kc">NaN</span><span class="p">,</span>
-  <span class="na">b</span><span class="p">:</span> <span class="kc">Infinity</span><span class="p">,</span>
-  <span class="na">c</span><span class="p">:</span> <span class="kc">null</span>
-<span class="p">});</span>
-<span class="c1">// '{"a":null,"b":null,"c":null}'</span>
-
-<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">([</span><span class="kc">NaN</span><span class="p">,</span> <span class="kc">Infinity</span><span class="p">,</span> <span class="kc">null</span><span class="p">]);</span>
-<span class="c1">// '[null,null,null]'</span>
-
-<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="mi">1</span><span class="nx">n</span><span class="p">);</span>
-<span class="c1">// Uncaught TypeError: Do not know how to serialize a BigInt</span>
-</code></pre></div></div>
-
-<ul>
-  <li><strong>布尔值</strong>、<strong>数字</strong>、<strong>字符串</strong>的包装对象作为数组元素以及对象的属性值序列化时会自动转换成对应的原始值，单独序列化时会转化为对应的字符串。</li>
-</ul>
-
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="k">new</span> <span class="nb">Number</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
-<span class="c1">// '1'</span>
-<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="k">new</span> <span class="nb">String</span><span class="p">(</span><span class="dl">"</span><span class="s2">false</span><span class="dl">"</span><span class="p">));</span>
-<span class="c1">// '"false"'</span>
-<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="k">new</span> <span class="nb">Boolean</span><span class="p">(</span><span class="kc">false</span><span class="p">));</span>
-<span class="c1">// 'false'</span>
-
-<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
-	<span class="na">a</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Number</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
-	<span class="na">b</span><span class="p">:</span> <span class="k">new</span> <span class="nb">String</span><span class="p">(</span><span class="dl">"</span><span class="s2">false</span><span class="dl">"</span><span class="p">),</span>
-	<span class="na">c</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Boolean</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
-<span class="p">});</span>
-<span class="c1">// '{"a":1,"b":"false","c":false}'</span>
-
-<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">([</span><span class="k">new</span> <span class="nb">Number</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="k">new</span> <span class="nb">String</span><span class="p">(</span><span class="dl">"</span><span class="s2">false</span><span class="dl">"</span><span class="p">),</span> <span class="k">new</span> <span class="nb">Boolean</span><span class="p">(</span><span class="kc">false</span><span class="p">)]);</span>
-<span class="c1">// '[1,"false",false]'</span>
-</code></pre></div></div>
-
-<ul>
-  <li>其他类型的对象，包括 <strong>Map</strong>/<strong>Set</strong>/<strong>WeakMap</strong>/<strong>WeakSet</strong>，仅会序列化可枚举的属性。</li>
-</ul>
-
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span>
-  <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="p">{</span>
-    <span class="na">a</span><span class="p">:</span> <span class="p">{</span> <span class="na">value</span><span class="p">:</span> <span class="dl">'</span><span class="s1">json</span><span class="dl">'</span><span class="p">,</span> <span class="na">enumerable</span><span class="p">:</span> <span class="kc">false</span> <span class="p">},</span>
-    <span class="na">b</span><span class="p">:</span> <span class="p">{</span> <span class="na">value</span><span class="p">:</span> <span class="dl">'</span><span class="s1">stringify</span><span class="dl">'</span><span class="p">,</span> <span class="na">enumerable</span><span class="p">:</span> <span class="kc">true</span> <span class="p">}</span>
-  <span class="p">})</span>
-<span class="p">);</span>
-<span class="c1">// '{"b":"stringify"}'</span>
-</code></pre></div></div>
-
-<ul>
-  <li>对包含循环引用的对象（对象之间相互引用，形成无限循环）执行此方法，会抛出错误。当我们试图通过 <code class="language-plaintext highlighter-rouge">JSON.parse(JSON.stringify())</code> 方法实现深拷贝时，要注意对象不能包含循环引用，否则会报错。</li>
-</ul>
-
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Uncaught TypeError: Converting circular structure to JSON</span>
-</code></pre></div></div>
-
-<h2 id="第二个参数">第二个参数</h2>
-
-<p>接下来看第二个和第三个参数。两个参数都是可选的。</p>
-
-<p>第二个参数 <code class="language-plaintext highlighter-rouge">replacer</code> 可以是一个函数，也可以是一个数组。</p>
-
-<ul>
-  <li>当它是一个函数时，它有两个参数，键（key）和值（value），被序列化的值的每个属性都会经过该函数的处理，类似于数组方法 <code class="language-plaintext highlighter-rouge">map</code>、<code class="language-plaintext highlighter-rouge">filter</code> 等方法的回调函数。</li>
-  <li>当它是一个数组时，只有数组中包含的属性名才会被序列化到 JSON 字符串中。</li>
-  <li>当它是 null 或者未传时，对象所有的属性都会被序列化。</li>
-</ul>
-
-<p>通过 <code class="language-plaintext highlighter-rouge">replacer</code> 参数，我们可以打破上述九个特性中的一些特性。</p>
-
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">a</span><span class="p">:</span> <span class="dl">"</span><span class="s2">stringify</span><span class="dl">"</span><span class="p">,</span>
-  <span class="na">b</span><span class="p">:</span> <span class="kc">undefined</span><span class="p">,</span>
-  <span class="na">c</span><span class="p">:</span> <span class="nb">Symbol</span><span class="p">(</span><span class="dl">"</span><span class="s2">stringify</span><span class="dl">"</span><span class="p">),</span>
-  <span class="na">d</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{}</span>
-<span class="p">};</span>
-
-<span class="c1">// 不用 replacer 参数时</span>
-<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
-<span class="c1">// '{"a":"stringify"}'</span>
-
-<span class="c1">// 使用 replacer 参数时</span>
-<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="k">switch</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">case</span> <span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">undefined</span><span class="dl">"</span><span class="p">:</span>
-      <span class="k">return</span> <span class="dl">"</span><span class="s2">undefined</span><span class="dl">"</span><span class="p">;</span>
-    <span class="k">case</span> <span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">symbol</span><span class="dl">"</span><span class="p">:</span>
-      <span class="k">return</span> <span class="nx">value</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
-    <span class="k">case</span> <span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">function</span><span class="dl">"</span><span class="p">:</span>
-      <span class="k">return</span> <span class="nx">value</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
-    <span class="nl">default</span><span class="p">:</span>
-      <span class="k">break</span><span class="p">;</span>
-  <span class="p">}</span>
-  <span class="k">return</span> <span class="nx">value</span><span class="p">;</span>
-<span class="p">});</span>
-<span class="c1">// '{"a":"stringify","b":"undefined","c":"Symbol(stringify)","d":"function() {}"}'</span>
-</code></pre></div></div>
-
-<p>需要注意的是，<code class="language-plaintext highlighter-rouge">replacer</code> 传入函数时，第一个参数不是对象的第一个键值对，而是空字符串作为 key 值，value 值是整个对象的键值对：</p>
-
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span> <span class="na">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">b</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">c</span><span class="p">:</span> <span class="mi">3</span> <span class="p">};</span>
-<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-  <span class="k">return</span> <span class="nx">value</span><span class="p">;</span>
-<span class="p">});</span>
-<span class="c1">// 第一个传入 replacer 函数的是 {"":{a:1,b:2,c:3}}</span>
-<span class="c1">// { a: 1, b: 2, c: 3 }   </span>
-<span class="c1">// 1</span>
-<span class="c1">// 2</span>
-<span class="c1">// 3</span>
-</code></pre></div></div>
-
-<p>这时候我们再返回开头看看实现 Object.map 的方法，是不是恍然大悟呢？</p>
-
-<p>当 <code class="language-plaintext highlighter-rouge">replacer</code> 是一个数组时，很简单，只会序列化数组中包含的属性值。</p>
-
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span> <span class="na">a</span><span class="p">:</span> <span class="dl">"</span><span class="s2">JSON</span><span class="dl">"</span><span class="p">,</span> <span class="na">b</span><span class="p">:</span> <span class="dl">"</span><span class="s2">stringify</span><span class="dl">"</span> <span class="p">};</span>
-
-<span class="c1">// 只保留 b 属性的值</span>
-<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="p">[</span><span class="dl">"</span><span class="s2">b</span><span class="dl">"</span><span class="p">]);</span>
-<span class="c1">// '{"b":"stringify"}'</span>
-</code></pre></div></div>
-
-<h2 id="第三个参数">第三个参数</h2>
-
-<p>第三个参数 <code class="language-plaintext highlighter-rouge">space</code> 指定缩进用的空白字符串，用于美化输出，它可以是数字，也可以是字符串。这个参数用处不大。</p>
-
-<ul>
-  <li>如果参数是数字，代表缩进有多少个空格，最大是 10，小于 1 则没有空格。</li>
-  <li>如果参数是字符串，那么这个字符串将作为缩进的空格，当字符串超过 10 个字母时，取它的前 10 个字母。</li>
-  <li>如果参数没有或者为 null，将没有空格。</li>
-</ul>
-
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span> <span class="na">a</span><span class="p">:</span> <span class="dl">"</span><span class="s2">JSON</span><span class="dl">"</span><span class="p">,</span> <span class="na">b</span><span class="p">:</span> <span class="dl">"</span><span class="s2">stringify</span><span class="dl">"</span> <span class="p">};</span>
-
-<span class="c1">// 缩进有 12 个空格</span>
-<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="mi">12</span><span class="p">);</span>
-<span class="c1">// '{\n          "a": "JSON",\n          "b": "stringify"\n}'</span>
-
-<span class="c1">// 用'a'代替缩进的空格</span>
-<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">);</span>
-<span class="c1">// '{\na"a": "JSON",\na"b": "stringify"\n}'</span>
-</code></pre></div></div>
-
-<h2 id="举一反三">举一反三</h2>
-
-<h3 id="json-对象">JSON 对象</h3>
-
-<p><code class="language-plaintext highlighter-rouge">JSON</code> 是一种语法，用来序列化对象、数组、数值、字符串、布尔值和 <code class="language-plaintext highlighter-rouge">null</code> 。<code class="language-plaintext highlighter-rouge">JSON</code> 对象包含两个方法：<code class="language-plaintext highlighter-rouge">parse</code> 和 <code class="language-plaintext highlighter-rouge">stringify</code>。除了这两个方法，<code class="language-plaintext highlighter-rouge">JSON</code> 这个对象本身并没有其他作用，也不能被调用或者作为构造函数调用。</p>
-
-<p><code class="language-plaintext highlighter-rouge">JSON</code> 基于 JavaScript 语法，但 JSON 不是 JavaScript，JavaScript 也不是 JSON。</p>
-
-<ul>
-  <li>对象和数组：属性名称必须是双引号括起来的字符串；最后一个属性后不能有逗号。</li>
-  <li>数值：不能出现前导零；如果有小数点，后面至少跟着一位数字。</li>
-  <li>字符串：字符串必须用双引号括起来。</li>
-</ul>
-
-<h3 id="jsonparse">JSON.parse()</h3>
-
-<p><code class="language-plaintext highlighter-rouge">JSON.parse()</code> 方法用来解析 JSON 字符串，构造由字符串描述的 JavaScript 值或对象。</p>
-
-<h4 id="语法">语法</h4>
-
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">text</span><span class="p">[,</span> <span class="nx">reviver</span><span class="p">])</span>
-</code></pre></div></div>
-
-<h4 id="参数">参数</h4>
-
-<ul>
-  <li><strong><code class="language-plaintext highlighter-rouge">text</code></strong></li>
-</ul>
-
-<p>要被解析成 JavaScript 值的字符串，必须符合 JSON 的语法格式。</p>
-
-<ul>
-  <li><strong><code class="language-plaintext highlighter-rouge">reviver</code> 可选</strong></li>
-</ul>
-
-<p>转换器函数，如果传入该函数，可以用来修改解析生成的原始值，在 parse 返回之前调用。这个函数的遍历顺序从最内层开始，按照层级顺序，依次向外遍历，当遍历到最顶层的解析值时，传入 <code class="language-plaintext highlighter-rouge">reviver</code> 函数的参数是空字符串和当前的解析值（有可能已经被修改过了）。</p>
-
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="dl">'</span><span class="s1">{"p": 5}</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">k</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span><span class="p">(</span><span class="nx">k</span> <span class="o">===</span> <span class="dl">''</span><span class="p">)</span> <span class="k">return</span> <span class="nx">v</span><span class="p">;</span>
-  <span class="k">return</span> <span class="nx">v</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
-<span class="p">});</span>
-<span class="c1">// { p: 10 }</span>
-</code></pre></div></div>
-
-<h4 id="返回值">返回值</h4>
-
-<ul>
-  <li>Object 类型，对应给定 JSON 文本的对象/值。</li>
-</ul>
-
-<h4 id="异常">异常</h4>
-
-<ul>
-  <li>若传入的字符串不符合 JSON 规范，则会抛出 SyntaxError 异常。</li>
-</ul>
-
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 不允许用逗号作为结尾</span>
-<span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="dl">"</span><span class="s2">[1, 2, 3, 4, ]</span><span class="dl">"</span><span class="p">);</span>
-<span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="dl">'</span><span class="s1">{"foo" : 1, }</span><span class="dl">'</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>以上。</p>
-
-<h2 id="参考资料">参考资料</h2>
-
-<ul>
-  <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify">JSON.stringify() - MDN</a></li>
-  <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON">JSON - MDN</a></li>
-  <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse">JSON.parse() - MDN</a></li>
-  <li><a href="https://github.com/NieZhuZhu/Blog/issues/1">你不知道的 JSON.stringify() 的威力</a></li>
-</ul>]]></content><author><name>Ji Chao</name></author><category term="一次搞懂系列" /><category term="JavaScript" /><summary type="html"><![CDATA[一次搞懂 JSON.stringify]]></summary></entry></feed>
+</ul>]]></content><author><name>Ji Chao</name></author><category term="一次搞懂系列" /><category term="CSS" /><summary type="html"><![CDATA[一次搞懂 rem 布局]]></summary></entry></feed>
